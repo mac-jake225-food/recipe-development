@@ -36,16 +36,14 @@ function Navbar() {
     }
   };
   
-  /* have to figure out how to implement the useEffect of the button showing and resixzing for mobible screens */
-  /* 
+  // /* have to figure out how to implement the useEffect of the button showing and resixzing for mobible screens */
   useEffect(() => {
     showButton();
     window.addEventListener("resize", showButton);
     return {
-      //   window.removeEventListener('resize', showButton)
+        // window.removeEventListener('resize', showButton)
     };
-  }, []);
-  */ 
+  }, []); 
 
   return (
     <>

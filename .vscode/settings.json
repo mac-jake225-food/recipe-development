@@ -1,0 +1,21 @@
+{
+    "[jsonc]": {
+    "breadcrumbs.showFiles": true,
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    "terminal.integrated.commandsToSkipShell": [
+        "\"emmet.triggerExpansionOnTab\": true, \"emmet.includeLanguages\": {   \"javascript\": \"javascriptreact\" }"
+    ],
+    "[json]": {
+    
+
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    }
+    
+}

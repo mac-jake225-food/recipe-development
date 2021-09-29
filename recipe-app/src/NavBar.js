@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
-import { MdFingerprint } from "react-icons/md";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { GiChefToque } from "react-icons/gi";
 import { IconContext } from "react-icons/lib";

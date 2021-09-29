@@ -16,7 +16,9 @@
         //budget
         //nutrition
         //Type of dish(dinner,lunch, etc.)
+        //Allergies/foods to avoid
     //will need to look at api documentation more before outlining steps
+    //write functions for each parameter that can be called in this function
 
 /**
  * returns n recipes that the user has selected for their timeframe
@@ -24,11 +26,11 @@
 //applyTimeframe(n)
     //Create recipeList
     //for(i=0;i++;n)
-        //recipe=returnRecipe
+        //recipe=returnRecipe(input)
         //add recipe to recipeList
     //return recipeList
 
-//returnGroceryList
+//returnGroceryList(recipeList)
     //create groceryList
     //loop through recipeList
         //extract ingredients from recipe
@@ -36,3 +38,4 @@
     //return groceryList
 
 //Calendar functions?
+//Confirming or denying the output recipes?

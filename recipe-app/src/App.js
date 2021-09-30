@@ -17,7 +17,7 @@ const AppContainer = styled.div`
 function App() {
   return (
       <Router>
-        {/* <NavBar />  */}
+        <NavBar /> 
         <AppContainer>
           <AccountBox />
         </AppContainer>

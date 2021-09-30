@@ -45,7 +45,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 14%; 
+  padding-bottom: 20%; 
 `;
 
 const HeaderText = styled.h2`
@@ -53,14 +53,24 @@ const HeaderText = styled.h2`
   font-size: 30px;
   font-weight: 800;
   line-height: 1px;
-  color: #fff;
+  color: #808080;
   z-index: 10;
   margin: 0;
-
 `;
+const HeaderSecondaryText = styled.h2`
+  text-indent: 1.75em;
+  height: 60px; 
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1px;
+  color: #808080;
+  z-index: 10;
+  margin: 0;
+`
 
 const SmallText = styled.div`
-  color: #fff; 
+  height: 20px;
+  color: #808080; 
   font-weight: 600; 
   font-size: 10px; 
   z-index: 10;
@@ -74,7 +84,7 @@ const SmallText = styled.div`
                     <BackDrop/>
                     <HeaderContainer>
                       <HeaderText>Welcome</HeaderText>
-                      <HeaderText>Back!</HeaderText>
+                      <HeaderSecondaryText>Back!</HeaderSecondaryText>
                       <SmallText>Sign in to continue</SmallText>
                     </HeaderContainer>
                     </TopContainer>

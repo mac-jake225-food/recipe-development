@@ -1,8 +1,6 @@
 /*Standard settings for navbar*/ 
 .navbar {
-    /*background: #C1E1C1;*/
-    background: rgb(2,0,36);
-    background: linear-gradient(58deg, rgba(2,0,36,1) 0%, rgba(193,225,193,1) 35%, rgba(0,212,255,1) 100%);
+    background: #C1E1C1;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -37,7 +35,7 @@
     justify-self: start;
     cursor: pointer;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     display: flex;
     align-items: center;
   }
@@ -45,7 +43,7 @@
   
 /*Navbar icon and font padding from each other*/ 
   .navbar-icon {
-    margin-right: .75rem;
+    margin-right: .5rem;
   }
 /*NavBar adjusting properties for when window shrinks and expands */ 
   .nav-menu {

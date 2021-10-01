@@ -1,11 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-function Home() {
-    return (
-        <div>
-            <h1>Hello, this is your home screen</h1>
-        </div>
-    )
-}
+const Home = () => {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '90vh'
+      }}
+    >
+      <h1>Home</h1>
+    </div>
+  );
+};
 
-export default Home
+export default Home;

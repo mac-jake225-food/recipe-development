@@ -1,11 +1,18 @@
-import React from 'react'
+import React from 'react';
 
 const Recipes = () => {
-    return (
-        <div>
-            <h1>Hello, This is your Recipes Page</h1>
-        </div>
-    )
-}
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '90vh'
+      }}
+    >
+      <h1>Recipe</h1>
+    </div>
+  );
+};
 
-export default Recipes
+export default Recipes;

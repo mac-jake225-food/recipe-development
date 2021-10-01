@@ -7,15 +7,7 @@ import Calendar from './pages/Calendar';
 import Recipes from './pages/Recipes';
 
 
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 10%; 
-`;
+
 
 function App() {
   return (
@@ -23,12 +15,10 @@ function App() {
         <NavBar /> 
         <Switch>
           <Route path='/' exact component={Home}/>
-          <Route path='/sign-up' exact component={AccountBox}/>
+          <Route path='/sign-up' exact component= {AccountBox}/>
           <Route path='/Calendar' exact component={Calendar}/>
           <Route path='/Recipes' exact component={Recipes}/>
         </Switch> 
- 
-
       </Router>
   );
 }

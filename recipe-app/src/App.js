@@ -21,10 +21,13 @@ function App() {
   return (
       <Router>
         <NavBar /> 
-        <Switch><Route path='/' exact component={Home}/></Switch> 
-        <Switch><Route path='/sign-up' exact component={AccountBox}/></Switch> 
-        <Switch><Route path='/Calendar' exact component={Calendar}/></Switch> 
-        <Switch><Route path='/Recipes' exact component={Recipes}/></Switch> 
+        <Switch>
+          <Route path='/' exact component={Home}/>
+          <Route path='/sign-up' exact component={AccountBox}/>
+          <Route path='/Calendar' exact component={Calendar}/>
+          <Route path='/Recipes' exact component={Recipes}/>
+        </Switch> 
+ 
 
       </Router>
   );

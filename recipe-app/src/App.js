@@ -1,7 +1,10 @@
-import NavBar from './NavBar';
+import NavBar from './NavBar/NavBar';
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AccountBox } from './signup';
+import Home from './pages/Home'
+import Calendar from './pages/Calendar';
+import Recipes from './pages/Recipes';
 
 
 const AppContainer = styled.div`
@@ -18,13 +21,13 @@ function App() {
   return (
       <Router>
         <NavBar /> 
-        <AppContainer>
-          <AccountBox />
-        </AppContainer>
-        
-        
+        <Switch><Route path='/' exact component={Home}/></Switch> 
+        <Switch><Route path='/sign-up' exact component={AccountBox}/></Switch> 
+        <Switch><Route path='/Calendar' exact component={Calendar}/></Switch> 
+        <Switch><Route path='/Recipes' exact component={Recipes}/></Switch> 
+
       </Router>
   );
 }
 
-export default App;
+export default App; 

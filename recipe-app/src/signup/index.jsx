@@ -1,6 +1,17 @@
 import react from 'react'; 
 import styled from 'styled-components'; 
+import { LoginForm } from './loginForm';
 
+
+const AppContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10%; 
+`;
 
 const BoxContainer = styled.div`
   width: 280px;
@@ -21,25 +32,19 @@ const TopContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   padding: 0 1.8em;
-  padding-bottom: 5em;
+  padding-bottom: 1em;
 `;
 
 const BackDrop = styled.div`
-  width: 160%;
-  height: 550px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   display: flex;
   flex-direction: column;
-  border-radius: 50%;
-  {/* transform shifts our graident container bar 60 degrees*/} 
-  transform: rotate(60deg);
-  {/* informs where to start the gradient */} 
-  top: -270px;
-  left: -90px;
-  {/* gradient blue color*/} 
   background: rgb(2,0,36);
-  background: linear-gradient(58deg, rgba(2,0,36,1) 0%, rgba(193,225,193,1) 35%, rgba(0,212,255,1) 100%);
-  );
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(193,225,193,1) 0%, rgba(0,212,255,1) 100%);
+  margin-left: -30px; 
+  padding-top: ; 
 `;
 const HeaderContainer = styled.div`
   width: 100%;
@@ -58,7 +63,7 @@ const HeaderText = styled.h2`
   margin: 0;
 `;
 const HeaderSecondaryText = styled.h2`
-  text-indent: 1.75em;
+  text-indent:3em;
   height: 60px; 
   font-size: 30px;
   font-weight: 800;
@@ -66,6 +71,7 @@ const HeaderSecondaryText = styled.h2`
   color: #808080;
   z-index: 10;
   margin: 0;
+  padding-bottom: .1em;
 `
 
 const SmallText = styled.div`
@@ -75,18 +81,31 @@ const SmallText = styled.div`
   font-size: 10px; 
   z-index: 10;
   margin:0; 
+  padding-bottom: 2em; 
+`
+const fillData = styled.div`
+  width: 100%; 
+  display: flex; 
+  flex-direction: column; 
 `
 
-
     export function AccountBox(props) {
-        return <BoxContainer>
-                    <TopContainer> 
-                    <BackDrop/>
-                    <HeaderContainer>
-                      <HeaderText>Welcome</HeaderText>
-                      <HeaderSecondaryText>Back!</HeaderSecondaryText>
-                      <SmallText>Sign in to continue</SmallText>
-                    </HeaderContainer>
-                    </TopContainer>
-            </BoxContainer>
-    }
+        return (
+        <AppContainer>
+          <BoxContainer>
+                      <TopContainer> 
+                      <BackDrop/>
+                      <HeaderContainer>
+                        <HeaderText>Welcome</HeaderText>
+                        <HeaderSecondaryText>Back!</HeaderSecondaryText>
+                        <SmallText>Sign in to continue</SmallText>
+                      </HeaderContainer>
+                      </TopContainer>
+                      <fillData>
+                        <LoginForm/> 
+                      </fillData>
+              </BoxContainer>
+        </AppContainer>
+          
+    );
+  }

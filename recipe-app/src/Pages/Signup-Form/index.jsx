@@ -89,20 +89,6 @@ const fillData = styled.div`
   flex-direction: column; 
 `
 
-const HeaderContainer = styled.div`
-  width: 100%; 
-  display: flex; 
-  flex-direction: column; 
-`
-const HeaderText = styled.h2`
-  font-size: 25px; 
-  line-weight: 500; 
-  line-height: 1.3; 
-  color: #fff; 
-
-
-`
-
     export function AccountBox(props) {
         return (
         <AppContainer>

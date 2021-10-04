@@ -1,7 +1,7 @@
 import NavBar from './NavBar/NavBar';
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { AccountBox } from './Signup';
+import { AccountBox } from './Pages/Signup-Form';
 import Home from './Pages/Home'
 import Calendar from './Pages/Calendar';
 import Recipes from './Pages/Recipes';

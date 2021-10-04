@@ -41,6 +41,7 @@ const BackDrop = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
+  transform: rotate(78deg);
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(193,225,193,1) 0%, rgba(0,212,255,1) 100%);
   margin-left: -30px; 

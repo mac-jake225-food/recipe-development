@@ -31,17 +31,35 @@ const BackDrop = styled.div`
   flex-direction: column;
   border-radius: 50%;
   transform: rotate(60deg);
-  top: -290px;
-  left: -70px;
+  {/* this top and left is for the gradient color, shapes it  */} 
+  top: -330px;
+  left: -130px;
   background: rgb(2,0,36);
   background: linear-gradient(58deg, rgba(2,0,36,1) 0%, rgba(193,225,193,1) 35%, rgba(0,212,255,1) 100%);
   );
 `;
 
+const HeaderContainer = styled.div`
+  width: 100%; 
+  display: flex; 
+  flex-direction: column; 
+`
+const HeaderText = styled.h2`
+  font-size: 25px; 
+  line-weight: 500; 
+  line-height: 1.3; 
+  color: #fff; 
+
+
+`
+
     export function AccountBox(props) {
         return <BoxContainer>
                     <TopContainer> 
                     <BackDrop/>
+                    <HeaderContainer>
+                      <HeaderText></HeaderText>
+                    </HeaderContainer>
                     </TopContainer>
             </BoxContainer>
     }

@@ -1,7 +1,7 @@
 import NavBar from './NavBar';
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { AccountBox } from './signup';
+import { AccountBox } from './Pages/signup';
 
 
 const AppContainer = styled.div`

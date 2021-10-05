@@ -6,6 +6,8 @@ import Home from './Pages/Home'
 import Calendar from './Pages/Calendar';
 import Recipes from './Pages/Recipes';
 
+import SpoonacularApi from './spoonacular';
+
 
 
 

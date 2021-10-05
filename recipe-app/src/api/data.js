@@ -30,14 +30,5 @@ function getRecipeData(recipeList) {
     requestString = requestString + recipeString
     unirest.get(requestString)
     .header("X-RapidAPI-Key", API_KEY)
-    .end(result => {
-         if(result.status === 200){
-             result.body.map(result =>
-                 console.log(
-                     result.title + " -- " + "Weight Watchers Smart Points: " + 
-                     result.weightWatcherSmartPoints + " -- Instructions: " + result.instructions
-                 );
-             );
-         };
-    });    
+    .end(result => {});    
 };

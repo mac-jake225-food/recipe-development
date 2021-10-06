@@ -81,6 +81,15 @@ function Navbar() {
                   Calendar
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link
+                  to="/Profile"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Profile
+                </Link>
+              </li>
               <li className="nav-btn">
                 {button ? (
                   <Link to="/sign-up" className="btn-link">

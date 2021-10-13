@@ -11,8 +11,7 @@ const Calendar = () => {
         height: '90vh'
       }}
     >
-      <img src={CalanderPic} height={600} width={1100}/>
-      <h1>Calendar</h1>
+      <img src={CalanderPic} height={600} width={1200}/>
     </div>
   );
 };

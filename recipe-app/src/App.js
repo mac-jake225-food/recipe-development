@@ -1,16 +1,17 @@
 import Sidebar from "./SideBar/Sidebar";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './Pages/Home'
+import Home from './Pages//HomePage/Home'
 import Calendar from './Pages/CalendarPage/Calendar';
 import Recipes from './Pages/RecipesPage/Recipes';
 import {ProfileDiet} from './Pages/Profile/ProfileDiet';
 import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
 import {ProfileCuisine} from './Pages/Profile/ProfileCuisine';
+
 import {ProfileCookTime} from './Pages/Profile/ProfileCookTime';
 import {ProfileNutrition} from './Pages/Profile/ProfileNutrition';
 import ProfileRecipeAmount from './Pages/Profile/ProfileRecipeAmount';
 
-import SpoonacularApi from './spoonacular';
+
 
 function App() {
   return (

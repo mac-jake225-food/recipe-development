@@ -85,6 +85,12 @@ class ProfileDiet extends Component {
                   Deselect All
                 </button>
                 <button type="submit" className="profile-buttons">
+                    <Link to="/ProfileRecipeAmount"
+                    className="profile-links">
+                    Back
+                    </Link>
+                  </button>
+                <button type="submit" className="profile-buttons">
                   <Link to="/ProfileIntolerances"
                   className="profile-links">
                   Next

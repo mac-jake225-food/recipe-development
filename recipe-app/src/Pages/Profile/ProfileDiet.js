@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 const DIET_OPTIONS = ["Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan",
 "Pescetarian", "Paleo", "Primal", "Low FODMAP", "Whole30"]
 
+var diets = []
+
 class ProfileDiet extends Component {
   state = {
     checkboxes: DIET_OPTIONS.reduce(
@@ -45,12 +47,11 @@ class ProfileDiet extends Component {
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
-
     Object.keys(this.state.checkboxes)
       .filter(checkbox => this.state.checkboxes[checkbox])
       .forEach(checkbox => {
-        console.log(checkbox, "is selected.");
-        //SAVE AND FILTER API CHARACTERISTICS HERE
+        diets.push(checkbox)
+        console.log(diets)
       });
   };
 
@@ -84,10 +85,15 @@ class ProfileDiet extends Component {
                   onClick={this.deselectAll}>
                   Deselect All
                 </button>
-                <button type="submit" className="profile-buttons">
-                  <Link to="/ProfileIntolerances"
+                <button type="submit" 
+                className="profile-buttons">
+                Save
+                </button>
+                <button type="button" 
+                className="profile-buttons">
+                <Link to="/ProfileIntolerances"
                   className="profile-links">
-                  Next
+                    Next
                   </Link>
                 </button>
               </div>
@@ -97,4 +103,5 @@ class ProfileDiet extends Component {
   }
 }
 
-export default ProfileDiet;
+export {ProfileDiet, diets};
+ 

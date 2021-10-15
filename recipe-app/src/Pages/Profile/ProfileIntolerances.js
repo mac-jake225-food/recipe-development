@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 const INTOLERANCE_OPTIONS = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", 
 "Soy", "Sulfite", "Tree Nut", "Wheat"]
 
+var intolerances = []
+
 class ProfileIntolerances extends Component {
   state = {
     checkboxes: INTOLERANCE_OPTIONS.reduce(
@@ -50,7 +52,8 @@ class ProfileIntolerances extends Component {
       .filter(checkbox => this.state.checkboxes[checkbox])
       .forEach(checkbox => {
         console.log(checkbox, "is selected.");
-        //SAVE AND FILTER API CHARACTERISTICS HERE
+        intolerances.push(checkbox)
+        console.log(intolerances)
       });
   };
 
@@ -72,6 +75,13 @@ class ProfileIntolerances extends Component {
             <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
               <div className="buttons">
+              <button type="button" 
+                className="profile-buttons">
+                  <Link to="/ProfileDiet"
+                  className="profile-links">
+                  Back
+                  </Link>
+                </button>
                 <button
                   type="button"
                   className="profile-buttons"
@@ -84,16 +94,15 @@ class ProfileIntolerances extends Component {
                   onClick={this.deselectAll}>
                   Deselect All
                 </button>
-                <button type="submit" className="profile-buttons">
-                  <Link to="/ProfileDiet"
-                  className="profile-links">
-                  Back
-                  </Link>
+                <button type="submit" 
+                className="profile-buttons">
+                Save
                 </button>
-                <button type="submit" className="profile-buttons">
-                  <Link to="/ProfileCuisine"
+                <button type="button" 
+                className="profile-buttons">
+                <Link to="/ProfileCuisine"
                   className="profile-links">
-                  Next
+                    Next
                   </Link>
                 </button>
               </div>
@@ -103,4 +112,4 @@ class ProfileIntolerances extends Component {
   }
 }
 
-export default ProfileIntolerances;
+export {ProfileIntolerances, intolerances};

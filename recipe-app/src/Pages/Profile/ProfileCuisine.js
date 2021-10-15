@@ -7,6 +7,8 @@ const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean",
 "Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", 
 "Vietnamese"];  
 
+var cuisines = []
+
 class ProfileCuisine extends Component {
     state = {
       checkboxes: CUISINE_OPTIONS.reduce(
@@ -51,8 +53,8 @@ class ProfileCuisine extends Component {
       Object.keys(this.state.checkboxes)
         .filter(checkbox => this.state.checkboxes[checkbox])
         .forEach(checkbox => {
-          console.log(checkbox, "is selected.");
-          //SAVE AND FILTER API CHARACTERISTICS HERE
+          cuisines.push(checkbox)
+          console.log(cuisines)
         });
     };
   
@@ -74,6 +76,13 @@ class ProfileCuisine extends Component {
               <form onSubmit={this.handleFormSubmit}>
                 {this.createCheckboxes()}
                 <div className="buttons">
+                <button type="button" 
+                  className="profile-buttons">
+                    <Link to="/ProfileIntolerances"
+                    className="profile-links">
+                    Back
+                    </Link>
+                  </button>
                   <button
                     type="button"
                     className="profile-buttons"
@@ -86,13 +95,12 @@ class ProfileCuisine extends Component {
                     onClick={this.deselectAll}>
                     Deselect All
                   </button>
-                  <button type="submit" className="profile-buttons">
-                    <Link to="/ProfileIntolerances"
-                    className="profile-links">
-                    Back
-                    </Link>
-                  </button>
-                  <button type="submit" className="profile-buttons">
+                  <button type="submit" 
+                className="profile-buttons">
+                Save
+                </button>
+                  <button type="button" 
+                  className="profile-buttons">
                     <Link to="/ProfileCookTime"
                     className="profile-links">
                     Next
@@ -105,4 +113,4 @@ class ProfileCuisine extends Component {
     }
   }
   
-  export default ProfileCuisine;
+  export {ProfileCuisine, cuisines};

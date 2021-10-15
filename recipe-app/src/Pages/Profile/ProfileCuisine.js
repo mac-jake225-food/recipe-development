@@ -3,9 +3,9 @@ import Checkbox from "./Checkbox";
 import { Link } from "react-router-dom";
 
 const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", 
-"European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
-"Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", 
-"Vietnamese"];  
+"Ethiopian","European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
+"Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "North African", "Southern", "Spanish", "Thai", 
+"Vietnamese", "West African"];  
 
 class ProfileCuisine extends Component {
     state = {

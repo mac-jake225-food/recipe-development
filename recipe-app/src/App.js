@@ -5,11 +5,21 @@ import { AccountBox } from './Signup-Form';
 import Home from './Pages/Home'
 import Calendar from './Pages/Calendar';
 import Recipes from './Pages/Recipes';
+<<<<<<< HEAD
 import {ProfileDiet} from './Pages/Profile/ProfileDiet';
 import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
 import {ProfileCuisine} from './Pages/Profile/ProfileCuisine';
 import {ProfileCookTime} from './Pages/Profile/ProfileCookTime';
 import {ProfileNutrition} from './Pages/Profile/ProfileNutrition';
+=======
+
+import ProfileRecipeAmount from './Pages/Profile/ProfileRecipeAmount';
+import ProfileDiet from './Pages/Profile/ProfileDiet';
+import ProfileIntolerances from './Pages/Profile/ProfileIntolerances';
+import ProfileCuisine from './Pages/Profile/ProfileCuisine';
+import ProfileCookTime from './Pages/Profile/ProfileCookTime';
+import ProfileNutrition from './Pages/Profile/ProfileNutrition';
+>>>>>>> 7ff6b023589c121d8eaba8af7c9f189d4a19c029
 
 import SpoonacularApi from './spoonacular';
 
@@ -25,6 +35,8 @@ function App() {
           <Route path='/sign-up' exact component= {AccountBox}/>
           <Route path='/Calendar' exact component={Calendar}/>
           <Route path='/Recipes' exact component={Recipes}/>
+
+          <Route path='/ProfileRecipeAmount' exact component={ProfileRecipeAmount}/>
           <Route path='/ProfileDiet' exact component={ProfileDiet}/>
           <Route path='/ProfileIntolerances' exact component={ProfileIntolerances}/>
           <Route path='/ProfileCuisine' exact component={ProfileCuisine}/>

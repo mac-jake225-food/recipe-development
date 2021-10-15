@@ -18,17 +18,12 @@ export const Sidebar = () => {
       <>
         <IconContext.Provider value={{ color: 'black' }}>
           <div className='sidebar'>
-            <Link to='#' className='menu-bars'>
+            <Link to='#' className='menu-arrow'>
               <BsFillArrowLeftCircleFill onClick={showSidebar} />
             </Link>
           </div>
           <nav className={sidebar ? 'sidebar-menu active' : 'sidebar-menu'}>
             <ul className='sidebar-menu-items' onClick={showSidebar}>
-              <li className='sidebar-toggle'>
-                <Link to='#' className='menu-bars'>
-                  <BsFillArrowLeftCircleFill/>
-                </Link>
-              </li>
               {SidebarData.map((item, index) => {
                 return (
                   <li key={index} className={item.cName}>

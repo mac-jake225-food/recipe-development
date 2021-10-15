@@ -9,6 +9,7 @@ import ProfileDiet from './Pages/Profile/ProfileDiet';
 import ProfileIntolerances from './Pages/Profile/ProfileIntolerances';
 
 import SpoonacularApi from './spoonacular';
+import Checkbox from './Pages/Profile/Checkbox';
 
 
 
@@ -22,8 +23,10 @@ function App() {
           <Route path='/sign-up' exact component= {AccountBox}/>
           <Route path='/Calendar' exact component={Calendar}/>
           <Route path='/Recipes' exact component={Recipes}/>
-          <Route path='/ProfileDiet' exact component={ProfileDiet}/>
-        </Switch> 
+          <Route path='/ProfileDiet' exact component={ProfileDiet}/> 
+          <Route path='/ProfileIntolerances' exact component={ProfileIntolerances}/>
+        </Switch>
+        
       </Router>
   );
 }

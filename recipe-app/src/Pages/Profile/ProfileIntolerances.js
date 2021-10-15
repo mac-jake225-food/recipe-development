@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Checkbox from "./Checkbox";
+import ProfileDiet from "./ProfileDiet";
 
 const INTOLERANCE_OPTIONS = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy",
 "Sulfite", "Tree Nut", "Wheat"]

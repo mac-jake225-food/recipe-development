@@ -5,7 +5,8 @@ import { AccountBox } from './Signup-Form';
 import Home from './Pages/Home'
 import Calendar from './Pages/Calendar';
 import Recipes from './Pages/Recipes';
-import Profile from './Pages/Profile';
+import ProfileDiet from './Pages/Profile/ProfileDiet';
+import ProfileIntolerances from './Pages/Profile/ProfileIntolerances';
 
 import SpoonacularApi from './spoonacular';
 
@@ -21,7 +22,7 @@ function App() {
           <Route path='/sign-up' exact component= {AccountBox}/>
           <Route path='/Calendar' exact component={Calendar}/>
           <Route path='/Recipes' exact component={Recipes}/>
-          <Route path='/Profile' exact component={Profile}/>
+          <Route path='/ProfileDiet' exact component={ProfileDiet}/>
         </Switch> 
       </Router>
   );

@@ -85,7 +85,6 @@ class ProfileDiet extends Component {
                   onClick={this.deselectAll}>
                   Deselect All
                 </button>
-<<<<<<< HEAD
                 <button type="submit" 
                 className="profile-buttons">
                 Save
@@ -93,16 +92,6 @@ class ProfileDiet extends Component {
                 <button type="button" 
                 className="profile-buttons">
                 <Link to="/ProfileIntolerances"
-=======
-                <button type="submit" className="profile-buttons">
-                    <Link to="/ProfileRecipeAmount"
-                    className="profile-links">
-                    Back
-                    </Link>
-                  </button>
-                <button type="submit" className="profile-buttons">
-                  <Link to="/ProfileIntolerances"
->>>>>>> 7ff6b023589c121d8eaba8af7c9f189d4a19c029
                   className="profile-links">
                     Next
                   </Link>

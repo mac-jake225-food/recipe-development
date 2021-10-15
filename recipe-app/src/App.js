@@ -5,21 +5,11 @@ import { AccountBox } from './Signup-Form';
 import Home from './Pages/Home'
 import Calendar from './Pages/Calendar';
 import Recipes from './Pages/Recipes';
-<<<<<<< HEAD
 import {ProfileDiet} from './Pages/Profile/ProfileDiet';
 import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
 import {ProfileCuisine} from './Pages/Profile/ProfileCuisine';
 import {ProfileCookTime} from './Pages/Profile/ProfileCookTime';
 import {ProfileNutrition} from './Pages/Profile/ProfileNutrition';
-=======
-
-import ProfileRecipeAmount from './Pages/Profile/ProfileRecipeAmount';
-import ProfileDiet from './Pages/Profile/ProfileDiet';
-import ProfileIntolerances from './Pages/Profile/ProfileIntolerances';
-import ProfileCuisine from './Pages/Profile/ProfileCuisine';
-import ProfileCookTime from './Pages/Profile/ProfileCookTime';
-import ProfileNutrition from './Pages/Profile/ProfileNutrition';
->>>>>>> 7ff6b023589c121d8eaba8af7c9f189d4a19c029
 
 import SpoonacularApi from './spoonacular';
 

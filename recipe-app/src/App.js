@@ -1,10 +1,8 @@
-import NavBar from './NavBar/NavBar';
-import styled from "styled-components";
+import Sidebar from "./SideBar/Sidebar";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { AccountBox } from './Signup-Form';
-import Home from './Pages/Home'
-import Calendar from './Pages/Calendar';
-import Recipes from './Pages/Recipes';
+import Home from './Pages/HomePage/Home'
+import Calendar from './Pages/CalendarPage/Calendar';
+import Recipes from './Pages/RecipesPage/Recipes';
 import ProfileDiet from './Pages/Profile/ProfileDiet';
 import ProfileIntolerances from './Pages/Profile/ProfileIntolerances';
 
@@ -16,18 +14,18 @@ import Checkbox from './Pages/Profile/Checkbox';
 
 function App() {
   return (
+    <>
       <Router>
-        <NavBar /> 
+        <Sidebar/>
         <Switch>
           <Route path='/' exact component={Home}/>
-          <Route path='/sign-up' exact component= {AccountBox}/>
           <Route path='/Calendar' exact component={Calendar}/>
           <Route path='/Recipes' exact component={Recipes}/>
           <Route path='/ProfileDiet' exact component={ProfileDiet}/> 
           <Route path='/ProfileIntolerances' exact component={ProfileIntolerances}/>
         </Switch>
-        
       </Router>
+    </>
   );
 }
 

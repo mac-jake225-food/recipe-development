@@ -5,6 +5,9 @@
     justify-content: start;
     align-items: center;
   }
+.menu-bars {
+    transform: rotateY(180deg);
+}
   
 .sidebar-menu {
     padding-top: 17%;
@@ -16,10 +19,13 @@
     position: fixed;
     top: 0;
     left: -100%;
+    transition: 850ms;
+
 }
   
 .sidebar-menu.active {
     left: 0;
+    transform: 350ms;
 }
 .sidebar-text{
     font-family: monospace;
@@ -31,12 +37,18 @@
     align-items: center;
     padding: 0 16px;
     border-radius: 4px;
+    list-style: none;
 }
-  
-.sidebar-menu-items {
+
+ul {
+    list-style: none;
+}
+
+.sidebar-text {
     width: 100%;
     list-style: none;
-  }
+
+}
 
 .nav-text{
     font-family: monospace;
@@ -60,4 +72,10 @@ a:hover {
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
 
+}
+.sidebar-toggle {
+    rotate: 90deg;
+    padding-top: 20px;
+    width: 100%;
+    size: 20px;
 }

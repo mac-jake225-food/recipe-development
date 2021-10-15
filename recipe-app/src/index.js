@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './NavBar/NavBar';
+import './SideBar/Sidebar';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

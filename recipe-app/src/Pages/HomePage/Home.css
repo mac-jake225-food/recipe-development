@@ -1,0 +1,8 @@
+h1 {
+    font-family: monospace;
+    display: flex;  
+    justify-content: center; 
+    text-align: center;
+    height: 90vh; 
+    font-family: monospace;   
+}

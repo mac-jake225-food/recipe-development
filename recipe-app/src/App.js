@@ -1,10 +1,8 @@
-import NavBar from './NavBar/NavBar';
-import styled from "styled-components";
+import Sidebar from "./SideBar/Sidebar";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { AccountBox } from './Signup-Form';
 import Home from './Pages/Home'
-import Calendar from './Pages/Calendar';
-import Recipes from './Pages/Recipes';
+import Calendar from './Pages/CalendarPage/Calendar';
+import Recipes from './Pages/RecipesPage/Recipes';
 import {ProfileDiet} from './Pages/Profile/ProfileDiet';
 import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
 import {ProfileCuisine} from './Pages/Profile/ProfileCuisine';
@@ -16,11 +14,11 @@ import SpoonacularApi from './spoonacular';
 
 function App() {
   return (
+    <>
       <Router>
-        <NavBar /> 
+        <Sidebar/>
         <Switch>
           <Route path='/' exact component={Home}/>
-          <Route path='/sign-up' exact component= {AccountBox}/>
           <Route path='/Calendar' exact component={Calendar}/>
           <Route path='/Recipes' exact component={Recipes}/>
           <Route path='/ProfileDiet' exact component={ProfileDiet}/>
@@ -31,6 +29,7 @@ function App() {
           <Route path='/ProfileRecipeAmount' exact component={ProfileRecipeAmount}/>
         </Switch> 
       </Router>
+    </>
   );
 }
 

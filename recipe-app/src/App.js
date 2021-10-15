@@ -10,11 +10,9 @@ import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
 import {ProfileCuisine} from './Pages/Profile/ProfileCuisine';
 import {ProfileCookTime} from './Pages/Profile/ProfileCookTime';
 import {ProfileNutrition} from './Pages/Profile/ProfileNutrition';
+import ProfileRecipeAmount from './Pages/Profile/ProfileRecipeAmount';
 
 import SpoonacularApi from './spoonacular';
-
-
-
 
 function App() {
   return (
@@ -25,13 +23,12 @@ function App() {
           <Route path='/sign-up' exact component= {AccountBox}/>
           <Route path='/Calendar' exact component={Calendar}/>
           <Route path='/Recipes' exact component={Recipes}/>
-
-          <Route path='/ProfileRecipeAmount' exact component={ProfileRecipeAmount}/>
           <Route path='/ProfileDiet' exact component={ProfileDiet}/>
           <Route path='/ProfileIntolerances' exact component={ProfileIntolerances}/>
           <Route path='/ProfileCuisine' exact component={ProfileCuisine}/>
           <Route path='/ProfileCookTime' exact component={ProfileCookTime}/>
           <Route path='/ProfileNutrition' exact component={ProfileNutrition}/>
+          <Route path='/ProfileRecipeAmount' exact component={ProfileRecipeAmount}/>
         </Switch> 
       </Router>
   );

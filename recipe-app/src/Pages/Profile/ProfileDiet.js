@@ -69,28 +69,22 @@ class ProfileDiet extends Component {
     return (
       <div>
         Diet Options
-      <div className="container">
-        <div className="row mt-5">
-          <div className="col-sm-12">
             <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
-
-              <div className="form-group mt-2">
+              <div className="buttons">
                 <button
                   type="button"
-                  className="btn btn-outline-primary mr-2"
-                  onClick={this.selectAll}
-                >
+                  className="profile-buttons"
+                  onClick={this.selectAll}>
                   Select All
                 </button>
                 <button
                   type="button"
-                  className="btn btn-outline-primary mr-2"
-                  onClick={this.deselectAll}
-                >
+                  className="profile-buttons"
+                  onClick={this.deselectAll}>
                   Deselect All
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="profile-buttons">
                   <Link to="/ProfileIntolerances"
                   className="profile-links">
                   Next
@@ -99,9 +93,6 @@ class ProfileDiet extends Component {
               </div>
             </form>
           </div>
-        </div>
-      </div>
-      </div>
     );
   }
 }

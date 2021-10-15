@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Checkbox from "./Checkbox";
-import ProfileDiet from "./ProfileDiet";
+import { Link } from "react-router-dom";
 
-const INTOLERANCE_OPTIONS = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy",
-"Sulfite", "Tree Nut", "Wheat"]
+const INTOLERANCE_OPTIONS = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", 
+"Soy", "Sulfite", "Tree Nut", "Wheat"]
 
 class ProfileIntolerances extends Component {
   state = {
@@ -71,24 +71,30 @@ class ProfileIntolerances extends Component {
         Intolerance Options
             <form onSubmit={this.handleFormSubmit}>
               {this.createCheckboxes()}
-
-              <div className="form-group mt-2">
+              <div className="buttons">
                 <button
                   type="button"
-                  className="btn btn-outline-primary mr-2"
-                  onClick={this.selectAll}
-                >
+                  className="profile-buttons"
+                  onClick={this.selectAll}>
                   Select All
                 </button>
                 <button
                   type="button"
-                  className="btn btn-outline-primary mr-2"
-                  onClick={this.deselectAll}
-                >
+                  className="profile-buttons"
+                  onClick={this.deselectAll}>
                   Deselect All
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="profile-buttons">
+                  <Link to="/ProfileDiet"
+                  className="profile-links">
+                  Back
+                  </Link>
+                </button>
+                <button type="submit" className="profile-buttons">
+                  <Link to="/ProfileCuisine"
+                  className="profile-links">
                   Next
+                  </Link>
                 </button>
               </div>
             </form>

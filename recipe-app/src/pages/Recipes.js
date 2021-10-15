@@ -21,7 +21,7 @@ searchRecipes = () =>{
       console.log('API called successfully. Returned data: ', data);
     }
   };
-  api.searchRecipes(opts, callback)
+  var filteredRecipes = api.searchRecipes(opts, callback)
 }
 
 

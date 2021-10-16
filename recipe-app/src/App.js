@@ -10,6 +10,9 @@ import DateTime from './HelperMethods/DateTime'
 import SpoonacularApi from './spoonacular';
 import Checkbox from './Pages/Profile/Checkbox';
 
+import {ProfileCookTime} from './Pages/Profile/ProfileCookTime';
+import {ProfileNutrition} from './Pages/Profile/ProfileNutrition';
+import ProfileRecipeAmount from './Pages/Profile/ProfileRecipeAmount';
 
 
 
@@ -37,19 +40,19 @@ export default App;
 
 // move this code where it belongs
 // testing spoonacular works
-console.log("-----------------------> running API query");
-var api = new SpoonacularApi.IngredientsApi()
-var opts = {
-  'query': "burger", // {String} The (natural language) search query.
-  '_number': 10, // {Number} The maximum number of items to return (between 1 and 100). Defaults to 10.
-  'metaInformation': false, // {Boolean} Whether to return more meta information about the ingredients.
-  'intolerances': "egg" // {String} A comma-separated list of intolerances. All recipes returned must not contain ingredients that are not suitable for people with the intolerances entered. See a full list of supported intolerances.
-};
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ', data);
-  }
-};
-api.autocompleteIngredientSearch(opts, callback);
+// console.log("-----------------------> running API query");
+// var api = new SpoonacularApi.IngredientsApi()
+// var opts = {
+//   'query': "burger", // {String} The (natural language) search query.
+//   '_number': 10, // {Number} The maximum number of items to return (between 1 and 100). Defaults to 10.
+//   'metaInformation': false, // {Boolean} Whether to return more meta information about the ingredients.
+//   'intolerances': "egg" // {String} A comma-separated list of intolerances. All recipes returned must not contain ingredients that are not suitable for people with the intolerances entered. See a full list of supported intolerances.
+// };
+// var callback = function(error, data, response) {
+//   if (error) {
+//     console.error(error);
+//   } else {
+//     console.log('API called successfully. Returned data: ', data);
+//   }
+// };
+// api.autocompleteIngredientSearch(opts, callback);

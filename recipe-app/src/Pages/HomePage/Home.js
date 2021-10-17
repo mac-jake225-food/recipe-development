@@ -5,6 +5,7 @@ import Planner from '../StockImages/planner.jpg'
 import "./Home.css";
 
 
+
 const Home = (props) => {
 
   return (

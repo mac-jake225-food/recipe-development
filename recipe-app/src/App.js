@@ -1,11 +1,14 @@
 import Sidebar from "./SideBar/Sidebar";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './Pages//HomePage/Home'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Home from './Pages/HomePage/Home'
 import Calendar from './Pages/CalendarPage/Calendar';
 import Recipes from './Pages/RecipesPage/Recipes';
-import {ProfileDiet} from './Pages/Profile/ProfileDiet';
-import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
-import {ProfileCuisine} from './Pages/Profile/ProfileCuisine';
+import ProfileDiet from './Pages/Profile/ProfileDiet';
+import ProfileIntolerances from './Pages/Profile/ProfileIntolerances';
+import DateTime from './HelperMethods/DateTime'
+
+import SpoonacularApi from './spoonacular';
+import Checkbox from './Pages/Profile/Checkbox';
 
 import {ProfileCookTime} from './Pages/Profile/ProfileCookTime';
 import {ProfileNutrition} from './Pages/Profile/ProfileNutrition';
@@ -14,22 +17,20 @@ import ProfileRecipeAmount from './Pages/Profile/ProfileRecipeAmount';
 
 
 function App() {
+
   return (
     <>
       <Router>
+        <DateTime/>
         <Sidebar/>
-        <Switch>
-          <Route path='/' exact component={Home}/>
-          <Route path='/Calendar' exact component={Calendar}/>
-          <Route path='/Recipes' exact component={Recipes}/>
-          <Route path='/ProfileDiet' exact component={ProfileDiet}/>
-          <Route path='/ProfileIntolerances' exact component={ProfileIntolerances}/>
-          <Route path='/ProfileCuisine' exact component={ProfileCuisine}/>
-          <Route path='/ProfileCookTime' exact component={ProfileCookTime}/>
-          <Route path='/ProfileNutrition' exact component={ProfileNutrition}/>
-          <Route path='/ProfileRecipeAmount' exact component={ProfileRecipeAmount}/>
-        </Switch> 
-      </Router>
+            <Switch>
+              <Route path='/Home' exact component={Home}/>
+              <Route path='/Calendar' exact component={Calendar}/>
+              <Route path='/Recipes' exact component={Recipes}/>
+              <Route path='/ProfileDiet' exact component={ProfileDiet}/> 
+              <Route path='/ProfileIntolerances' exact component={ProfileIntolerances}/>
+            </Switch>
+        </Router>
     </>
   );
 }

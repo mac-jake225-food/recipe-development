@@ -1,0 +1,7 @@
+.timeClock {
+    font-family: 'Space Mono', monospace;
+    font-weight: normal;
+    position: relative;
+    justify-content: right;
+    text-align: right;
+  }

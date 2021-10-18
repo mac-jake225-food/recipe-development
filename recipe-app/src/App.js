@@ -1,10 +1,11 @@
 import Sidebar from "./SideBar/Sidebar";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Home from './Pages/HomePage/Home'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './Pages/HomePage/Home';
 import Calendar from './Pages/CalendarPage/Calendar';
 import Recipes from './Pages/RecipesPage/Recipes';
 import ProfileDiet from './Pages/Profile/ProfileDiet';
 import ProfileIntolerances from './Pages/Profile/ProfileIntolerances';
+import ProfileCuisine from "./Pages/Profile/ProfileCuisine";
 import DateTime from './HelperMethods/DateTime'
 
 import SpoonacularApi from './spoonacular';
@@ -29,6 +30,7 @@ function App() {
               <Route path='/Recipes' exact component={Recipes}/>
               <Route path='/ProfileDiet' exact component={ProfileDiet}/> 
               <Route path='/ProfileIntolerances' exact component={ProfileIntolerances}/>
+              <Route path='/ProfileCuisine' exact component={ProfileCuisine}/>
             </Switch>
         </Router>
     </>

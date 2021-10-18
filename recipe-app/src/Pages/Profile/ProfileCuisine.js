@@ -113,4 +113,4 @@ class ProfileCuisine extends Component {
     }
   }
   
-  export {ProfileCuisine, cuisines};
+export  default ProfileCuisine;

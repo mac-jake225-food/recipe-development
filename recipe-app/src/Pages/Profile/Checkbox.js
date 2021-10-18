@@ -1,4 +1,5 @@
 import React from "react";
+import './Profile.css'; 
 
 const Checkbox = ({ label, isSelected, onCheckboxChange }) => (
   <div className="form-check">

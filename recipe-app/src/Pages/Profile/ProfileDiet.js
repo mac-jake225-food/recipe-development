@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Checkbox from "./Checkbox";
 import { Link } from "react-router-dom";
+import './Profile.css'
 
 const DIET_OPTIONS = ["Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan",
 "Pescetarian", "Paleo", "Primal", "Low FODMAP", "Whole30"]
@@ -8,6 +9,7 @@ const DIET_OPTIONS = ["Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetaria
 var diets = []
 
 class ProfileDiet extends Component {
+
   state = {
     checkboxes: DIET_OPTIONS.reduce(
       (options, option) => ({
@@ -68,40 +70,41 @@ class ProfileDiet extends Component {
 
   render() {
     return (
-      <div>
-        Diet Options
-            <form onSubmit={this.handleFormSubmit}>
-              {this.createCheckboxes()}
-              <div className="buttons">
-                <button
-                  type="button"
-                  className="profile-buttons"
-                  onClick={this.selectAll}>
-                  Select All
-                </button>
-                <button
-                  type="button"
-                  className="profile-buttons"
-                  onClick={this.deselectAll}>
-                  Deselect All
-                </button>
-                <button type="submit" 
-                className="profile-buttons">
-                Save
-                </button>
-                <button type="button" 
-                className="profile-buttons">
-                <Link to="/ProfileIntolerances"
-                  className="profile-links">
-                    Next
-                  </Link>
-                </button>
-              </div>
-            </form>
+      <div className='selector__items'>
+        <div className='checkbox__items'>
+          Diet Options
+              <form onSubmit={this.handleFormSubmit}>
+                {this.createCheckboxes()}
+                <div className="buttons">
+                  <button
+                    type="button"
+                    className="profile-buttons"
+                    onClick={this.selectAll}>
+                    Select All
+                  </button>
+                  <button
+                    type="button"
+                    className="profile-buttons"
+                    onClick={this.deselectAll}>
+                    Deselect All
+                  </button>
+                  <button type="submit" 
+                  className="profile-buttons">
+                  Save
+                  </button>
+                  <button type="button" 
+                  className="profile-buttons">
+                  <Link to="/ProfileIntolerances"
+                    className="profile-links">
+                      Next
+                    </Link>
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
     );
   }
 }
-
-export default {ProfileDiet, diets};
+export default ProfileDiet;
  

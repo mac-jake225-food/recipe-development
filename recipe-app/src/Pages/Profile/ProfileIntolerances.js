@@ -112,4 +112,4 @@ class ProfileIntolerances extends Component {
   }
 }
 
-export default {ProfileIntolerances, intolerances};
+export {ProfileIntolerances, intolerances};

@@ -4,7 +4,7 @@ import {diets} from '../Profile/ProfileDiet'
 import {intolerances} from '../Profile/ProfileIntolerances'
 import {cuisines} from '../Profile/ProfileCuisine'
 
-class Recipes extends Component{
+class GroceryList extends Component{
 
 searchRecipes = () =>{
   var api = new SpoonacularApi.RecipesApi()
@@ -38,12 +38,12 @@ render(){
     <button 
     type="button"
     onClick={this.searchRecipes}>
-      Generate Recipes
+      Generate Grocery List
     </button>
-    <h1>Recipe</h1>
+    <h1>Placeholder</h1>
   </div>
 );}
 
 }
 
-export default Recipes;
+export default GroceryList;

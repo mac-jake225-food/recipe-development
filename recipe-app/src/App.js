@@ -6,6 +6,7 @@ import Recipes from './Pages/RecipesPage/Recipes';
 import {ProfileDiet, diets} from './Pages/Profile/ProfileDiet';
 import {ProfileIntolerances, intolerances} from './Pages/Profile/ProfileIntolerances';
 import DateTime from './HelperMethods/DateTime'
+import GroceryList from "./Pages/GroceryList/GroceryList";
 
 import SpoonacularApi from './spoonacular';
 import Checkbox from './Pages/Profile/Checkbox';
@@ -27,6 +28,7 @@ function App() {
               <Route path='/Home' exact component={Home}/>
               <Route path='/Calendar' exact component={Calendar}/>
               <Route path='/Recipes' exact component={Recipes}/>
+              <Route path= '/GroceryList' exact component={GroceryList}/>
               <Route path='/ProfileDiet' exact component={ProfileDiet}/> 
               <Route path='/ProfileIntolerances' exact component={ProfileIntolerances}/>
             </Switch>

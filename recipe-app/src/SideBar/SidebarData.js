@@ -20,5 +20,10 @@ export const SidebarData = [
     title: 'Calendar',
     path: '/Calendar',
     cName: 'nav-text'
+  },
+  {
+    title: 'Grocery List',
+    path: '/GroceryList',
+    cName: 'nav-text'
   }
 ];

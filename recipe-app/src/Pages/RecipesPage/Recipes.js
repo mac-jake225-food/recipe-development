@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import SpoonacularApi from '../../spoonacular';
-import diets from '../Profile/ProfileDiet';
-import intolerances from '../Profile/ProfileIntolerances';
-import cuisines from '../Profile/ProfileCuisine';
+import {diets} from '../Profile/ProfileDiet';
+import {intolerances} from '../Profile/ProfileIntolerances';
+import {cuisines} from '../Profile/ProfileCuisine';
 
 class Recipes extends Component{
 

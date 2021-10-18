@@ -3,19 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Pages/HomePage/Home';
 import Calendar from './Pages/CalendarPage/Calendar';
 import Recipes from './Pages/RecipesPage/Recipes';
-import ProfileDiet from './Pages/Profile/ProfileDiet';
-import ProfileIntolerances from './Pages/Profile/ProfileIntolerances';
-import ProfileCuisine from "./Pages/Profile/ProfileCuisine";
+import {ProfileDiet} from './Pages/Profile/ProfileDiet';
+import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
+import {ProfileCuisine} from "./Pages/Profile/ProfileCuisine";
 import DateTime from './HelperMethods/DateTime'
 
 import SpoonacularApi from './spoonacular';
 import Checkbox from './Pages/Profile/Checkbox';
-
-import {ProfileCookTime} from './Pages/Profile/ProfileCookTime';
-import {ProfileNutrition} from './Pages/Profile/ProfileNutrition';
-import ProfileRecipeAmount from './Pages/Profile/ProfileRecipeAmount';
-
-
 
 function App() {
 

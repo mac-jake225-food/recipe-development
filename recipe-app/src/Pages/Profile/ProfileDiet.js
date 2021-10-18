@@ -70,7 +70,11 @@ class ProfileDiet extends Component {
 
   render() {
     return (
-      <div className='selector__items'>
+      <div className='selector__items'
+      style={{display: 'flex',  
+      justifyContent:'center', 
+      alignItems:'center',
+      height: '60vh'}}>
         <div className='checkbox__items'>
           Diet Options
               <form onSubmit={this.handleFormSubmit}>
@@ -106,5 +110,5 @@ class ProfileDiet extends Component {
     );
   }
 }
-export default ProfileDiet;
+export {ProfileDiet, diets};
  

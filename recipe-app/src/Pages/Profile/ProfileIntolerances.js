@@ -70,46 +70,52 @@ class ProfileIntolerances extends Component {
 
   render() {
     return (
-      <div>
-        Intolerance Options
-            <form onSubmit={this.handleFormSubmit}>
-              {this.createCheckboxes()}
-              <div className="buttons">
-              <button type="button" 
-                className="profile-buttons">
-                  <Link to="/ProfileDiet"
-                  className="profile-links">
-                  Back
-                  </Link>
-                </button>
-                <button
-                  type="button"
-                  className="profile-buttons"
-                  onClick={this.selectAll}>
-                  Select All
-                </button>
-                <button
-                  type="button"
-                  className="profile-buttons"
-                  onClick={this.deselectAll}>
-                  Deselect All
-                </button>
-                <button type="submit" 
-                className="profile-buttons">
-                Save
-                </button>
+      <div className='selector__items'
+      style={{display: 'flex',  
+      justifyContent:'center', 
+      alignItems:'center',
+      height: '60vh'}}>
+        <div className='checkbox__items'>
+          Intolerance Options
+              <form onSubmit={this.handleFormSubmit}>
+                {this.createCheckboxes()}
+                <div className="buttons">
                 <button type="button" 
-                className="profile-buttons">
-                <Link to="/ProfileCuisine"
-                  className="profile-links">
-                    Next
-                  </Link>
-                </button>
-              </div>
-            </form>
+                  className="profile-buttons">
+                  <Link to="/ProfileDiet"
+                    className="profile-links">
+                      Back
+                    </Link>
+                  </button>
+                  <button
+                    type="button"
+                    className="profile-buttons"
+                    onClick={this.selectAll}>
+                    Select All
+                  </button>
+                  <button
+                    type="button"
+                    className="profile-buttons"
+                    onClick={this.deselectAll}>
+                    Deselect All
+                  </button>
+                  <button type="submit" 
+                  className="profile-buttons">
+                  Save
+                  </button>
+                  <button type="button" 
+                  className="profile-buttons">
+                  <Link to="/ProfileCuisine"
+                    className="profile-links">
+                      Next
+                    </Link>
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
     );
   }
 }
 
-export default ProfileIntolerances;
+export {ProfileIntolerances, intolerances};

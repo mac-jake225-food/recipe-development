@@ -71,46 +71,52 @@ class ProfileCuisine extends Component {
   
     render() {
       return (
-        <div>
-          Cuisine Options
-              <form onSubmit={this.handleFormSubmit}>
-                {this.createCheckboxes()}
-                <div className="buttons">
-                <button type="button" 
-                  className="profile-buttons">
-                    <Link to="/ProfileIntolerances"
-                    className="profile-links">
-                    Back
-                    </Link>
-                  </button>
-                  <button
-                    type="button"
-                    className="profile-buttons"
-                    onClick={this.selectAll}>
-                    Select All
-                  </button>
-                  <button
-                    type="button"
-                    className="profile-buttons"
-                    onClick={this.deselectAll}>
-                    Deselect All
-                  </button>
-                  <button type="submit" 
-                className="profile-buttons">
-                Save
-                </button>
+        <div className='selector__items'
+        style={{display: 'flex',  
+        justifyContent:'center', 
+        alignItems:'center',
+        height: '70vh'}}>
+          <div className='checkbox__items'>
+            Cuisine Options
+                <form onSubmit={this.handleFormSubmit}>
+                  {this.createCheckboxes()}
+                  <div className="buttons">
                   <button type="button" 
-                  className="profile-buttons">
-                    <Link to="/ProfileCookTime"
-                    className="profile-links">
-                    Next
-                    </Link>
-                  </button>
-                </div>
-              </form>
+                    className="profile-buttons">
+                    <Link to="/ProfileIntolerances"
+                      className="profile-links">
+                        Back
+                      </Link>
+                    </button>
+                    <button
+                      type="button"
+                      className="profile-buttons"
+                      onClick={this.selectAll}>
+                      Select All
+                    </button>
+                    <button
+                      type="button"
+                      className="profile-buttons"
+                      onClick={this.deselectAll}>
+                      Deselect All
+                    </button>
+                    <button type="submit" 
+                    className="profile-buttons">
+                    Save
+                    </button>
+                    {/* <button type="button" 
+                    className="profile-buttons">
+                    <Link to="/"
+                      className="profile-links">
+                        Next
+                      </Link>
+                    </button> */}
+                  </div>
+                </form>
+              </div>
             </div>
       );
     }
   }
   
-export  default ProfileCuisine;
+export {ProfileCuisine, cuisines};

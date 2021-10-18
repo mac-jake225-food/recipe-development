@@ -2,3 +2,6 @@ body {
     font-family: monospace;
     justify-self: center; 
 }
+button {
+    font-family: monospace;
+}

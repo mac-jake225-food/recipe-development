@@ -103,5 +103,5 @@ class ProfileDiet extends Component {
   }
 }
 
-export default {ProfileDiet, diets};
+export {ProfileDiet, diets};
  

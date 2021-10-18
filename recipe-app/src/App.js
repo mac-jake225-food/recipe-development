@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './Pages/HomePage/Home'
 import Calendar from './Pages/CalendarPage/Calendar';
 import Recipes from './Pages/RecipesPage/Recipes';
-import ProfileDiet from './Pages/Profile/ProfileDiet';
-import ProfileIntolerances from './Pages/Profile/ProfileIntolerances';
+import {ProfileDiet, diets} from './Pages/Profile/ProfileDiet';
+import {ProfileIntolerances, intolerances} from './Pages/Profile/ProfileIntolerances';
 import DateTime from './HelperMethods/DateTime'
 
 import SpoonacularApi from './spoonacular';

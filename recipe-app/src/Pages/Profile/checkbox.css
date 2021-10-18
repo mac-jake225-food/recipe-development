@@ -1,0 +1,5 @@
+.selector__items {
+    display: flex;
+    justify-content: center;
+    margin-left: 50%;
+}

@@ -1,5 +1,5 @@
 import Sidebar from "./SideBar/Sidebar";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './Pages/HomePage/Home';
 import Calendar from './Pages/CalendarPage/Calendar';
 import Recipes from './Pages/RecipesPage/Recipes';
@@ -18,6 +18,9 @@ function App() {
       <Router>
         <DateTime/>
         <Sidebar/>
+        <Route exact path="/">
+            <Redirect to="/Home" />
+        </Route>
             <Switch>
               <Route path='/Home' exact component={Home}/>
               <Route path='/Calendar' exact component={Calendar}/>

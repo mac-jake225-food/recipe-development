@@ -6,7 +6,7 @@ export const DateTime = () => {
         return (
             <div className="timeClock">
                 {(currentTime.getMonth()+1 + '/' + currentTime.getDate() + '/' +currentTime.getFullYear() + ' ' + 
-                (currentTime.getHours()-12)) + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds() } 
+                (currentTime.getHours())) + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds() } 
             </div>
         )      
 }

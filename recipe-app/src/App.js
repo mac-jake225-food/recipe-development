@@ -50,11 +50,16 @@ export default App;
 //   'metaInformation': false, // {Boolean} Whether to return more meta information about the ingredients.
 //   'intolerances': "egg" // {String} A comma-separated list of intolerances. All recipes returned must not contain ingredients that are not suitable for people with the intolerances entered. See a full list of supported intolerances.
 // };
-// var callback = function(error, data, response) {
+
+// function callback (error, data, response) {
 //   if (error) {
 //     console.error(error);
 //   } else {
 //     console.log('API called successfully. Returned data: ', data);
+//     response = data
 //   }
+//   return data
 // };
 // api.autocompleteIngredientSearch(opts, callback);
+
+// console.log("testing callback", callback)

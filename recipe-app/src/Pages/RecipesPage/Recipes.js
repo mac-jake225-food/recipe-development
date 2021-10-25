@@ -6,14 +6,14 @@ import {cuisines} from '../Profile/ProfileCuisine'
 
 class Recipes extends Component{
 
-
-searchRecipes = () =>{
+recipeSearch = ()=>{
   var api = new SpoonacularApi.RecipesApi()
   var opts = {
     'diet' : diets.toString(),
     'intolerances' : intolerances.toString(),
     'cuisine' : cuisines.toString()
   };
+
   var callback = function(error, data, response) {
     if (error) {
       console.error(error);
@@ -22,18 +22,13 @@ searchRecipes = () =>{
       var recipe1= data.results[1]
       var title = data.results[1].title
       console.log("first recipe title", data.results[1].title)
-      console.log("second recipe title", data.results[2].title)
-
+      console.log("second recipe title", data.results[2].title)  
     }
   };
 
-  let data = null
-  var filteredRecipes = api.searchRecipes(opts, callback)
-  console.log('API called successfully. Returned data: ', data);
-  // console.log("placeholder", placeholder)
-
-  // console.log(recipeString)
-  // console.log("testing stringify",JSON.stringify(filteredRecipes))
+  api.searchRecipes(opts, callback)
+  var testData = callback
+  console.log(testData)
 }
 
 
@@ -44,12 +39,13 @@ render(){
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '90vh'
+      height: '90vh',
+      flexDirection : 'column'
     }}
   >
     <button 
     type="button"
-    onClick={this.searchRecipes}>
+    onClick={this.recipeSearch}>
       Generate Recipes
     </button>
     <h1>Recipe</h1>

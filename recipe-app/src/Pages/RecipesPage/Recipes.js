@@ -14,6 +14,7 @@ recipeSearch = ()=>{
     'cuisine' : cuisines.toString()
   };
 
+  var recipeId = null;
   var callback = function(error, data, response) {
     if (error) {
       console.error(error);
@@ -21,14 +22,23 @@ recipeSearch = ()=>{
       // console.log('API called successfully. Returned data: ', data);
       var recipe1= data.results[1]
       var title = data.results[1].title
-      console.log("first recipe title", data.results[1].title)
-      console.log("second recipe title", data.results[2].title)  
+      // console.log("first recipe title: ", data.results[1].title)
+      // console.log("second recipe title: ", data.results[2].title)  
+      console.log("data: ", data)
+      recipeId = data.results[1].id
+      // return recipeId
+      console.log("printing recipe id,", recipeId)
+      return recipeId
     }
   };
 
-  api.searchRecipes(opts, callback)
-  var testData = callback
-  console.log(testData)
+
+
+  var filteredRecipes = api.searchRecipes(opts, callback)
+  console.log("printing callback", callback)
+  console.log("filteredRecipes", filteredRecipes)
+  console.log("testing: ", filteredRecipes.xhr)
+
 }
 
 

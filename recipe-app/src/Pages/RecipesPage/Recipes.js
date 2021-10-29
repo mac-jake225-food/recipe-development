@@ -1,28 +1,22 @@
 import React, { Component } from "react";
-import SpoonacularApi from '../../spoonacular';
-import {diets} from '../Profile/ProfileDiet';
-import {intolerances} from '../Profile/ProfileIntolerances';
-import {cuisines} from '../Profile/ProfileCuisine';
+import { render } from 'react-dom';
+import { filteredRecipeData } from "../Profile/ProfileCuisine";
+
+var recipeID;
 
 class Recipes extends Component{
 
-searchRecipes = () => {
-  var api = new SpoonacularApi.RecipesApi()
-  var opts = {
-  'diet' : diets.toString(),
-  'intolerances' : intolerances.toString(),
-  'cuisine' : cuisines.toString()
-  };
-  var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } 
-  else {
-    console.log('API called successfully. Returned data: ', data);
+  constructor() {
+    super(); 
+    this.state = { showMessage: false }
   }
-};
-api.searchRecipes(opts, callback);
-}
+
+  _showMessage = (bool) => {
+    this.setState({
+      showMessage: bool
+    });
+  }
+
 
 
 render(){  
@@ -35,12 +29,16 @@ render(){
       height: '70vh'
     }}
   >
-    <button 
-    type="button"
-    onClick={this.searchRecipes}>
-      Generate Recipes
-    </button>
+    <div>
+        <button onClick={
+          this._showMessage.bind(null, true)
+        }>
+          Generate Recipes
+          </button>
+        { this.state.showMessage && (filteredRecipeData[Math.floor(Math.random()*(filteredRecipeData.length-1))].title)}
+      </div>
   </div>
+  
 );}
 }
 

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Checkbox from "./Checkbox";
 import { Link } from "react-router-dom";
+import SpoonacularApi from '../../spoonacular';
+import {diets} from './ProfileDiet';
+import {intolerances} from './ProfileIntolerances';
 
 const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", 
 "Ethiopian","European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
@@ -8,6 +11,7 @@ const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean",
 "Vietnamese", "West African"];  
 
 var cuisines = []
+var filteredRecipeData;
 
 class ProfileCuisine extends Component {
     state = {
@@ -68,6 +72,26 @@ class ProfileCuisine extends Component {
     );
   
     createCheckboxes = () => CUISINE_OPTIONS.map(this.createCheckbox);
+
+    searchRecipes = () => {
+      var api = new SpoonacularApi.RecipesApi()
+      var opts = {
+      'diet' : diets.toString(),
+      'intolerances' : intolerances.toString(),
+      'cuisine' : cuisines.toString(),
+      '_number' : "10000"
+      };
+      var callback = function(error, data, response) {
+      if (error) {
+        console.error(error);
+      } 
+      else {
+        console.log('API called successfully. Returned data: ', data);
+        filteredRecipeData = data.results
+      }
+    };
+    api.searchRecipes(opts, callback);
+    }
   
     render() {
       return (
@@ -104,6 +128,11 @@ class ProfileCuisine extends Component {
                     className="profile-buttons">
                     Save
                     </button>
+                    <button type="button" 
+                    className="profile-buttons"
+                    onClick={this.searchRecipes}>
+                    Finish Profile
+                    </button>
                     {/* <button type="button" 
                     className="profile-buttons">
                     <Link to="/"
@@ -119,4 +148,4 @@ class ProfileCuisine extends Component {
     }
   }
   
-export {ProfileCuisine, cuisines};
+export {ProfileCuisine, cuisines, filteredRecipeData};

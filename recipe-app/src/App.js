@@ -6,6 +6,8 @@ import Recipes from './Pages/RecipesPage/Recipes';
 import {ProfileDiet} from './Pages/Profile/ProfileDiet';
 import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
 import {ProfileCuisine} from "./Pages/Profile/ProfileCuisine";
+
+import GroceryList from "./Pages/GroceryList/GroceryList";
 import DateTime from './HelperMethods/DateTime'
 
 import SpoonacularApi from './spoonacular';
@@ -28,6 +30,7 @@ function App() {
               <Route path='/ProfileDiet' exact component={ProfileDiet}/> 
               <Route path='/ProfileIntolerances' exact component={ProfileIntolerances}/>
               <Route path='/ProfileCuisine' exact component={ProfileCuisine}/>
+              <Route path = '/GroceryList' exact component = {GroceryList}/>
             </Switch>
         </Router>
     </>

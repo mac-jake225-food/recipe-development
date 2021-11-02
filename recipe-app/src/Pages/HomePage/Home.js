@@ -1,4 +1,5 @@
 import React, { Children } from 'react';
+import womanCooking from '../StockImages/womanCooking.jpeg'
 import chickPeasImg from '../StockImages/chickpeas.jpg'
 import Ingredients from '../StockImages/Ingredients.jpg'
 import Planner from '../StockImages/planner.jpg'
@@ -11,6 +12,7 @@ const Home = () => {
     <div>
     <h1 className='header__formatter'>Why Us?</h1>
     <div className="wrapper">
+      <Card img={womanCooking} title='How to Use' description='Simply select the Profile page on the side menu and fill out your preferences, then navigate to the Recipies page to see what delicious meals we have put on your menu. '/>
       <Card img={chickPeasImg} title='Nutrional Layout' description='With our integrated Spoonacular API, We are able to provide each user from a custom range of unique Recipes. Our meals are backed by cutting-edge nutrition science to satisfy your hunger any day of the week.'/>
       <Card img={Ingredients} title='Household Ingredients' description='To ensure peak nutrition, convenience and deliciousness, we allow users with the experience to select the ingredients that they have avaiable presenting them with meals that they are able to make. Giving our users the most accessible recipes.'/>
       <Card img={Planner} title='Planner Structure' description='Inspired by accessiblity, we provide our users with the ability to bookmark their desired recipes for the times and days they would like to make them. With love, we aim yo provide one of the most flexible and unique user experiences.'/>

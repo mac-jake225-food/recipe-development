@@ -17,7 +17,14 @@ class Recipes extends Component{
     });
   }
 
-
+  // handleClick=()=>{
+  //   if(typeof filteredRecipeData == 'undefined'){
+  //   this.message = "Fill out profile first"
+  // }
+  //   else{
+  //     this.message = filteredRecipeData[Math.floor(Math.random()*(filteredRecipeData.length-1))].title
+  //   }
+  // }
 
 render(){  
   return (
@@ -30,12 +37,17 @@ render(){
     }}
   >
     <div>
+
         <button onClick={
-          this._showMessage.bind(null, true)
+          
+          this._showMessage.bind(null, typeof filteredRecipeData != 'undefined')
         }>
           Generate Recipes
           </button>
-        { this.state.showMessage && (filteredRecipeData[Math.floor(Math.random()*(filteredRecipeData.length-1))].title)}
+        { typeof filteredRecipeData == 'undefined' && <h1>Please fill out profile first</h1>}
+        { this.state.showMessage && ((filteredRecipeData[Math.floor(Math.random()*(filteredRecipeData.length-1))].title))}
+
+      
       </div>
   </div>
   

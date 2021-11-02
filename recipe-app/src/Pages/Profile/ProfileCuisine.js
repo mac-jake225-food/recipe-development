@@ -86,7 +86,7 @@ class ProfileCuisine extends Component {
         console.error(error);
       } 
       else {
-        console.log('API called successfully. Returned data: ', data);
+        console.log('API called successfully. Returned data: ', data.results);
         filteredRecipeData = data.results
       }
     };

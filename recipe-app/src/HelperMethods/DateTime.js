@@ -1,22 +1,33 @@
 import React from 'react'
+import { render } from 'react-dom'
 import './DateTime.css'
+import FinalDate from './FinalDate'
 
-export const DateTime = () => {
-    var currentTime = new Date()
-    function timeClock() {
-        if(currentTime.getHours() <= 12){
-            return currentTime.getHours()
-        } else {
-            return currentTime.getHours() - 12
+export class DateTime extends React.Component {
+    
+    constructor() {
+        super();
+        this.state = { time: FinalDate() };
+        
+        
+    }
+
+
+    componentDidMount() {
+        this.interval = setInterval(() => this.setState({ time: FinalDate() }), 1000);
+        }
+    componentWillUnmount(){
+        clearInterval(this.interval);
         }
 
-    }
+    render() {
         return (
             <div className="timeClock">
-                {(currentTime.getMonth()+1 + '/' + currentTime.getDate() + '/' +currentTime.getFullYear() + ' ' + 
-                (timeClock())) + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds() } 
+                {this.state.time}
             </div>
-        )      
+        )     
+    }
+            
 }
 
 export default DateTime; 

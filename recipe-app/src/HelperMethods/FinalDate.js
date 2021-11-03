@@ -29,6 +29,14 @@ const FinalDate = () => {
             return currentTime.getSeconds()
         }
     }
+    function timeMinutes(){
+        if(currentTime.getMinutes() < 10){
+            return '0'+ currentTime.getMinutes()
+        }else{
+            return '0' + currentTime.getMinutes()
+        }
+
+    }
 
     function timeDate(){
         if(currentTime.getDate() < 10){
@@ -39,7 +47,7 @@ const FinalDate = () => {
     }
     
     function finalDate(){
-            return timeMonths() + '/' + timeDate() + '/' + currentTime.getFullYear() + ' ' + (timeHours())+ ':' + currentTime.getMinutes() + ':' + timeSeconds()
+            return timeMonths() + '/' + timeDate() + '/' + currentTime.getFullYear() + ' ' + (timeHours())+ ':' + timeMinutes() + ':' + timeSeconds()
           }
 
     return (

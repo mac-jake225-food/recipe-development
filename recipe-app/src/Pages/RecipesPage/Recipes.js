@@ -6,25 +6,33 @@ import { Text } from 'react'
 import { TouchableOpacity } from 'react'
 
 var recipeID;
+var savedRecipes = [];
 
 class Recipes extends Component{
 
   constructor() {
     super(); 
-    this.state = { showMessage: false }
+    this.state = { showItems: false }
   }
 
-  _showMessage = (bool) => {
+  _showItems = (bool) => {
     this.setState({
-      showMessage: bool
+      showItems: bool
     });
   }
-
-  generateRandomRecipeID = (a) => {
+  
+  generateRandomRecipeID = () => {
     if (filteredRecipeData!=undefined){
-      recipeID = Math.floor(Math.random()*(filteredRecipeData.length-1));
+        recipeID = Math.floor(Math.random()*(filteredRecipeData.length-1));
+      }
     }
-  }
+  
+    saveRecipe = () => {
+      if (filteredRecipeData!=undefined){
+        savedRecipes.push(filteredRecipeData[recipeID].title)
+        console.log(savedRecipes)
+      }
+    }
 
   // handleClick=()=>{
   //   if(typeof filteredRecipeData == 'undefined'){
@@ -44,20 +52,29 @@ render(){
       alignItems: 'center',
       height: '70vh'
     }}
+    className = "recipe-page"
   >
-    <div>
-        <button onClick={
-          this.generateRandomRecipeID(),
-          this._showMessage.bind(null, typeof filteredRecipeData != 'undefined')
-        }>
-          Generate Recipes
-          </button>
-        { typeof filteredRecipeData == 'undefined' && <h1>Please fill out profile first</h1>}
-      </div>
-
       <div>
-      { this.state.showMessage && filteredRecipeData[recipeID].title}
-      { this.state.showMessage && 
+        <button 
+        type="submit" className = "recipe-buttons"
+        onClick={
+          this.generateRandomRecipeID(),
+          this.saveRecipe(),
+          this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
+        }>
+          Save Recipe
+          </button>
+          <button type="button" className = "recipe-buttons" onClick={
+          this.generateRandomRecipeID(),
+          this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
+        }>
+          Get new recipe
+          </button>
+        { typeof filteredRecipeData == 'undefined' && 'Please fill out profile first'}
+      </div>
+      <div>
+      { this.state.showItems && filteredRecipeData[recipeID].title}
+      { this.state.showItems && 
       <img
       src = {filteredRecipeData[recipeID].image.toString()}>
       </img>}
@@ -67,4 +84,4 @@ render(){
 );}
 }
 
-export default Recipes;
+export {Recipes};

@@ -2,7 +2,7 @@ import Sidebar from "./SideBar/Sidebar";
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './Pages/HomePage/Home';
 import Calendar from './Pages/CalendarPage/Calendar';
-import Recipes from './Pages/RecipesPage/Recipes';
+import {Recipes} from './Pages/RecipesPage/Recipes';
 import {ProfileDiet} from './Pages/Profile/ProfileDiet';
 import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
 import {ProfileCuisine} from "./Pages/Profile/ProfileCuisine";

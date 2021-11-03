@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './SideBar/Sidebar';
 import App from './App';
+import DateTime from './HelperMethods/DateTime'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

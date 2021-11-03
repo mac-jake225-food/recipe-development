@@ -18,7 +18,7 @@ const FinalDate = () => {
             return currentTime.getHours()
         }
         else {
-            return currentTime.getHours() - 12
+            return '0' + currentTime.getHours() - 12
         }
     }
 
@@ -33,7 +33,7 @@ const FinalDate = () => {
         if(currentTime.getMinutes() < 10){
             return '0'+ currentTime.getMinutes()
         }else{
-            return '0' + currentTime.getMinutes()
+            return currentTime.getMinutes()
         }
 
     }
@@ -47,7 +47,7 @@ const FinalDate = () => {
     }
     
     function finalDate(){
-            return timeMonths() + '/' + timeDate() + '/' + currentTime.getFullYear() + ' ' + (timeHours())+ ':' + timeMinutes() + ':' + timeSeconds()
+            return timeMonths() + '/' + timeDate() + '/' + currentTime.getFullYear() + ' ' + timeHours()+ ':' + timeMinutes() + ':' + timeSeconds()
           }
 
     return (

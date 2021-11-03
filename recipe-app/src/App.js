@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <Router>
-        <DateTime/>
+      <DateTime/>
         <Sidebar/>
         <Route exact path="/">
             <Redirect to="/Home" />

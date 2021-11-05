@@ -5,7 +5,7 @@ import { Linking } from 'react';
 import { Text } from 'react'
 import { TouchableOpacity } from 'react'
 
-var recipeID;
+var recipePosition;
 var savedRecipes = [];
 
 class Recipes extends Component{
@@ -21,15 +21,15 @@ class Recipes extends Component{
     });
   }
   
-  generateRandomRecipeID = () => {
+  generateRandomrecipePosition = () => {
     if (filteredRecipeData!=undefined){
-        recipeID = Math.floor(Math.random()*(filteredRecipeData.length-1));
+        recipePosition = Math.floor(Math.random()*(filteredRecipeData.length-1));
       }
     }
   
     saveRecipe = () => {
       if (filteredRecipeData!=undefined){
-        savedRecipes.push(filteredRecipeData[recipeID].title)
+        savedRecipes.push(filteredRecipeData[recipePosition].title)
         console.log(savedRecipes)
       }
     }
@@ -58,14 +58,14 @@ render(){
         <button 
         type="submit" className = "recipe-buttons"
         onClick={
-          this.generateRandomRecipeID(),
+          this.generateRandomrecipePosition(),
           this.saveRecipe(),
           this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
         }>
           Save Recipe
           </button>
           <button type="button" className = "recipe-buttons" onClick={
-          this.generateRandomRecipeID(),
+          this.generateRandomrecipePosition(),
           this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
         }>
           Get new recipe
@@ -73,10 +73,10 @@ render(){
         { typeof filteredRecipeData == 'undefined' && 'Please fill out profile first'}
       </div>
       <div>
-      { this.state.showItems && filteredRecipeData[recipeID].title}
+      { this.state.showItems && filteredRecipeData[recipePosition].title}
       { this.state.showItems && 
       <img
-      src = {filteredRecipeData[recipeID].image.toString()}>
+      src = {filteredRecipeData[recipePosition].image.toString()}>
       </img>}
       </div>
   </div>
@@ -84,4 +84,4 @@ render(){
 );}
 }
 
-export {Recipes};
+export {Recipes, savedRecipes};

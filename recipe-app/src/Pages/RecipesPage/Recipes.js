@@ -79,21 +79,27 @@ render(){
     className = "recipe-page"
   >
       <div>
+
+        <button 
+        type="button" className = "recipe-buttons" 
+        onClick={
+            this.generateRandomrecipePosition(),
+            this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
+          }>
+            Get new recipe
+          </button>
+
         <button 
         type="submit" className = "recipe-buttons"
         onClick={
-          this.generateRandomrecipePosition(),
           this.saveRecipe(),
           this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
         }>
           Save Recipe
           </button>
-          <button type="button" className = "recipe-buttons" onClick={
-          this.generateRandomrecipePosition(),
-          this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
-        }>
-          Get new recipe
-          </button>
+
+
+          
         { typeof filteredRecipeData == 'undefined' && 'Please fill out profile first'}
       </div>
       <div>

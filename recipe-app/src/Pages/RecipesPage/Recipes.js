@@ -12,24 +12,29 @@ var savedRecipes = [];
 
 class Recipes extends Component{
 
-  constructor() {
-    super(); 
-    this.state = { showItems: false }
-    // this._showItems=this._showItems.bind(this); //change _showItems to more descriptive variable
-  
+  constructor(props) {
+    super(props); 
+    this.state = { buttonClicked: false }
+    this.handleClick=this.handleClick.bind(this); 
   }
-  _showItems = (bool) => {
-    this.setState({
-      showItems: bool
-    });
+
+  handleClick() {
+    this.setState(prevState=>({
+      buttonClicked: !prevState.buttonClicked
+    }));
   }
-  // _showItems(){
+
+  testButtonWorks() {
+    console.log("works")
+  }
+
+  // handleClick(){
   //   this.setState(prevState=>({
-  //     showItems:!prevState.showItems
+  //     buttonClicked:!prevState.buttonClicked
   //   }))
   // }
 
-  generateRandomrecipePosition = () => {
+  generateRandomrecipePosition() {
     if (filteredRecipeData!=undefined){
         recipePosition = Math.floor(Math.random()*(filteredRecipeData.length-1));
       }
@@ -46,7 +51,7 @@ class Recipes extends Component{
 //       console.log("recipePosition 3: ",recipePosition)
 //     }
 
-    saveRecipe = () => {
+    saveRecipe () {
       if (filteredRecipeData!=undefined){
         savedRecipes.push(filteredRecipeData[recipePosition].title)
         console.log(savedRecipes)
@@ -56,7 +61,7 @@ class Recipes extends Component{
   //     // handleClick(){
 //     //   this.checkRecipePosition() 
 //     //   this.generateRandomrecipePosition()
-//     //   this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
+//     //   this.handleClick.bind(null, typeof filteredRecipeData != 'undefined')
 //     // }
 
   // handleClick=()=>{
@@ -78,34 +83,32 @@ render(){
     }}
     className = "recipe-page"
   >
-      <div>
-
+  <div>
         <button 
         type="button" className = "recipe-buttons" 
         onClick={
-            this.generateRandomrecipePosition(),
-            this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
+            this.handleClick.bind(null),
+            this.generateRandomrecipePosition()
           }>
             Get new recipe
           </button>
 
         <button 
         type="submit" className = "recipe-buttons"
-        onClick={
-          this.saveRecipe(),
-          this._showItems.bind(null, typeof filteredRecipeData != 'undefined')
+        onClick={          
+          this.handleClick.bind(null),
+          this.saveRecipe()
         }>
           Save Recipe
           </button>
 
-
-          
-        { typeof filteredRecipeData == 'undefined' && 'Please fill out profile first'}
+      { typeof filteredRecipeData == 'undefined' && 'Please fill out profile first'}
       </div>
+      
       <div>
-      { this.state.showItems && filteredRecipeData[recipePosition].title}
+      { this.state.buttonClicked && filteredRecipeData[recipePosition].title}
 
-      { this.state.showItems && 
+      { this.state.buttonClicked && 
       <img
       src = {filteredRecipeData[recipePosition].image.toString()}>
       </img>}

@@ -47,6 +47,7 @@ class ProfileDiet extends Component {
     }));
   };
 
+  //what does this do?
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
     Object.keys(this.state.checkboxes)
@@ -55,6 +56,9 @@ class ProfileDiet extends Component {
         diets.push(checkbox)
         console.log(diets)
       });
+      <Link to="/ProfileIntolerances">
+    </Link>
+    
   };
 
   createCheckbox = option => (
@@ -92,17 +96,25 @@ class ProfileDiet extends Component {
                     onClick={this.deselectAll}>
                     Deselect All
                   </button>
+
                   <button type="submit" 
-                  className="profile-buttons">
-                  Save
-                  </button>
-                  <button type="button" 
                   className="profile-buttons">
                   <Link to="/ProfileIntolerances"
                     className="profile-links">
-                      Next
-                    </Link>
+                      next
+                  </Link>
                   </button>
+
+                  {/* <button type="button" 
+                   className="profile-buttons">
+                     <Link to="/ProfileIntolerances"
+                    className="profile-links">
+                      next
+                  </Link>
+                  
+                  </button> */}
+                  
+
                 </div>
               </form>
             </div>

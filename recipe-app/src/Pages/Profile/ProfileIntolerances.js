@@ -87,22 +87,26 @@ class ProfileIntolerances extends Component {
                       Back
                     </Link>
                   </button>
+
                   <button
                     type="button"
                     className="profile-buttons"
                     onClick={this.selectAll}>
                     Select All
                   </button>
+
                   <button
                     type="button"
                     className="profile-buttons"
                     onClick={this.deselectAll}>
                     Deselect All
                   </button>
+
                   <button type="submit" 
                   className="profile-buttons">
                   Save
                   </button>
+                  
                   <button type="button" 
                   className="profile-buttons">
                   <Link to="/ProfileCuisine"

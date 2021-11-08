@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import SpoonacularApi from '../../spoonacular';
 import {diets} from './ProfileDiet';
 import {intolerances} from './ProfileIntolerances';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Recipes } from "../RecipesPage/Recipes";
 
 const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", 
 "Ethiopian","European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
@@ -128,11 +130,17 @@ class ProfileCuisine extends Component {
                     className="profile-buttons">
                     Save
                     </button>
-                    <button type="button" 
-                    className="profile-buttons"
-                    onClick={this.searchRecipes}>
-                    Finish Profile
-                    </button>
+                        < Link to='/Recipes'><button type="button" 
+                          className="profile-buttons" 
+                          onClick={this.searchRecipes}>
+                          Finish Profile
+                        </button>
+                        </Link>
+                    
+                    
+                    
+                    
+
                     {/* <button type="button" 
                     className="profile-buttons">
                     <Link to="/"

@@ -72,9 +72,10 @@ render(){
       </div>
 
       <div>
-      { this.state.buttonClicked && filteredRecipeData[recipePosition].title}
+        
+      { this.state.buttonClicked &&  typeof filteredRecipeData != 'undefined' && filteredRecipeData[recipePosition].title}
 
-      { this.state.buttonClicked && 
+      { this.state.buttonClicked &&  typeof filteredRecipeData != 'undefined' &&
       <img
       src = {filteredRecipeData[recipePosition].image.toString()}>
       </img>}

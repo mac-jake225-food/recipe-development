@@ -35,9 +35,11 @@ class Recipes extends Component{
   }
 
 render(){  
-  var recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
-  console.log("render recipe position", recipePosition)
-  
+  if(filteredRecipeData!=undefined){
+    var recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
+    console.log("render recipe position", recipePosition)
+  }
+
   return (
   <div
     style={{
@@ -70,9 +72,10 @@ render(){
       </div>
 
       <div>
-      { this.state.buttonClicked && filteredRecipeData[recipePosition].title}
+        
+      { this.state.buttonClicked &&  typeof filteredRecipeData != 'undefined' && filteredRecipeData[recipePosition].title}
 
-      { this.state.buttonClicked && 
+      { this.state.buttonClicked &&  typeof filteredRecipeData != 'undefined' &&
       <img
       src = {filteredRecipeData[recipePosition].image.toString()}>
       </img>}

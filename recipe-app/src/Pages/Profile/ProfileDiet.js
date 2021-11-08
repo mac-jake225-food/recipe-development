@@ -97,22 +97,20 @@ class ProfileDiet extends Component {
                     Deselect All
                   </button>
 
+                  
+
                   <button type="submit" 
+                  className="profile-buttons">
+                  Save
+                  </button>
+                  
+                  <button type="button" 
                   className="profile-buttons">
                   <Link to="/ProfileIntolerances"
                     className="profile-links">
-                      next
-                  </Link>
+                      Next
+                    </Link>
                   </button>
-
-                  {/* <button type="button" 
-                   className="profile-buttons">
-                     <Link to="/ProfileIntolerances"
-                    className="profile-links">
-                      next
-                  </Link>
-                  
-                  </button> */}
                   
 
                 </div>

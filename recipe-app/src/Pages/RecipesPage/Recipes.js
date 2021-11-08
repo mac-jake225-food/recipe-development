@@ -7,7 +7,6 @@ import { Linking } from 'react';
 import { TouchableOpacity } from 'react'
 import { Text } from 'react'
 
-var recipePosition;
 var savedRecipes = [];
 
 class Recipes extends Component{
@@ -18,61 +17,27 @@ class Recipes extends Component{
     this.handleClick=this.handleClick.bind(this); 
   }
 
-  handleClick() {
-    this.setState(prevState=>({
-      buttonClicked: !prevState.buttonClicked
-    }));
+  handleClick=(event) =>{
+    event.preventDefault(); //might not be necessary
+    this.setState({buttonClicked:true});
   }
 
-  testButtonWorks() {
-    console.log("works")
-  }
-
-  // handleClick(){
-  //   this.setState(prevState=>({
-  //     buttonClicked:!prevState.buttonClicked
-  //   }))
-  // }
-
-  generateRandomrecipePosition() {
+  saveRecipe (position) {
+    console.log("input position: ", position)
     if (filteredRecipeData!=undefined){
-        recipePosition = Math.floor(Math.random()*(filteredRecipeData.length-1));
-      }
-    }
-
-//   generateRandomrecipePosition = (recipeList) => {
-//     if (recipeList!=undefined){
-//         recipePosition = Math.floor(Math.random()*(recipeList.length-1));
-//         console.log("recipePosition 1: ",recipePosition)
-//       }
-//     }
-
-//     checkRecipePosition=()=>{
-//       console.log("recipePosition 3: ",recipePosition)
-//     }
-
-    saveRecipe () {
-      if (filteredRecipeData!=undefined){
-        savedRecipes.push(filteredRecipeData[recipePosition].title)
+        savedRecipes.push(filteredRecipeData[position].title)
         console.log(savedRecipes)
-      }
+      
     }
+    else{
+      console.log("undefined")
+    }
+  }
 
-  //     // handleClick(){
-//     //   this.checkRecipePosition() 
-//     //   this.generateRandomrecipePosition()
-//     //   this.handleClick.bind(null, typeof filteredRecipeData != 'undefined')
-//     // }
-
-  // handleClick=()=>{
-  //   if(typeof filteredRecipeData == 'undefined'){
-  //   this.message = "Fill out profile first"
-  // }
-  //   else{
-  //     this.message = filteredRecipeData[Math.floor(Math.random()*(filteredRecipeData.length-1))].title
-  //   }
-  // }
 render(){  
+  var recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
+  console.log("render recipe position", recipePosition)
+  
   return (
   <div
     style={{
@@ -86,25 +51,24 @@ render(){
   <div>
         <button 
         type="button" className = "recipe-buttons" 
-        onClick={
-            this.handleClick.bind(null),
-            this.generateRandomrecipePosition()
+        onClick={()=>
+            this.generateRandomrecipePosition,
+            this.handleClick
           }>
             Get new recipe
           </button>
 
         <button 
         type="submit" className = "recipe-buttons"
-        onClick={          
-          this.handleClick.bind(null),
-          this.saveRecipe()
+        onClick={()=>      
+          this.saveRecipe(recipePosition)
         }>
           Save Recipe
           </button>
 
       { typeof filteredRecipeData == 'undefined' && 'Please fill out profile first'}
       </div>
-      
+
       <div>
       { this.state.buttonClicked && filteredRecipeData[recipePosition].title}
 

@@ -25,9 +25,8 @@ class Recipes extends Component{
   saveRecipe (position) {
     console.log("input position: ", position)
     if (filteredRecipeData!=undefined){
-        savedRecipes.push(filteredRecipeData[position].title)
+        savedRecipes.push(filteredRecipeData[position])
         console.log(savedRecipes)
-      
     }
     else{
       console.log("undefined")
@@ -50,7 +49,7 @@ render(){
     }}
     className = "recipe-page"
   >
-  <div>
+  <div> 
         <button 
         type="button" className = "recipe-buttons" 
         onClick={()=>

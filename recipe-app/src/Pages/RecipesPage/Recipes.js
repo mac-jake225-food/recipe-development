@@ -25,7 +25,7 @@ class Recipes extends Component{
   saveRecipe (position) {
     console.log("input position: ", position)
     if (filteredRecipeData!=undefined){
-        savedRecipes.push(filteredRecipeData[position])
+        savedRecipes.push(filteredRecipeData[position].id)
         console.log(savedRecipes)
     }
     else{

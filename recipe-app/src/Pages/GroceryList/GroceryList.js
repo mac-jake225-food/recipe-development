@@ -9,14 +9,13 @@ import { savedRecipes } from "../RecipesPage/Recipes";
 import { Link } from "react-router-dom";
 
 var id = 1003464
+// var id = savedRecipes[0]
 var ingredientInfo;
 
 
 console.log("-----------------------> running API query");
+// var id=savedRecipes[0]
 var api = new SpoonacularApi.RecipesApi()
-var opts = {
-  'id': id 
-};
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -24,16 +23,14 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ', data);
   }
 };
-api.getRecipeIngredientsByID(opts, callback)
+
+api.getRecipeIngredientsByID(id, callback)
 
 class GroceryList extends Component{
 
     getRecipeIngredientsByID = () => {
       console.log("inside method")
       var api = new SpoonacularApi.RecipesApi()
-      // var opts = {
-      // 'id' : savedRecipes[0].id.toString()
-      // };
       var callback = function(error, data, response) {
       if (error) {
         console.error(error);

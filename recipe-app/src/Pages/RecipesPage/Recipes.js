@@ -6,8 +6,12 @@ import { filteredRecipeData } from "../Profile/ProfileCuisine";
 import { Linking } from 'react';
 import { TouchableOpacity } from 'react'
 import { Text } from 'react'
+import SpoonacularApi from "../../spoonacular";
 
 var savedRecipes = [];
+var recipePosition;
+var recipeID;
+var recipeLink;
 
 class Recipes extends Component{
 
@@ -33,9 +37,28 @@ class Recipes extends Component{
     }
   }
 
+  getRecipeLink () {
+    var api = new SpoonacularApi.RecipesApi()
+      var opts = {
+        'includeNutrition' : false
+      };
+      var callback = function(error, data, response) {
+      if (error) {
+        console.error(error);
+      } 
+      else {
+        recipeLink = data.sourceUrl
+        console.log(recipeLink)
+      }
+    };
+    api.getRecipeInformation(recipeID, opts, callback);
+  }
+
 render(){  
   if(filteredRecipeData!=undefined){
-    var recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
+    recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
+    recipeID = filteredRecipeData[recipePosition].id
+    this.getRecipeLink()
     console.log("render recipe position", recipePosition)
   }
 
@@ -53,32 +76,30 @@ render(){
         <button 
         type="button" className = "recipe-buttons" 
         onClick={()=>
-            this.generateRandomrecipePosition,
-            this.handleClick
+          this.doNothingWTF,
+          this.handleClick
           }>
             Get new recipe
           </button>
 
         <button 
-        type="submit" className = "recipe-buttons"
+        type="button" className = "recipe-buttons"
         onClick={()=>      
           this.saveRecipe(recipePosition)
         }>
           Save Recipe
           </button>
-
+          </div>
+    <div> 
       { typeof filteredRecipeData == 'undefined' && 'Please fill out profile first'}
       </div>
-
       <div>
-        
       { this.state.buttonClicked &&  typeof filteredRecipeData != 'undefined' && filteredRecipeData[recipePosition].title}
-
       { this.state.buttonClicked &&  typeof filteredRecipeData != 'undefined' &&
       <img
+      onClick = {() => window.open(recipeLink, "_blank")}
       src = {filteredRecipeData[recipePosition].image.toString()}>
       </img>}
-
       </div>
   </div>
 

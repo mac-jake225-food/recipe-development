@@ -22,8 +22,6 @@ class ProfileCuisine extends Component {
           ...options,
           [option]: false
         }),
-        
-        {}
       )
     };
   
@@ -126,21 +124,17 @@ class ProfileCuisine extends Component {
                       onClick={this.deselectAll}>
                       Deselect All
                     </button>
-                    <button type="submit" 
+                    <button type="button" 
                     className="profile-buttons">
                     Save
                     </button>
-                        < Link to='/Recipes'><button type="button" 
+                        < Link to='/Recipes'>
+                          <button type="button" 
                           className="profile-buttons" 
                           onClick={this.searchRecipes}>
                           Finish Profile
                         </button>
                         </Link>
-                    
-                    
-                    
-                    
-
                     {/* <button type="button" 
                     className="profile-buttons">
                     <Link to="/"

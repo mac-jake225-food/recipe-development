@@ -9,25 +9,22 @@ var savedRecipes = [];
 var recipePosition;
 var recipeID;
 var recipeLink;
-const CUISINE_OPTIONS = ["1"];
-var cuisines = []
+var savedRecipesText = "";
 
 class Recipes extends Component{
 
   state = {
-    checkboxes: CUISINE_OPTIONS.reduce(
-      (options, option) => ({
-        ...options,
-        [option]: false
-      }),
-    ),
     itemsShown : false
   };
 
-  showItems1 = (bool) => {
+  showItems = (bool) => {
     if (filteredRecipeData!=undefined){
       recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
       console.log(recipePosition)
+      recipeID = filteredRecipeData[recipePosition].id
+      console.log(recipeID)
+      this.getRecipeLink()
+      console.log(recipeLink)
     }
     this.setState({
       itemsShown : bool
@@ -35,12 +32,17 @@ class Recipes extends Component{
     console.log("showItems")
   }
 
-  showItems2 = (bool) => {
+  showItemsAndSave = (bool) => {
     if (filteredRecipeData!=undefined){
-      savedRecipes.push(filteredRecipeData[recipePosition].title)
+      savedRecipes.push(filteredRecipeData[recipePosition])
       console.log(savedRecipes)
       recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
       console.log(recipePosition)
+      recipeID = filteredRecipeData[recipePosition].id
+      console.log(recipeID)
+      this.getRecipeLink()
+      console.log(recipeLink)
+      this.generateSavedRecipeText()
     }
     this.setState({
       itemsShown : bool
@@ -48,55 +50,7 @@ class Recipes extends Component{
     console.log("showItems")
   }
 
-  selectAllCheckboxes = isSelected => {
-    Object.keys(this.state.checkboxes).forEach(checkbox => {
-      this.setState(prevState => ({
-        checkboxes: {
-          ...prevState.checkboxes,
-          [checkbox]: isSelected
-        }
-      }));
-    });
-  };
-
-  selectAll = () => this.selectAllCheckboxes(true);
-
-  deselectAll = () => this.selectAllCheckboxes(false);
-
-  handleCheckboxChange = changeEvent => {
-    const { name } = changeEvent.target;
-
-    this.setState(prevState => ({
-      checkboxes: {
-        ...prevState.checkboxes,
-        [name]: !prevState.checkboxes[name]
-      }
-    }));
-  };
-
-  handleFormSubmit = formSubmitEvent => {
-    formSubmitEvent.preventDefault();
-
-    Object.keys(this.state.checkboxes)
-      .filter(checkbox => this.state.checkboxes[checkbox])
-      .forEach(checkbox => {
-        cuisines.push(checkbox)
-        console.log(cuisines)
-      });
-  };
-
-  createCheckbox = option => (
-    <Checkbox
-      label={option}
-      isSelected={this.state.checkboxes[option]}
-      onCheckboxChange={this.handleCheckboxChange}
-      key={option}
-    />
-  );
-
-  createCheckboxes = () => CUISINE_OPTIONS.map(this.createCheckbox);
-
-  getRecipeLink () {
+  getRecipeLink = () => {
     var api = new SpoonacularApi.RecipesApi()
       var opts = {
         'includeNutrition' : false
@@ -107,39 +61,49 @@ class Recipes extends Component{
       } 
       else {
         recipeLink = data.sourceUrl
-        console.log(recipeLink)
       }
     };
     api.getRecipeInformation(recipeID, opts, callback);
   }
 
+  generateSavedRecipeText = () => {
+    savedRecipesText = ""
+    savedRecipesText = savedRecipes[0].title.toString()
+    for (let i=1; i<savedRecipes.length; i++) {
+      savedRecipesText = savedRecipesText + ", " + savedRecipes[i].title.toString()
+    }
+  }
+
   render() {
     return (
-      <div className='selector__items'
-      style={{display: 'flex',  
-      justifyContent:'center', 
-      alignItems:'center',
-      height: '70vh'}}>
-        <div className='checkbox__items'>
-                <div className="buttons">
-                  <div>
-                  <button
-                    type="button"
-                    className="profile-buttons"
-                    onClick={this.showItems1.bind(null, true)}>
-                    Generate Recipe
-                  </button>
-                  <button
-                    type="button"
-                    className="profile-buttons"
-                    onClick={this.showItems2.bind(null, true)}>
-                    Save Recipe
-                  </button>
-                  {this.state.itemsShown && typeof filteredRecipeData!=undefined && filteredRecipeData[recipePosition].title}
-                  </div>
-                </div>
-            </div>
-          </div>
+      <div className='recipe-items'
+      style = {{display: 'flex', justifyContent: 'center', alignItems:'center', height:'70vh'}}>
+        <div>
+          {this.state.itemsShown && typeof filteredRecipeData!='undefined' && <img 
+          src = {filteredRecipeData[recipePosition].image.toString()}
+          onClick = {() => window.open(recipeLink, "_blank")}></img>}
+        </div> 
+        <div>
+          {this.state.itemsShown && typeof filteredRecipeData!='undefined' && filteredRecipeData[recipePosition].title}
+        </div>
+        <div className="recipe-buttons">
+          <button
+            type="button"
+            className="recipe-buttons"
+            onClick={this.showItems.bind(null, true)}>
+            Generate Recipe
+          </button>
+          <button
+            type="button"
+            className="recipe-buttons"
+            onClick={this.showItemsAndSave.bind(null, true)}>
+            Save Recipe
+          </button>
+        </div>
+        <div>
+          {typeof filteredRecipeData!='undefined' && "Saved Recipes: " + savedRecipesText}
+        </div>
+      </div>
     );
   }
 }

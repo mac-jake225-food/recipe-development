@@ -8,64 +8,65 @@ import { savedRecipes } from "../RecipesPage/Recipes";
 
 import { Link } from "react-router-dom";
 
-var id = 1003464
-// var id = savedRecipes[0]
-var ingredientInfo;
+// var id = 1003464
+// // var id = savedRecipes[0]
+// var ingredientInfo;
 
 
-console.log("-----------------------> running API query");
-// var id=savedRecipes[0]
-var api = new SpoonacularApi.RecipesApi()
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ', data);
-  }
-};
+// console.log("-----------------------> running API query");
+// // var id=savedRecipes[0]
+// var api = new SpoonacularApi.RecipesApi()
+// var callback = function(error, data, response) {
+//   if (error) {
+//     console.error(error);
+//   } else {
+//     console.log('API called successfully. Returned data: ', data);
+//   }
+// };
 
-api.getRecipeIngredientsByID(id, callback)
+// api.getRecipeIngredientsByID(id, callback)
 
 class GroceryList extends Component{
 
-    getRecipeIngredientsByID = () => {
-      console.log("inside method")
-      var api = new SpoonacularApi.RecipesApi()
-      var callback = function(error, data, response) {
-      if (error) {
-        console.error(error);
-      } 
-      else {
-        console.log('ingredient api called successfully. Returned data: ', data.results);
-        ingredientInfo = data
-      }
-    };
-    api.getRecipeIngredientsByID(id, callback);
-    console.log(" function called")
-    }
+    // getRecipeIngredientsByID = () => {
+    //   console.log("inside method")
+    //   var api = new SpoonacularApi.RecipesApi()
+    //   var callback = function(error, data, response) {
+    //   if (error) {
+    //     console.error(error);
+    //   } 
+    //   else {
+    //     console.log('ingredient api called successfully. Returned data: ', data.results);
+    //     ingredientInfo = data
+    //   }
+    // };
+    // api.getRecipeIngredientsByID(id, callback);
+    // console.log(" function called")
+    // }
 
 render(){  
   return (
-  <div
-    style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '90vh'
-    }}
-  >
-  <div>
-      {this.getRecipeIngredientsByID}
-      {console.log('can print')}
-  </div>
-      {/* < Link to='/Recipes'> */}
-        <button type="button" 
-        className="profile-buttons" 
-        onClick={this.searchRecipes}>
-        Finish Profile
-      </button>
-      {/* </Link> */}
-  </div>
+    <div></div>
+  // <div
+  //   style={{
+  //     display: 'flex',
+  //     justifyContent: 'center',
+  //     alignItems: 'center',
+  //     height: '90vh'
+  //   }}
+  // >
+  // <div>
+  //     {this.getRecipeIngredientsByID}
+  //     {console.log('can print')}
+  // </div>
+  //     {/* < Link to='/Recipes'> */}
+  //       <button type="button" 
+  //       className="profile-buttons" 
+  //       onClick={this.searchRecipes}>
+  //       Finish Profile
+  //     </button>
+  //     {/* </Link> */}
+  // </div>
 );}
 }
 export default GroceryList;

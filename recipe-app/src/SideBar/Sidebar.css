@@ -6,6 +6,7 @@
     align-items: center;
   }
 
+
 .menu-arrow{
     transition: all 1s ease-out;
     transform: rotateY(180deg);
@@ -19,7 +20,7 @@
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
 }
-  
+
 .sidebar-menu {
     padding-top: 17%;
     background-color: transparent;
@@ -31,13 +32,35 @@
     top: 0;
     left: -100%;
     transition: 850ms;
-
 }
-  
+@media screen and (max-width: 768px){
+    .sidebar-menu {
+        font-family: monospace;
+        width: 12%;
+        margin-top: 15%;
+    }
+}
+@media screen and (max-width: 1080px){
+    .sidebar-menu {
+        font-family: monospace;
+        width: 12%;
+        margin-top: 15%;
+    }
+}
+
 .sidebar-menu.active {
-    left: 0;
+    left: 2px;
     transform: 350ms;
 }
+
+@media only screen and (max-width: 30px) {
+    .sidebar-menu.active {
+        left: 0;
+        transform: 350ms;
+        scale: 1
+    }
+}
+
 .sidebar-text{
     font-family: monospace;
     color: #ffffff;

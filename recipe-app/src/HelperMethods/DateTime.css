@@ -5,3 +5,13 @@
     justify-content: right;
     text-align: right;
   }
+
+@media screen and (max-width: 768px){
+  .timeClock {
+    font-family: 'Space Mono', monospace;
+    font-weight: normal;
+    position: relative;
+    margin-right: 50px;
+    max-width: 100%;
+  }
+}

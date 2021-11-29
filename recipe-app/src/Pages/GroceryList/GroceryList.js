@@ -8,65 +8,66 @@ import { savedRecipes } from "../RecipesPage/Recipes";
 
 import { Link } from "react-router-dom";
 
-// var id = 1003464
-// // var id = savedRecipes[0]
-// var ingredientInfo;
-
-
-// console.log("-----------------------> running API query");
-// // var id=savedRecipes[0]
-// var api = new SpoonacularApi.RecipesApi()
-// var callback = function(error, data, response) {
-//   if (error) {
-//     console.error(error);
-//   } else {
-//     console.log('API called successfully. Returned data: ', data);
-//   }
-// };
-
-// api.getRecipeIngredientsByID(id, callback)
+var ingredientList= [];
 
 class GroceryList extends Component{
 
-    // getRecipeIngredientsByID = () => {
-    //   console.log("inside method")
-    //   var api = new SpoonacularApi.RecipesApi()
-    //   var callback = function(error, data, response) {
-    //   if (error) {
-    //     console.error(error);
-    //   } 
-    //   else {
-    //     console.log('ingredient api called successfully. Returned data: ', data.results);
-    //     ingredientInfo = data
-    //   }
-    // };
-    // api.getRecipeIngredientsByID(id, callback);
-    // console.log(" function called")
-    // }
+  getRecipeIngredients = () => {
+
+    if(typeof savedRecipes[0] != 'undefined'){
+      var api = new SpoonacularApi.RecipesApi()
+      for(let i =0; i<savedRecipes.length; i++){
+        console.log("-----------------------> running API query");
+        var id=savedRecipes[i].id
+        var callback = function(error, data, response) {
+          if (error) {
+            console.error(error);
+          } else {
+            console.log('ingredient api called successfully. Returned data: ', data.ingredients);
+            ingredientList= ingredientList.concat(data.ingredients)
+          }
+          console.log('all ingredients: ', ingredientList)
+        };
+        api.getRecipeIngredientsByID(id, callback)
+        console.log('all ingredients: ', ingredientList)
+      }
+    }
+  }
+
+  // getAllIngredients = () => {
+  //   for(let i =0; i<savedRecipes.length; i++){
+  //     var id=savedRecipes[i].id
+  //     var api = new SpoonacularApi.RecipesApi()
+  //     var callback = function(error, data, response) {
+  //       if (error) {
+  //         console.error(error);
+  //       } else {
+  //         console.log('ingredient api called successfully. Returned data: ', data.ingredients);
+  //         ingredientList= ingredientList.concat(data.ingredients)
+  //       }
+  //     };
+  //     api.getRecipeIngredientsByID(id, callback)
+  //   }
+  // }
 
 render(){  
+  
   return (
-    <div></div>
-  // <div
-  //   style={{
-  //     display: 'flex',
-  //     justifyContent: 'center',
-  //     alignItems: 'center',
-  //     height: '90vh'
-  //   }}
-  // >
-  // <div>
-  //     {this.getRecipeIngredientsByID}
-  //     {console.log('can print')}
-  // </div>
-  //     {/* < Link to='/Recipes'> */}
-  //       <button type="button" 
-  //       className="profile-buttons" 
-  //       onClick={this.searchRecipes}>
-  //       Finish Profile
-  //     </button>
-  //     {/* </Link> */}
-  // </div>
+    // <div></div>
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '90vh'
+    }}
+  >
+  <div>
+      {this.getRecipeIngredients()}
+      {console.log('can print')}
+  </div>
+      {typeof savedRecipes!='undefined' && ingredientList.toString && 'test'}
+  </div>
 );}
 }
 export default GroceryList;

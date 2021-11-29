@@ -77,7 +77,13 @@ class Recipes extends Component{
   render() {
     return (
       <div className='recipe-items'
-      style = {{display: 'flex', justifyContent: 'center', alignItems:'center', height:'70vh'}}>
+      style = {{
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems:'center', 
+        height:'70vh'
+      }}
+      >
         <div>
           {this.state.itemsShown && typeof filteredRecipeData!='undefined' && <img 
           src = {filteredRecipeData[recipePosition].image.toString()}

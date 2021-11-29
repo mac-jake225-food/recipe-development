@@ -34,22 +34,6 @@ class GroceryList extends Component{
     }
   }
 
-  // getAllIngredients = () => {
-  //   for(let i =0; i<savedRecipes.length; i++){
-  //     var id=savedRecipes[i].id
-  //     var api = new SpoonacularApi.RecipesApi()
-  //     var callback = function(error, data, response) {
-  //       if (error) {
-  //         console.error(error);
-  //       } else {
-  //         console.log('ingredient api called successfully. Returned data: ', data.ingredients);
-  //         ingredientList= ingredientList.concat(data.ingredients)
-  //       }
-  //     };
-  //     api.getRecipeIngredientsByID(id, callback)
-  //   }
-  // }
-
 render(){  
   
   return (
@@ -66,7 +50,7 @@ render(){
       {this.getRecipeIngredients()}
       {console.log('can print')}
   </div>
-      {typeof savedRecipes!='undefined' && ingredientList.toString && 'test'}
+      {typeof savedRecipes[0]!='undefined' && ingredientList.toString && 'test'}
   </div>
 );}
 }

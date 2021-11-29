@@ -34,10 +34,16 @@ class GroceryList extends Component{
     }
   }
 
+  getIngredientNames = () => {
+    console.log('ingredientList', ingredientList)
+    // if(typeof ingredientList[0] != undefined){
+    //   console.log('ingredient name: ', ingredientList[0].name)
+    // }
+  }
+
 render(){  
   
   return (
-    // <div></div>
   <div
     style={{
       display: 'flex',
@@ -48,6 +54,7 @@ render(){
   >
   <div>
       {this.getRecipeIngredients()}
+      {this.getIngredientNames}
       {console.log('can print')}
   </div>
       {typeof savedRecipes[0]!='undefined' && ingredientList.toString && 'test'}

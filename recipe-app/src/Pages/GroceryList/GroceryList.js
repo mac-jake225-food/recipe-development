@@ -12,8 +12,16 @@ var ingredientList= [];
 
 class GroceryList extends Component{
 
-  getRecipeIngredients = () => {
+  state = {
+    listFilled : false
+  };
 
+  changeListFilled = (bool) => {
+    this.setState({
+      listFilled : bool
+    });
+  }
+  getRecipeIngredients = () => {
     if(typeof savedRecipes[0] != 'undefined'){
       var api = new SpoonacularApi.RecipesApi()
       for(let i =0; i<savedRecipes.length; i++){
@@ -24,18 +32,24 @@ class GroceryList extends Component{
             console.error(error);
           } else {
             console.log('ingredient api called successfully. Returned data: ', data.ingredients);
-            ingredientList= ingredientList.concat(data.ingredients)
+            for(var i=0; i<data.ingredients.length; i++){
+              var recipeName = data.ingredients[i].name
+              ingredientList.push(recipeName)
+            }
           }
-          console.log('all ingredients: ', ingredientList)
+          // console.log('all ingredients: ', ingredientList.toString())
+
         };
         api.getRecipeIngredientsByID(id, callback)
-        console.log('all ingredients: ', ingredientList)
+        this.changeListFilled.bind(null, true)
       }
     }
   }
 
   getIngredientNames = () => {
-    console.log('ingredientList', ingredientList)
+    console.log("function runs")
+    console.log('all ingredients: ', ingredientList.toString())
+
     // if(typeof ingredientList[0] != undefined){
     //   console.log('ingredient name: ', ingredientList[0].name)
     // }
@@ -53,11 +67,15 @@ render(){
     }}
   >
   <div>
+      {/* {this.getIngredientNames()} */}
+      
       {this.getRecipeIngredients()}
-      {this.getIngredientNames}
+      {console.log('list filled? ', this.state.listFilled)}
+      {this.state.listFilled && this.getIngredientNames() && 'works'}
       {console.log('can print')}
   </div>
-      {typeof savedRecipes[0]!='undefined' && ingredientList.toString && 'test'}
+      {/* {this.getIngredientNames()} */}
+      {/* {typeof savedRecipes[0]!='undefined' && 'test' + ingredientList.toString() } */}
   </div>
 );}
 }

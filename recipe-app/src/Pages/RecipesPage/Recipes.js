@@ -15,7 +15,7 @@ var savedRecipesText = "";
 class Recipes extends Component{
 
   state = {
-    itemsShown : false
+    itemsShown : generateRecipesHasBeenClicked
   };
 
   showItems = (bool) => {

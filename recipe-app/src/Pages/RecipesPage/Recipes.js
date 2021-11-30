@@ -5,6 +5,7 @@ import SpoonacularApi from "../../spoonacular";
 import { Link } from "react-router-dom";
 import Checkbox from "../Profile/Checkbox";
 
+var generateRecipesHasBeenClicked = false;
 var savedRecipes = [];
 var recipePosition;
 var recipeID;
@@ -14,11 +15,12 @@ var savedRecipesText = "";
 class Recipes extends Component{
 
   state = {
-    itemsShown : false
+    itemsShown : generateRecipesHasBeenClicked
   };
 
   showItems = (bool) => {
     if (filteredRecipeData!=undefined){
+      generateRecipesHasBeenClicked = true;
       recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
       console.log(recipePosition)
       recipeID = filteredRecipeData[recipePosition].id
@@ -33,7 +35,7 @@ class Recipes extends Component{
   }
 
   showItemsAndSave = (bool) => {
-    if (filteredRecipeData!=undefined){
+    if (filteredRecipeData!=undefined && generateRecipesHasBeenClicked){
       savedRecipes.push(filteredRecipeData[recipePosition])
       console.log(savedRecipes)
       recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
@@ -67,32 +69,45 @@ class Recipes extends Component{
   }
 
   generateSavedRecipeText = () => {
-    savedRecipesText = ""
-    savedRecipesText = savedRecipes[0].title.toString()
-    for (let i=1; i<savedRecipes.length; i++) {
-      savedRecipesText = savedRecipesText + ", " + savedRecipes[i].title.toString()
+    if (generateRecipesHasBeenClicked){
+      savedRecipesText = ""
+      savedRecipesText = savedRecipes[0].title.toString()
+      for (let i=1; i<savedRecipes.length; i++) {
+        savedRecipesText = savedRecipesText + ", " + savedRecipes[i].title.toString()
+      }
     }
   }
 
   render() {
     return (
-      <div className='recipe-items'
-      style = {{
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems:'center', 
-        height:'70vh'
-      }}
-      >
-        <div>
-          {this.state.itemsShown && typeof filteredRecipeData!='undefined' && <img 
+      <div className='recipe-items'>
+        <div
+          style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'40vh'
+        }}>
+          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && <img 
           src = {filteredRecipeData[recipePosition].image.toString()}
           onClick = {() => window.open(recipeLink, "_blank")}></img>}
         </div> 
-        <div>
-          {this.state.itemsShown && typeof filteredRecipeData!='undefined' && filteredRecipeData[recipePosition].title}
+        <div
+        style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'5vh'
+        }}>
+          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && filteredRecipeData[recipePosition].title}
         </div>
-        <div className="recipe-buttons">
+        <div className="recipe-buttons"
+        style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'5vh'
+        }}>
           <button
             type="button"
             className="recipe-buttons"
@@ -106,8 +121,14 @@ class Recipes extends Component{
             Save Recipe
           </button>
         </div>
-        <div>
-          {typeof filteredRecipeData!='undefined' && "Saved Recipes: " + savedRecipesText}
+        <div
+        style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'5vh'
+        }}>
+          {typeof filteredRecipeData!='undefined' && generateRecipesHasBeenClicked && "Saved Recipes: " + savedRecipesText}
         </div>
       </div>
     );

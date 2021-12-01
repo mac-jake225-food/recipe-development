@@ -28,6 +28,7 @@ class GroceryList extends Component{
         console.log("-----------------------> running API query");
         var id=savedRecipes[i].id
         var callback = function(error, data, response) {
+          //I think this callback function is what is making the list be filled as the last step
           if (error) {
             console.error(error);
           } else {
@@ -67,15 +68,13 @@ render(){
     }}
   >
   <div>
-      {/* {this.getIngredientNames()} */}
-      
       {this.getRecipeIngredients()}
+      {this.getIngredientNames()}
       {console.log('list filled? ', this.state.listFilled)}
       {this.state.listFilled && this.getIngredientNames() && 'works'}
       {console.log('can print')}
   </div>
-      {/* {this.getIngredientNames()} */}
-      {/* {typeof savedRecipes[0]!='undefined' && 'test' + ingredientList.toString() } */}
+
   </div>
 );}
 }

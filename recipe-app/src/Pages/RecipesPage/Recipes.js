@@ -15,7 +15,7 @@ var savedRecipesText = "";
 class Recipes extends Component{
 
   state = {
-    itemsShown : false
+    itemsShown : generateRecipesHasBeenClicked
   };
 
   showItems = (bool) => {
@@ -80,23 +80,34 @@ class Recipes extends Component{
 
   render() {
     return (
-      <div className='recipe-items'
-      style = {{
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems:'center', 
-        height:'70vh'
-      }}
-      >
-        <div>
+      <div className='recipe-items'>
+        <div
+          style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'40vh'
+        }}>
           {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && <img 
           src = {filteredRecipeData[recipePosition].image.toString()}
           onClick = {() => window.open(recipeLink, "_blank")}></img>}
         </div> 
-        <div>
+        <div
+        style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'5vh'
+        }}>
           {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && filteredRecipeData[recipePosition].title}
         </div>
-        <div className="recipe-buttons">
+        <div className="recipe-buttons"
+        style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'5vh'
+        }}>
           <button
             type="button"
             className="recipe-buttons"
@@ -110,7 +121,13 @@ class Recipes extends Component{
             Save Recipe
           </button>
         </div>
-        <div>
+        <div
+        style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'5vh'
+        }}>
           {typeof filteredRecipeData!='undefined' && generateRecipesHasBeenClicked && "Saved Recipes: " + savedRecipesText}
         </div>
       </div>

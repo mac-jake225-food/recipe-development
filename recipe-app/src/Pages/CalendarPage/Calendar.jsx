@@ -3,15 +3,17 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId } from './event-utils'
+import { INITIAL_EVENTS, createEventId, addToCalendar } from './event-utils'
 import './main.css'
 
 export default class Calendar extends React.Component {
 
   state = {
     weekendsVisible: true,
-    currentEvents: []
+    currentEvents: INITIAL_EVENTS
   }
+
+  
 
   render() {
     return (
@@ -31,15 +33,17 @@ export default class Calendar extends React.Component {
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+            initialEvents={this.state.currentEvents} // alternatively, use the `events` setting to fetch from a feed
             select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
+            // eventAdd={this.updateEvents}
             /* you can update a remote database when these fire:
             eventAdd={function(){}}
-            eventChange={function(){}}
+            eventChange={function(){}} 
             eventRemove={function(){}}
+            
             */
           />
         </div>
@@ -71,12 +75,21 @@ export default class Calendar extends React.Component {
         <div className='calendar-app-sidebar-section'>
           <h2>All Events ({this.state.currentEvents.length})</h2>
           <ul>
-            {this.state.currentEvents.map(renderSidebarEvent)}
+          {this.state.currentEvents.map(renderSidebarEvent)}
+           {addToCalendar()}
           </ul>
         </div>
       </div>
     )
   }
+
+  // componentDidUpdate(prevState) {
+  //   // Typical usage (don't forget to compare props):
+  //   if(this.state.currentEvents != INITIAL_EVENTS) {
+  //     this.setState(INITIAL_EVENTS);
+  //   }
+  // }
+
 
   handleWeekendsToggle = () => {
     this.setState({
@@ -113,8 +126,12 @@ export default class Calendar extends React.Component {
     })
   }
 
+updateEvents = (events) => {
+  this.setState({
+    currentEvents: events
+  })
 }
-
+}
 function renderEventContent(eventInfo) {
   return (
     <>
@@ -123,6 +140,7 @@ function renderEventContent(eventInfo) {
     </>
   )
 }
+
 
 function renderSidebarEvent(event) {
   return (

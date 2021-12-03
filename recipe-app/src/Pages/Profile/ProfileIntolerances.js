@@ -23,7 +23,6 @@ class ProfileIntolerances extends Component {
 
   setInitialState () {
     if (!hasBeenSubmitted){
-      console.log("hi")
       return false;
     }
     else {

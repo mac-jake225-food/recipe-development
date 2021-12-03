@@ -52,6 +52,13 @@ class Recipes extends Component{
     console.log("showItems")
   }
 
+  resetSavedRecipes = (bool) => {
+    savedRecipes.length=0
+    this.setState({
+      itemsShown : bool
+    });
+  }
+
   getRecipeLink = () => {
     var api = new SpoonacularApi.RecipesApi()
       var opts = {
@@ -112,13 +119,20 @@ class Recipes extends Component{
             type="button"
             className="recipe-buttons"
             onClick={this.showItems.bind(null, true)}>
-            Generate Recipe
+            New Recipe
           </button>
           <button
             type="button"
             className="recipe-buttons"
             onClick={this.showItemsAndSave.bind(null, true)}>
             Save Recipe
+          </button>
+          <button
+            type="button"
+            className="recipe-buttons"
+            onClick={this.resetSavedRecipes.bind(null, true)}>
+            Clear Saved Recipe
+            {/**does not take the previously saved recipes of the screen, just deletes the array */}
           </button>
         </div>
         <div
@@ -130,6 +144,17 @@ class Recipes extends Component{
         }}>
           {typeof filteredRecipeData!='undefined' && generateRecipesHasBeenClicked && "Saved Recipes: " + savedRecipesText}
         </div>
+
+        <div
+        style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'5vh'
+        }}>
+          Click on the image to navigate to the recipe!
+        </div>
+
       </div>
     );
   }

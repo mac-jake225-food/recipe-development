@@ -11,9 +11,12 @@ import { Link } from "react-router-dom";
 var ingredientList= [];
 
 class GroceryList extends Component{
-
+  //Maybe move to recipesFile 
+  // getRecipeIngredients()
+  // getIngredientNames()
   state = {
     listFilled : false
+
   };
 
   changeListFilled = (bool) => {
@@ -21,6 +24,7 @@ class GroceryList extends Component{
       listFilled : bool
     });
   }
+  
   getRecipeIngredients = () => {
     if(typeof savedRecipes[0] != 'undefined'){
       var api = new SpoonacularApi.RecipesApi()
@@ -68,8 +72,8 @@ render(){
     }}
   >
   <div>
-      {this.getRecipeIngredients()}
-      {this.getIngredientNames()}
+      {/* {this.getRecipeIngredients()} */}
+      {/* {this.getIngredientNames()} */}
       {console.log('list filled? ', this.state.listFilled)}
       {this.state.listFilled && this.getIngredientNames() && 'works'}
       {console.log('can print')}

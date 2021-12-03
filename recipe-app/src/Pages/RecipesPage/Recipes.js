@@ -153,7 +153,7 @@ class Recipes extends Component{
           height:'5vh'
         }}>
           {typeof filteredRecipeData!='undefined' && 'Click on the image to navigate to the recipe!'}
-          {typeof filteredRecipeData=='undefined' && 'Fill out profile first to get your customized recipes!'}
+          {typeof filteredRecipeData=='undefined' && 'Instructions: fill out profile first to get your customized recipes,then select your favorites'}
         </div>
 
       </div>

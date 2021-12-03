@@ -131,7 +131,7 @@ class Recipes extends Component{
             type="button"
             className="recipe-buttons"
             onClick={this.resetSavedRecipes.bind(null, true)}>
-            Clear Saved Recipe
+            Clear Saved Recipes
             {/**does not take the previously saved recipes of the screen, just deletes the array */}
           </button>
         </div>
@@ -152,7 +152,8 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
-          Click on the image to navigate to the recipe!
+          {typeof filteredRecipeData!='undefined' && 'Click on the image to navigate to the recipe!'}
+          {typeof filteredRecipeData=='undefined' && 'Fill out profile first to get your customized recipes!'}
         </div>
 
       </div>

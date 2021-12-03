@@ -7,13 +7,13 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Recipes',
-    path: '/Recipes',
+    title: 'Profile',
+    path: '/ProfileDiet',
     cName: 'nav-text'
   },
   {
-    title: 'Profile',
-    path: '/ProfileDiet',
+    title: 'Recipes',
+    path: '/Recipes',
     cName: 'nav-text'
   },
   {

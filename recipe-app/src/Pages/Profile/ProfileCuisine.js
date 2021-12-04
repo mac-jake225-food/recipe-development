@@ -10,22 +10,38 @@ import { Recipes } from "../RecipesPage/Recipes";
 const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", 
 "Ethiopian","European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
 "Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "North African", "Southern", "Spanish", "Thai", 
-"Vietnamese", "West African"];  
+"Vietnamese", "West African"]; 
 
 var cuisines = []
 var filteredRecipeData;
+var hasBeenSubmitted = false;
+var checkboxStates = [];
+var a = -1;
 
 class ProfileCuisine extends Component {
     state = {
       checkboxes: CUISINE_OPTIONS.reduce(
         (options, option) => ({
           ...options,
-          [option]: false
+          [option]: this.setInitialState()
         }),
+        {}
       )
     };
+
+    setInitialState () {
+      if (!hasBeenSubmitted){
+        return false;
+      }
+      else {
+        console.log(checkboxStates[a-CUISINE_OPTIONS.length])
+        a = a + 1;
+        console.log(a)
+        return checkboxStates[a-CUISINE_OPTIONS.length];
+      }
+    }
   
-    selectAllCheckboxes = isSelected => {
+    selectAllCheckboxes = (isSelected) => {
       Object.keys(this.state.checkboxes).forEach(checkbox => {
         this.setState(prevState => ({
           checkboxes: {
@@ -40,9 +56,8 @@ class ProfileCuisine extends Component {
   
     deselectAll = () => this.selectAllCheckboxes(false);
   
-    handleCheckboxChange = changeEvent => {
+    handleCheckboxChange = (changeEvent) => {
       const { name } = changeEvent.target;
-  
       this.setState(prevState => ({
         checkboxes: {
           ...prevState.checkboxes,
@@ -51,15 +66,21 @@ class ProfileCuisine extends Component {
       }));
     };
   
-    handleFormSubmit = formSubmitEvent => {
+    handleFormSubmit = (formSubmitEvent) => {
       formSubmitEvent.preventDefault();
-  
+      cuisines = [];
+      checkboxStates = [];
+      hasBeenSubmitted = true;
       Object.keys(this.state.checkboxes)
-        .filter(checkbox => this.state.checkboxes[checkbox])
         .forEach(checkbox => {
-          cuisines.push(checkbox)
-          console.log(cuisines)
+          if (this.state.checkboxes[checkbox]){
+            diets.push(checkbox)
+          }
+          checkboxStates.push(this.state.checkboxes[checkbox])
         });
+        console.log(checkboxStates)
+      console.log(cuisines)
+      console.log(a)
     };
   
     createCheckbox = option => (
@@ -79,8 +100,9 @@ class ProfileCuisine extends Component {
       'diet' : diets.toString(),
       'intolerances' : intolerances.toString(),
       'cuisine' : cuisines.toString(),
-      '_number' : "10000"
+      '_number' : "100"
       };
+      console.log(opts)
       var callback = function(error, data, response) {
       if (error) {
         console.error(error);
@@ -94,6 +116,7 @@ class ProfileCuisine extends Component {
     }
   
     render() {
+      a = -1;
       return (
         <div className='selector__items'
         style={{display: 'flex',  
@@ -124,24 +147,17 @@ class ProfileCuisine extends Component {
                       onClick={this.deselectAll}>
                       Deselect All
                     </button>
-                    <button type="button" 
+                    <button type="submit" 
                     className="profile-buttons">
                     Save
                     </button>
-                        < Link to='/Recipes'>
-                          <button type="button" 
-                          className="profile-buttons" 
-                          onClick={this.searchRecipes}>
+                    < Link to='/Recipes'>
+                      <button type="button" 
+                        className="profile-buttons" 
+                        onClick={this.searchRecipes}>
                           Finish Profile
-                        </button>
-                        </Link>
-                    {/* <button type="button" 
-                    className="profile-buttons">
-                    <Link to="/"
-                      className="profile-links">
-                        Next
-                      </Link>
-                    </button> */}
+                      </button>
+                    </Link>
                   </div>
                 </form>
               </div>

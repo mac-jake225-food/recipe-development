@@ -11,16 +11,38 @@ import { Link } from "react-router-dom";
 var ingredientList= [];
 
 class GroceryList extends Component{
-
+  //Maybe move to recipesFile 
+  // getRecipeIngredients()
+  // getIngredientNames()
   state = {
     listFilled : false
+
   };
 
-  changeListFilled = (bool) => {
-    this.setState({
-      listFilled : bool
-    });
+  constructor(props) {
+    super(props);
+    this.state = {
+      listFilled : false
+    };
   }
+
+  componentDidMount() {  
+    this.getRecipeIngredients()
+    this.getIngredientNames()
+  }
+  componentWillUnmount() {  
+
+  }
+
+  // changeListFilled = (bool) => {
+  //   this.getRecipeIngredients()
+  //   this.getIngredientNames()
+  //   console.log('state function works')
+  //   this.setState({
+  //     listFilled : bool
+  //   });
+  // }
+  
   getRecipeIngredients = () => {
     if(typeof savedRecipes[0] != 'undefined'){
       var api = new SpoonacularApi.RecipesApi()
@@ -38,22 +60,18 @@ class GroceryList extends Component{
               ingredientList.push(recipeName)
             }
           }
-          // console.log('all ingredients: ', ingredientList.toString())
+          console.log('inside api call, all ingredients: ', ingredientList.toString())
 
         };
         api.getRecipeIngredientsByID(id, callback)
-        this.changeListFilled.bind(null, true)
+        // this.changeListFilled.bind(null, true)
       }
     }
   }
 
   getIngredientNames = () => {
-    console.log("function runs")
+    console.log("printing all ingredientList: ")
     console.log('all ingredients: ', ingredientList.toString())
-
-    // if(typeof ingredientList[0] != undefined){
-    //   console.log('ingredient name: ', ingredientList[0].name)
-    // }
   }
 
 render(){  
@@ -68,10 +86,10 @@ render(){
     }}
   >
   <div>
-      {this.getRecipeIngredients()}
-      {this.getIngredientNames()}
+      {/* {this.getRecipeIngredients()} */}
+      {/* {this.getIngredientNames()} */}
       {console.log('list filled? ', this.state.listFilled)}
-      {this.state.listFilled && this.getIngredientNames() && 'works'}
+      {this.state.listFilled && ingredientList.toString() && 'works'}
       {console.log('can print')}
   </div>
 

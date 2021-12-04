@@ -7,6 +7,9 @@ const DIET_OPTIONS = ["Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetaria
 "Pescetarian", "Paleo", "Primal", "Low FODMAP", "Whole30"]
 
 var diets = []
+var hasBeenSubmitted = false;
+var checkboxStates = [];
+var a = -1;
 
 class ProfileDiet extends Component {
 
@@ -14,14 +17,25 @@ class ProfileDiet extends Component {
     checkboxes: DIET_OPTIONS.reduce(
       (options, option) => ({
         ...options,
-        [option]: false
+        [option]: this.setInitialState()
       }),
-      
       {}
     )
   };
 
-  selectAllCheckboxes = isSelected => {
+  setInitialState () {
+    if (!hasBeenSubmitted){
+      return false;
+    }
+    else {
+      console.log(checkboxStates[a-DIET_OPTIONS.length])
+      a = a + 1;
+      console.log(a)
+      return checkboxStates[a-DIET_OPTIONS.length];
+    }
+  }
+
+  selectAllCheckboxes = (isSelected) => {
     Object.keys(this.state.checkboxes).forEach(checkbox => {
       this.setState(prevState => ({
         checkboxes: {
@@ -36,9 +50,8 @@ class ProfileDiet extends Component {
 
   deselectAll = () => this.selectAllCheckboxes(false);
 
-  handleCheckboxChange = changeEvent => {
+  handleCheckboxChange = (changeEvent) => {
     const { name } = changeEvent.target;
-
     this.setState(prevState => ({
       checkboxes: {
         ...prevState.checkboxes,
@@ -47,21 +60,24 @@ class ProfileDiet extends Component {
     }));
   };
 
-  //what does this do?
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
+    diets = [];
+    checkboxStates = [];
+    hasBeenSubmitted = true;
     Object.keys(this.state.checkboxes)
-      .filter(checkbox => this.state.checkboxes[checkbox])
       .forEach(checkbox => {
-        diets.push(checkbox)
-        console.log(diets)
+        if (this.state.checkboxes[checkbox]){
+          diets.push(checkbox)
+        }
+        checkboxStates.push(this.state.checkboxes[checkbox])
       });
-      <Link to="/ProfileIntolerances">
-    </Link>
-    
+      console.log(checkboxStates)
+      console.log(diets)
+      console.log(a)
   };
 
-  createCheckbox = option => (
+  createCheckbox = (option) => (
     <Checkbox
       label={option}
       isSelected={this.state.checkboxes[option]}
@@ -73,6 +89,7 @@ class ProfileDiet extends Component {
   createCheckboxes = () => DIET_OPTIONS.map(this.createCheckbox);
 
   render() {
+    a = -1;
     return (
       <div className='selector__items'
       style={{display: 'flex',  
@@ -96,14 +113,10 @@ class ProfileDiet extends Component {
                     onClick={this.deselectAll}>
                     Deselect All
                   </button>
-
-                  
-
                   <button type="submit" 
                   className="profile-buttons">
                   Save
                   </button>
-                  
                   <button type="button" 
                   className="profile-buttons">
                   <Link to="/ProfileIntolerances"
@@ -111,8 +124,6 @@ class ProfileDiet extends Component {
                       Next
                     </Link>
                   </button>
-                  
-
                 </div>
               </form>
             </div>

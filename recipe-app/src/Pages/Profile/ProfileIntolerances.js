@@ -6,20 +6,34 @@ const INTOLERANCE_OPTIONS = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafo
 "Soy", "Sulfite", "Tree Nut", "Wheat"]
 
 var intolerances = []
+var hasBeenSubmitted = false;
+var checkboxStates = [];
+var a = -1;
 
 class ProfileIntolerances extends Component {
   state = {
     checkboxes: INTOLERANCE_OPTIONS.reduce(
       (options, option) => ({
         ...options,
-        [option]: false
+        [option]: this.setInitialState()
       }),
-      
       {}
     )
   };
 
-  selectAllCheckboxes = isSelected => {
+  setInitialState () {
+    if (!hasBeenSubmitted){
+      return false;
+    }
+    else {
+      console.log(checkboxStates[a-INTOLERANCE_OPTIONS.length])
+      a = a + 1;
+      console.log(a)
+      return checkboxStates[a-INTOLERANCE_OPTIONS.length];
+    }
+  }
+
+  selectAllCheckboxes = (isSelected) => {
     Object.keys(this.state.checkboxes).forEach(checkbox => {
       this.setState(prevState => ({
         checkboxes: {
@@ -36,7 +50,6 @@ class ProfileIntolerances extends Component {
 
   handleCheckboxChange = changeEvent => {
     const { name } = changeEvent.target;
-
     this.setState(prevState => ({
       checkboxes: {
         ...prevState.checkboxes,
@@ -45,19 +58,22 @@ class ProfileIntolerances extends Component {
     }));
   };
 
-  handleFormSubmit = formSubmitEvent => {
+  handleFormSubmit = (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
-
+    intolerances = [];
+    checkboxStates = [];
+    hasBeenSubmitted = true;
     Object.keys(this.state.checkboxes)
-      .filter(checkbox => this.state.checkboxes[checkbox])
       .forEach(checkbox => {
-        console.log(checkbox, "is selected.");
-        intolerances.push(checkbox)
-        console.log(intolerances)
+        if (this.state.checkboxes[checkbox]){
+          intolerances.push(checkbox)
+        }
+        checkboxStates.push(this.state.checkboxes[checkbox])
       });
+      console.log(intolerances)
   };
 
-  createCheckbox = option => (
+  createCheckbox = (option) => (
     <Checkbox
       label={option}
       isSelected={this.state.checkboxes[option]}
@@ -69,6 +85,7 @@ class ProfileIntolerances extends Component {
   createCheckboxes = () => INTOLERANCE_OPTIONS.map(this.createCheckbox);
 
   render() {
+    a = -1;
     return (
       <div className='selector__items'
       style={{display: 'flex',  

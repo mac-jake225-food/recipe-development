@@ -3,14 +3,14 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId, addToCalendar } from './event-utils'
+import { uniqueIDs, eventsCopy,createEventId, createInitalArray, checkforDuplicates, addToCalendar} from './event-utils'
 import './main.css'
 
 export default class Calendar extends React.Component {
 
   state = {
     weekendsVisible: true,
-    currentEvents: INITIAL_EVENTS
+    currentEvents: uniqueIDs
   }
 
   
@@ -19,6 +19,7 @@ export default class Calendar extends React.Component {
     return (
       <div className='calendar-app'>
         {this.renderSidebar()}
+        {this.renderEvents()}
         <div className='calendar-app-main'>
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -33,7 +34,7 @@ export default class Calendar extends React.Component {
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
-            initialEvents={this.state.currentEvents} // alternatively, use the `events` setting to fetch from a feed
+            initialEvents={uniqueIDs} // alternatively, use the `events` setting to fetch from a feed
             select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
@@ -76,20 +77,19 @@ export default class Calendar extends React.Component {
           <h2>All Events ({this.state.currentEvents.length})</h2>
           <ul>
           {this.state.currentEvents.map(renderSidebarEvent)}
-           {addToCalendar()}
           </ul>
         </div>
       </div>
     )
   }
 
-  // componentDidUpdate(prevState) {
-  //   // Typical usage (don't forget to compare props):
-  //   if(this.state.currentEvents != INITIAL_EVENTS) {
-  //     this.setState(INITIAL_EVENTS);
-  //   }
-  // }
-
+  renderEvents() {
+    return (
+      <div>
+        {addToCalendar()}
+      </div>
+    )
+  }
 
   handleWeekendsToggle = () => {
     this.setState({
@@ -125,12 +125,6 @@ export default class Calendar extends React.Component {
       currentEvents: events
     })
   }
-
-updateEvents = (events) => {
-  this.setState({
-    currentEvents: events
-  })
-}
 }
 function renderEventContent(eventInfo) {
   return (

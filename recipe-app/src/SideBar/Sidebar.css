@@ -12,6 +12,7 @@
     transform: rotateY(180deg);
     top: 20% 20%; 
     z-index: 5;
+    font-size: 22px;
 }
 .menu-arrow :hover {
     color: lightgrey;
@@ -111,5 +112,5 @@ a:hover {
     rotate: 90deg;
     padding-top: 20px;
     width: 100%;
-    size: 20px;
+    size: 40px;
 }

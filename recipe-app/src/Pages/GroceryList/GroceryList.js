@@ -8,27 +8,29 @@ import { savedRecipes } from "../RecipesPage/Recipes";
 
 import { Link } from "react-router-dom";
 
-var ingredientList= [];
 
 class GroceryList extends Component{
   //Maybe move to recipesFile 
   // getRecipeIngredients()
   // getIngredientNames()
-  state = {
-    listFilled : false
+  // state = {
+  //   ingredientList: []
+  // };
 
-  };
+  // this.setState(prevState => ({
+  //   arrayvar: [...prevState.arrayvar, newelement]
+  // }))
 
   constructor(props) {
     super(props);
     this.state = {
-      listFilled : false
+      ingredientList: []
     };
   }
 
   componentDidMount() {  
     this.getRecipeIngredients()
-    this.getIngredientNames()
+    // this.getIngredientNames()
   }
   componentWillUnmount() {  
 
@@ -42,7 +44,11 @@ class GroceryList extends Component{
   //     listFilled : bool
   //   });
   // }
-  
+  changeState=(recipeName)=>{
+    this.setState(prevState => ({
+      ingredientList: [...prevState.ingredientList, recipeName]
+    }))
+  }
   getRecipeIngredients = () => {
     if(typeof savedRecipes[0] != 'undefined'){
       var api = new SpoonacularApi.RecipesApi()
@@ -57,22 +63,26 @@ class GroceryList extends Component{
             console.log('ingredient api called successfully. Returned data: ', data.ingredients);
             for(var i=0; i<data.ingredients.length; i++){
               var recipeName = data.ingredients[i].name
-              ingredientList.push(recipeName)
+              // ingredientList.push(recipeName)
+              // this.setState(prevState => ({
+              //   ingredientList: [...prevState.ingredientList, recipeName]
+              // }))
+              this.changeState(recipeName)
             }
           }
-          console.log('inside api call, all ingredients: ', ingredientList.toString())
-
+          // console.log('inside api call, all ingredients: ', this.state.ingredientList.toString())
+          
         };
-        api.getRecipeIngredientsByID(id, callback)
+        api.getRecipeIngredientsByID(id, callback.bind(this))
         // this.changeListFilled.bind(null, true)
       }
     }
   }
 
-  getIngredientNames = () => {
-    console.log("printing all ingredientList: ")
-    console.log('all ingredients: ', ingredientList.toString())
-  }
+  // getIngredientNames = () => {
+  //   console.log("printing all ingredientList: ")
+  //   console.log('all ingredients: ', this.state.ingredientList.toString())
+  // }
 
 render(){  
   
@@ -88,9 +98,9 @@ render(){
   <div>
       {/* {this.getRecipeIngredients()} */}
       {/* {this.getIngredientNames()} */}
-      {console.log('list filled? ', this.state.listFilled)}
-      {this.state.listFilled && ingredientList.toString() && 'works'}
-      {console.log('can print')}
+      {/* {console.log('list filled? ', this.state.listFilled)} */}
+      {typeof ingredientList!=undefined && this.state.ingredientList && 'works'}
+      {console.log('ingredient list, in render: ', this.state.ingredientList.toString())}
   </div>
 
   </div>

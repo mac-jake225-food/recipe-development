@@ -9,13 +9,13 @@ let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of tod
 
 let INITIAL_EVENTS = []
 let eventTitle = [] 
-var uniqueIDs = [{}] 
-var finalEvents = [{}]
-var idValue = []
-var  titleValue = []
-var startValue= []
 
-
+/**
+ * This function takes in the intial SavedRecipes array which is checked to ensure there are no duplicate 
+ * recipes which is then returned to our intial array varible 
+ * @param {*} initalArray 
+ * @returns initalArray
+ */
 function createInitalArray(initalArray){
   if(savedRecipes.length > 0){
       initalArray = checkforDuplicates(createSecondaryArray(savedRecipes, eventTitle))
@@ -24,15 +24,25 @@ function createInitalArray(initalArray){
     return initalArray 
   }
 
-  // this function takes in an array copy coverts it to a set , and then reverts it back to an array to prevent any duplicate set items 
+  /**
+   * This function takes in an array and then creates a set from that array to ensure no duplicate values are present
+   * @param {*} arrayCopy 
+   * @returns finalArrayTitle
+   */
   function checkforDuplicates(arrayCopy){
     let finalSetTitle = [...new Set(arrayCopy)];
     let finalArrayTitle = Array.from(finalSetTitle)
     return finalArrayTitle
     }
 
-  // this function creates an array copy of the initail array and returns the array copy 
-  function createSecondaryArray(array, arrayCopy){
+
+    /**
+     * This function takes in two arrays (savedRecipes and an empty array), then a copy is made from the original array to the copy array which is finally returned
+     * @param {*} array 
+     * @param {*} arrayCopy 
+     * @returns finalArrayTitle
+     */
+    function createSecondaryArray(array, arrayCopy){
     let finalArrayTitle = []
     let concatArray = arrayCopy.concat(array)
     for (let title in concatArray){
@@ -46,37 +56,51 @@ function createInitalArray(initalArray){
     return finalArrayTitle
   }
 
-function createEventId() {
-  return String(eventGuid++)
-}
+  /**
+   * This function increments our eventID
+   * @returns String(eventGuid++)
+   */
+  function createEventId() {
+    return String(eventGuid++)
+  }
 
-function addToCalendar(){
-  let singleArray = createInitalArray(savedRecipes)
-  // console.log(singleArray)
-  let length = singleArray.length-1
-    for(var i = 0; i <= length; i++){
-      INITIAL_EVENTS.push( 
-        {
-        id: i,
-        title: singleArray[i],
-        start: todayStr
-      });
-    }
-  var uniqueIDs = Array.from(new Set(INITIAL_EVENTS.map(a => a.id)))
- .map(id => {
-   return INITIAL_EVENTS.find(a => a.id === id)
- })
-  idValue = uniqueIDs.map((id) => {
-      console.log(id.id)
-    })
-  titleValue = uniqueIDs.map((id) => {
-    console.log(id.title)
-  })
-  startValue = uniqueIDs.map((id) => {
-    console.log(id.start)
-  })
-  console.log(uniqueIDs)
-  return idValue, titleValue, startValue
-}
 
-export {uniqueIDs, addToCalendar,  createEventId, createInitalArray, checkforDuplicates, idValue, titleValue, startValue}
+  /**
+   * This function gets the intial array with no duplicates and then iterates through the length of the array which then adds them to our INITAL_EVENTS
+   * with keys as id, title, start 
+   * @returns INITIAL_EVENTS
+   */
+  function getCalendarData(){
+    let singleArray = createInitalArray(savedRecipes)
+    // console.log(singleArray)
+    let length = singleArray.length-1
+      for(var i = 0; i <= length; i++){
+          INITIAL_EVENTS.push( 
+            {
+            id: createEventId(),
+            title: singleArray[i],
+            start: todayStr + ' 12:00:00'
+          });
+        }
+
+    console.log(INITIAL_EVENTS)
+    return INITIAL_EVENTS
+  }
+
+// function getIDs(){
+//   getCalendarData()
+//   var finalEvents = INITIAL_EVENTS.map(event => event.id)
+// }
+// function getTitles(){
+//   var titleValue = INITIAL_EVENTS.map((id) => {
+//     return id.title
+//   })
+// }
+
+// function getTimes(){
+//   var timesValue = INITIAL_EVENTS.map((id) => {
+//     return id.start
+//   })
+// }
+
+export {INITIAL_EVENTS, getCalendarData,  createEventId}

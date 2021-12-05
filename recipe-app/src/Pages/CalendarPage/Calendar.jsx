@@ -3,23 +3,32 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { uniqueIDs, eventsCopy,createEventId, createInitalArray, checkforDuplicates, addToCalendar} from './event-utils'
+import {createEventId, getCalendarData, INITIAL_EVENTS} from './event-utils'
 import './main.css'
 
 export default class Calendar extends React.Component {
 
   state = {
     weekendsVisible: true,
-    currentEvents: uniqueIDs
+    currentEvents: []
   }
 
-  
+
+
+  /**
+   * This function gathers the intialEvents from our './event-utils' file and if data is present sets the state to that current data (continously updated)
+   */
+  componentDidMount(){
+    if(getCalendarData()){
+      this.setState({currentEvents: getCalendarData()})
+    }
+  }
 
   render() {
     return (
       <div className='calendar-app'>
         {this.renderSidebar()}
-        {this.renderEvents()}
+        {/* {this.renderEvents()} */}
         <div className='calendar-app-main'>
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -34,7 +43,7 @@ export default class Calendar extends React.Component {
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
-            initialEvents={uniqueIDs} // alternatively, use the `events` setting to fetch from a feed
+            events={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
             select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
@@ -52,6 +61,11 @@ export default class Calendar extends React.Component {
     )
   }
 
+  /**
+   * This is our main render method for components present on the calendar and UI, 
+   * It renders in the data under ALL EVENTS as well as the dragable components on our calendar page
+   * @returns 
+   */
   renderSidebar() {
     return (
       <div className='calendar-app-sidebar'>
@@ -83,20 +97,35 @@ export default class Calendar extends React.Component {
     )
   }
 
-  renderEvents() {
-    return (
-      <div>
-        {addToCalendar()}
-      </div>
-    )
-  }
+  // renderEvents() {
+  //   return (
+  //     <div>
+  //       {getCalendarData()}
+  //     </div>
+  //   )
+  // }
 
+  // componentDidUpdate(prevState) {
+  //   // Typical usage (don't forget to compare props):
+  //   if(this.state.currentEvents != finalArray) {
+  //     this.setState(finalArray);
+  //   }
+  // }
+
+
+  /**
+   * This function handles the weekend visibility toggle on or off
+   */
   handleWeekendsToggle = () => {
     this.setState({
       weekendsVisible: !this.state.weekendsVisible
     })
   }
 
+  /**
+   * This function will be removed, but handles users adding in new events 
+   * @param {selectInfo} 
+   */
   handleDateSelect = (selectInfo) => {
     let title = prompt('Please enter a new title for your event')
     let calendarApi = selectInfo.view.calendar
@@ -120,12 +149,14 @@ export default class Calendar extends React.Component {
     }
   }
 
-  handleEvents = (events) => {
-    this.setState({
-      currentEvents: events
-    })
+  // we want handle events if there is a new event to add the new event to current events instead of creating a new value 
+  // handleEvents = (event) => {
+  //   this.setState({
+  //     currentEvents : this.currentEvents.concat(event)
+  //   })
+  //   }
   }
-}
+
 function renderEventContent(eventInfo) {
   return (
     <>
@@ -135,7 +166,11 @@ function renderEventContent(eventInfo) {
   )
 }
 
-
+/**
+ * This function gathers each event's ID, Start Time, and Title which is then rendered on to the calander page
+ * @param {*} event 
+ * @returns (event.id, event.title, event.start)
+ */
 function renderSidebarEvent(event) {
   return (
     <li key={event.id}>

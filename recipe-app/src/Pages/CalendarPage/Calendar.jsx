@@ -3,7 +3,7 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import {createEventId, getCalendarData, INITIAL_EVENTS} from './event-utils'
+import {createEventId, getCalendarData, INITIAL_EVENTS, search, removeEvent} from './event-utils'
 import './main.css'
 
 export default class Calendar extends React.Component {
@@ -49,6 +49,7 @@ export default class Calendar extends React.Component {
             eventClick={this.handleEventClick}
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
             eventAdd={this.updateEvents}
+            eventRemove={this.handleRemove}
             /* you can update a remote database when these fire:
             eventAdd={function(){}}
             eventChange={function(){}} 
@@ -67,6 +68,7 @@ export default class Calendar extends React.Component {
    * @returns 
    */
   renderSidebar() {
+    this.handleRemove()
     return (
       <div className='calendar-app-sidebar'>
         <div className='calendar-app-sidebar-section'>
@@ -147,8 +149,21 @@ export default class Calendar extends React.Component {
     if (window.confirm(`Are you sure you want to delete this event '${clickInfo.event.title}'`)) {
       // have to splice up to that index, and then after that index then concat them together 
       clickInfo.event.remove()
+      console.log(search(clickInfo.event.title, INITIAL_EVENTS).id)
+      this.handleRemove(clickInfo)
+    }
+  }
+
+  handleRemove = (clickInfo) => {
+    if(typeof(clickInfo) != "undefined"){
+      var finalEvents = removeEvent(INITIAL_EVENTS, search(clickInfo.event.title, INITIAL_EVENTS).id)
+      console.log(finalEvents, ' updated events')
+      this.setState({
+        currentEvents: finalEvents
+      })
 
     }
+    
   }
 
   // we want handle events if there is a new event to add the new event to current events instead of creating a new value 
@@ -157,6 +172,7 @@ export default class Calendar extends React.Component {
   //     currentEvents : this.currentEvents.concat(event)
   //   })
   //   }
+
   }
 
 // function renderEventContent(eventInfo) {
@@ -167,6 +183,8 @@ export default class Calendar extends React.Component {
 //     </>
 //   )
 // }
+
+
 
 /**
  * This function gathers each event's ID, Start Time, and Title which is then rendered on to the calander page

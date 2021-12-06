@@ -39,16 +39,16 @@ export default class Calendar extends React.Component {
             }}
             initialView='timeGridWeek'
             editable={true}
-            selectable={true}
+            selectable={false}
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
             events={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={this.handleDateSelect}
-            eventContent={renderEventContent} // custom render function
+            // select={this.handleDateSelect}
+            // eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            // eventAdd={this.updateEvents}
+            eventAdd={this.updateEvents}
             /* you can update a remote database when these fire:
             eventAdd={function(){}}
             eventChange={function(){}} 
@@ -72,7 +72,7 @@ export default class Calendar extends React.Component {
         <div className='calendar-app-sidebar-section'>
           <h2>Instructions</h2>
           <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
+            <li>Drag your Recipe Events to where you would like them</li>
             <li>Drag, drop, and resize events</li>
             <li>Click an event to delete it</li>
           </ul>
@@ -126,22 +126,22 @@ export default class Calendar extends React.Component {
    * This function will be removed, but handles users adding in new events 
    * @param {selectInfo} 
    */
-  handleDateSelect = (selectInfo) => {
-    let title = prompt('Please enter a new title for your event')
-    let calendarApi = selectInfo.view.calendar
+  // handleDateSelect = (selectInfo) => {
+  //   let title = prompt('Please enter a new title for your event')
+  //   let calendarApi = selectInfo.view.calendar
 
-    calendarApi.unselect() // clear date selection
+  //   calendarApi.unselect() // clear date selection
 
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      })
-    }
-  }
+  //   if (title) {
+  //     calendarApi.addEvent({
+  //       id: createEventId(),
+  //       title,
+  //       start: selectInfo.startStr,
+  //       end: selectInfo.endStr,
+  //       allDay: selectInfo.allDay
+  //     })
+  //   }
+  // }
 
   handleEventClick = (clickInfo) => {
     if ((`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
@@ -157,14 +157,14 @@ export default class Calendar extends React.Component {
   //   }
   }
 
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  )
-}
+// function renderEventContent(eventInfo) {
+//   return (
+//     <>
+//       <b>{eventInfo.timeText}</b>
+//       <i>{eventInfo.event.title}</i>
+//     </>
+//   )
+// }
 
 /**
  * This function gathers each event's ID, Start Time, and Title which is then rendered on to the calander page

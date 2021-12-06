@@ -145,6 +145,7 @@ export default class Calendar extends React.Component {
 
   handleEventClick = (clickInfo) => {
     if (window.confirm(`Are you sure you want to delete this event '${clickInfo.event.title}'`)) {
+      // have to splice up to that index, and then after that index then concat them together 
       clickInfo.event.remove()
 
     }

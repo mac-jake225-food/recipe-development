@@ -75,12 +75,12 @@ function createInitalArray(initalArray){
     // console.log(singleArray)
     let length = singleArray.length-1
       for(var i = 0; i <= length; i++){
-          INITIAL_EVENTS.push( 
+          INITIAL_EVENTS[i]= 
             {
             id: createEventId(),
             title: singleArray[i],
             start: todayStr + ' 12:00:00'
-          });
+          };
         }
 
     console.log(INITIAL_EVENTS)

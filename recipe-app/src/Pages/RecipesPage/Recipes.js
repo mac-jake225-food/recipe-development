@@ -4,6 +4,7 @@ import { filteredRecipeData } from "../Profile/ProfileCuisine";
 import SpoonacularApi from "../../spoonacular";
 import { Link } from "react-router-dom";
 import Checkbox from "../Profile/Checkbox";
+import { INITIAL_EVENTS } from "../CalendarPage/event-utils";
 
 var generateRecipesHasBeenClicked = false;
 var savedRecipes = [];
@@ -86,6 +87,9 @@ class Recipes extends Component{
   }
 
   render() {
+    // Emilano will revist this code and update saved recipes 
+    // savedRecipes = INITIAL_EVENTS
+    // console.log(savedRecipes)
     return (
       <div className='recipe-items'>
         <div

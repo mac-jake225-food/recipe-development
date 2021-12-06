@@ -87,6 +87,21 @@ function createInitalArray(initalArray){
     return INITIAL_EVENTS
   }
 
+  function search(nameKey, intialEvents){
+    for (var i=0; i < intialEvents.length; i++) {
+        if (intialEvents[i].title === nameKey) {
+            return intialEvents[i];
+        }
+    }
+  }
+
+  function removeEvent(array, idValue) {   
+    return array.filter(function(ele){ 
+        return ele.id != idValue; 
+    });
+}
+
+
 // function getIDs(){
 //   getCalendarData()
 //   var finalEvents = INITIAL_EVENTS.map(event => event.id)
@@ -103,4 +118,4 @@ function createInitalArray(initalArray){
 //   })
 // }
 
-export {INITIAL_EVENTS, getCalendarData,  createEventId}
+export {INITIAL_EVENTS, getCalendarData,  createEventId, search, removeEvent}

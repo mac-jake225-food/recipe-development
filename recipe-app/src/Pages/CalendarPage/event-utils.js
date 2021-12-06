@@ -87,6 +87,12 @@ function createInitalArray(initalArray){
     return INITIAL_EVENTS
   }
 
+  /**
+   * This function takes in a key and an array which is then iterated over to find the desired key.
+   * @param {nameKey} nameKey 
+   * @param {initialEvents} intialEvents 
+   * @returns The index of the element that was searched for
+   */
   function search(nameKey, intialEvents){
     for (var i=0; i < intialEvents.length; i++) {
         if (intialEvents[i].title === nameKey) {
@@ -95,6 +101,12 @@ function createInitalArray(initalArray){
     }
   }
 
+  /**
+   * This function takes in an array and index and filters through the array to find all keys that do not match that index
+   * @param {array} array 
+   * @param {idValue} idValue 
+   * @returns each key element that does not match the id value 
+   */
   function removeEvent(array, idValue) {   
     return array.filter(function(ele){ 
         return ele.id != idValue; 

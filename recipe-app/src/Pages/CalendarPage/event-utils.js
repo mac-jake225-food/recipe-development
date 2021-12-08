@@ -96,7 +96,8 @@ function createInitalArray(initalArray){
   function search(nameKey, intialEvents){
     for (var i=0; i < intialEvents.length; i++) {
         if (intialEvents[i].title === nameKey) {
-            return intialEvents[i];
+          console.log(intialEvents[i].title)
+            return intialEvents[i].title;
         }
     }
   }
@@ -109,7 +110,7 @@ function createInitalArray(initalArray){
    */
   function removeEvent(array, idValue) {   
     return array.filter(function(ele){ 
-        return ele.id != idValue; 
+        return ele.title != idValue; 
     });
 }
 

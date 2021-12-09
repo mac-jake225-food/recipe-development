@@ -8,9 +8,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Recipes } from "../RecipesPage/Recipes";
 
 const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", 
-"Ethiopian","European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
-"Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "North African", "Southern", "Spanish", "Thai", 
-"Vietnamese", "West African"]; 
+"European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
+"Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", 
+"Vietnamese"]; 
 
 var cuisines = []
 var filteredRecipeData;
@@ -102,7 +102,7 @@ class ProfileCuisine extends Component {
       'cuisine' : cuisines.toString(),
       '_number' : "100"
       };
-      console.log(opts)
+      console.log("showing user choices: ",opts)
       var callback = function(error, data, response) {
       if (error) {
         console.error(error);

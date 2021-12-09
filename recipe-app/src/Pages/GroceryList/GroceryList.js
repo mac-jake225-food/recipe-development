@@ -40,8 +40,9 @@ class GroceryList extends Component{
             console.error(error);
           } else {
             console.log('ingredient api called successfully. Returned data: ', data.ingredients);
+
             for(var i=0; i<data.ingredients.length; i++){
-              var recipeName = ' '+data.ingredients[i].name + "\n"
+              var recipeName = ' '+data.ingredients[i].name + ": " + data.ingredients[i].amount.us.value+ " " + data.ingredients[i].amount.us.unit
               this.changeState(recipeName)
             }
           }
@@ -77,6 +78,7 @@ render(){
           return <div key={key}>{i}</div>;
         })}
     </div>
+    {typeof savedRecipes[0]=='undefined' && 'To get your customized grocery list, first fill out the profile page, then select your favorite recipes on the recipe page'}
   
   </div>
 

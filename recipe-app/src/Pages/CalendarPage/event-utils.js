@@ -108,10 +108,11 @@ function createInitalArray(initalArray){
    * @param {idValue} idValue 
    * @returns each key element that does not match the id value 
    */
-  function removeEvent(array, idValue) {   
-    return array.filter(function(ele){ 
+  function removeEvent(idValue) {   
+    INITIAL_EVENTS = INITIAL_EVENTS.filter(function(ele){ 
         return ele.title != idValue; 
     });
+    return INITIAL_EVENTS
 }
 
 
@@ -131,4 +132,4 @@ function createInitalArray(initalArray){
 //   })
 // }
 
-export {INITIAL_EVENTS, getCalendarData,  createEventId, search, removeEvent}
+export {INITIAL_EVENTS, getCalendarData,  createEventId, search, removeEvent, savedRecipes}

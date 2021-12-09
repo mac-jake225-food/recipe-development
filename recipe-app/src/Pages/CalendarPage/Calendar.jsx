@@ -3,7 +3,7 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import {createEventId, getCalendarData, INITIAL_EVENTS, search, removeEvent} from './event-utils'
+import {createEventId, getCalendarData, INITIAL_EVENTS, search, removeEvent, savedRecipes} from './event-utils'
 import './main.css'
 
 export default class Calendar extends React.Component {
@@ -157,9 +157,8 @@ export default class Calendar extends React.Component {
   handleRemove = (clickInfo) => {
     if(typeof(clickInfo) != "undefined"){
 
-      this.INITIAL_EVENTS = removeEvent(INITIAL_EVENTS, search(clickInfo.event.title, INITIAL_EVENTS))
-      //  console.log(typeof(this.INITIAL_EVENTS))
-      console.log(this.INITIAL_EVENTS, " inti")
+      this.INITIAL_EVENTS = removeEvent(search(clickInfo.event.title, INITIAL_EVENTS))
+       console.log(this.INITIAL_EVENTS)
 
       this.setState({
         currentEvents: this.INITIAL_EVENTS

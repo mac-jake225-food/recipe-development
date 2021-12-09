@@ -73,7 +73,16 @@ render(){
   <div>
       {console.log('ingredient list: ', this.state.ingredientList)}
       
-      <div className="display-linebreak"> 
+
+      <div style = {{
+          
+          display: 'flex', 
+          justifyContent: 'center', 
+          flexDirection: 'column',
+          alignItems:'center', 
+          height:'75%'
+
+        }}> 
         {this.convertListToString(this.state.ingredientList).split("\n").map((i,key)=>{
           return <div key={key}>{i}</div>;
         })}

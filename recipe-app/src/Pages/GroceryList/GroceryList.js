@@ -19,6 +19,7 @@ class GroceryList extends Component{
 
   componentDidMount() {  
     this.getRecipeIngredients()
+    this.convertListToString(["one", "two"])
   }
   componentWillUnmount() {  
 
@@ -39,19 +40,27 @@ class GroceryList extends Component{
             console.error(error);
           } else {
             console.log('ingredient api called successfully. Returned data: ', data.ingredients);
+
             for(var i=0; i<data.ingredients.length; i++){
-              var recipeName = ' '+data.ingredients[i].name 
+              var recipeName = ' '+data.ingredients[i].name + ": " + data.ingredients[i].amount.us.value+ " " + data.ingredients[i].amount.us.unit
               this.changeState(recipeName)
             }
           }
         };
         api.getRecipeIngredientsByID(id, callback.bind(this))
+      
       }
     }
   }
+  convertListToString(list){
+    var appendString = ""
+    for (let index = 0; index < list.length; index++) {
+      appendString += list[index] + "\n"
+    }
+    return appendString
+  }
 
 render(){  
-  
   return (
   <div
     style={{
@@ -62,11 +71,24 @@ render(){
     }}
   >
   <div>
-      {console.log('ingredient list, in render: ', this.state.ingredientList.toString())}
+      {console.log('ingredient list: ', this.state.ingredientList)}
       
-      <div>
-        {this.state.ingredientList.map(txt => <p>{txt}</p>)}
+
+      <div style = {{
+          
+          display: 'flex', 
+          justifyContent: 'center', 
+          flexDirection: 'column',
+          alignItems:'center', 
+          height:'75%'
+
+        }}> 
+        {this.convertListToString(this.state.ingredientList).split("\n").map((i,key)=>{
+          return <div key={key}>{i}</div>;
+        })}
     </div>
+    {typeof savedRecipes[0]=='undefined' && 'To get your customized grocery list, first fill out the profile page, then select your favorite recipes on the recipe page'}
+  
   </div>
 
   </div>

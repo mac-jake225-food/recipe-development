@@ -74,9 +74,9 @@ export default class Calendar extends React.Component {
         <div className='calendar-app-sidebar-section'>
           <h2>Instructions</h2>
           <ul>
-            <li>Drag your Recipe Events to where you would like them</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
+            <li>Drag your Recipes to the days where you would like them</li>
+            <li>Drag, drop, and resize recipes</li>
+            <li>Click a recipe to delete it</li>
           </ul>
         </div>
         <div className='calendar-app-sidebar-section'>

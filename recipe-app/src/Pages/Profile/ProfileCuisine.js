@@ -74,7 +74,7 @@ class ProfileCuisine extends Component {
       Object.keys(this.state.checkboxes)
         .forEach(checkbox => {
           if (this.state.checkboxes[checkbox]){
-            diets.push(checkbox)
+            cuisines.push(checkbox)
           }
           checkboxStates.push(this.state.checkboxes[checkbox])
         });

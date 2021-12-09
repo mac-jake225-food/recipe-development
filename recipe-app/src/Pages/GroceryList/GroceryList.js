@@ -19,6 +19,7 @@ class GroceryList extends Component{
 
   componentDidMount() {  
     this.getRecipeIngredients()
+    this.convertListToString(["one", "two"])
   }
   componentWillUnmount() {  
 
@@ -40,18 +41,25 @@ class GroceryList extends Component{
           } else {
             console.log('ingredient api called successfully. Returned data: ', data.ingredients);
             for(var i=0; i<data.ingredients.length; i++){
-              var recipeName = ' '+data.ingredients[i].name 
+              var recipeName = ' '+data.ingredients[i].name + "\n"
               this.changeState(recipeName)
             }
           }
         };
         api.getRecipeIngredientsByID(id, callback.bind(this))
+      
       }
     }
   }
+  convertListToString(list){
+    var appendString = ""
+    for (let index = 0; index < list.length; index++) {
+      appendString += list[index] + "\n"
+    }
+    return appendString
+  }
 
 render(){  
-  
   return (
   <div
     style={{
@@ -62,11 +70,14 @@ render(){
     }}
   >
   <div>
-      {console.log('ingredient list, in render: ', this.state.ingredientList.toString())}
+      {console.log('ingredient list: ', this.state.ingredientList)}
       
-      <div>
-        {this.state.ingredientList.map(txt => <p>{txt}</p>)}
+      <div className="display-linebreak"> 
+        {this.convertListToString(this.state.ingredientList).split("\n").map((i,key)=>{
+          return <div key={key}>{i}</div>;
+        })}
     </div>
+  
   </div>
 
   </div>

@@ -11,8 +11,11 @@ const FinalDate = () => {
     }
 
     function timeHours() {
-        if(currentTime.getHours() < 12){
+        if(currentTime.getHours() < 11){
             return '0' + currentTime.getHours()
+        } else{
+            return currentTime.getHours()
+
         }
         if(currentTime.getHours() == 12){
             return currentTime.getHours()

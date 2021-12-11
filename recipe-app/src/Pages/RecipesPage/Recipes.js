@@ -12,6 +12,7 @@ var recipePosition;
 var recipeID;
 var recipeLink;
 var savedRecipesText = "";
+var message;
 
 class Recipes extends Component{
 
@@ -21,18 +22,28 @@ class Recipes extends Component{
 
   showItems = (bool) => {
     if (filteredRecipeData!=undefined){
+      
       generateRecipesHasBeenClicked = true;
       recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
       console.log(recipePosition)
-      recipeID = filteredRecipeData[recipePosition].id
-      console.log(recipeID)
-      this.getRecipeLink()
-      console.log(recipeLink)
+      if(filteredRecipeData[recipePosition]!=undefined){
+        recipeID = filteredRecipeData[recipePosition].id
+        console.log(recipeID)
+        this.getRecipeLink()
+        console.log(recipeLink)
+      }
     }
-    this.setState({
-      itemsShown : bool
-    });
-    console.log("showItems")
+    if (filteredRecipeData!=undefined){
+      if(filteredRecipeData.length!=0){
+        this.setState({
+          itemsShown : bool
+        });
+        console.log("showItems")
+      }
+      else{
+        message = "We could not find any recipes that match your filters. Try filling out the profile page again with different filters."
+      }
+    }
   }
 
   showItemsAndSave = (bool) => {
@@ -41,16 +52,23 @@ class Recipes extends Component{
       console.log(savedRecipes)
       recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
       console.log(recipePosition)
-      recipeID = filteredRecipeData[recipePosition].id
-      console.log(recipeID)
-      this.getRecipeLink()
-      console.log(recipeLink)
-      this.generateSavedRecipeText()
+
+      if(filteredRecipeData[recipePosition]!=undefined){
+        recipeID = filteredRecipeData[recipePosition].id
+        console.log(recipeID)
+        this.getRecipeLink()
+        console.log(recipeLink)
+        this.generateSavedRecipeText()
+      }
     }
-    this.setState({
-      itemsShown : bool
-    });
-    console.log("showItems")
+    if (filteredRecipeData!=undefined){
+      if(filteredRecipeData.length!=0){
+        this.setState({
+          itemsShown : bool
+        });
+        console.log("showItems")
+      }
+    }
   }
 
   resetSavedRecipes = (bool) => {
@@ -103,6 +121,7 @@ class Recipes extends Component{
           src = {filteredRecipeData[recipePosition].image.toString()}
           onClick = {() => window.open(recipeLink, "_blank")}></img>}
         </div> 
+
         <div
         style = {{
           display: 'flex', 
@@ -125,19 +144,21 @@ class Recipes extends Component{
             onClick={this.showItems.bind(null, true)}>
             New Recipe
           </button>
+
           <button
             type="button"
             className="recipe-buttons"
             onClick={this.showItemsAndSave.bind(null, true)}>
             Save Recipe
           </button>
-          <button
+
+          {/* <button
             type="button"
             className="recipe-buttons"
             onClick={this.resetSavedRecipes.bind(null, true)}>
-            Clear Saved Recipes
-            {/**does not take the previously saved recipes of the screen, just deletes the array */}
-          </button>
+            Clear Saved Recipes */}
+            {/**does not take the previously saved recipes off the screen, just clears the array */}
+          {/* </button> */}
         </div>
         <div
         style = {{
@@ -147,6 +168,7 @@ class Recipes extends Component{
           height:'5vh'
         }}>
           {typeof filteredRecipeData!='undefined' && generateRecipesHasBeenClicked && "Saved Recipes: " + savedRecipesText}
+          {typeof filteredRecipeData!= 'undefined' && typeof filteredRecipeData[0]==undefined && console.log("command works")}
         </div>
 
         <div
@@ -157,7 +179,9 @@ class Recipes extends Component{
           height:'5vh'
         }}>
           {typeof filteredRecipeData!='undefined' && 'Click on the image to navigate to the recipe!'}
-         {typeof filteredRecipeData=='undefined' && 'Instructions: fill out the profile page first to get your customized recipes,then select your favorites using the buttons above'} 
+         {typeof filteredRecipeData=='undefined' && 'Instructions: fill out the profile page first to get your customized recipes,then select your favorites using the buttons above. '} 
+         {/* {typeof filteredRecipeData=='undefined' && "\n If no recipe appears when you press the new recipe button, and you've already filled out the profile, we could not find any recipes that match your filters. Try filling out the profile page again with different filters."} */}
+          {console.log("is recipe list defined? ", typeof filteredRecipeData)}
         </div>
 
       </div>

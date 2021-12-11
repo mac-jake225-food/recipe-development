@@ -26,9 +26,9 @@ class ProfileIntolerances extends Component {
       return false;
     }
     else {
-      console.log(checkboxStates[a-INTOLERANCE_OPTIONS.length])
+      // console.log(checkboxStates[a-INTOLERANCE_OPTIONS.length])
       a = a + 1;
-      console.log(a)
+      // console.log(a)
       return checkboxStates[a-INTOLERANCE_OPTIONS.length];
     }
   }

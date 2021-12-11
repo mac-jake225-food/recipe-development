@@ -28,9 +28,9 @@ class ProfileDiet extends Component {
       return false;
     }
     else {
-      console.log(checkboxStates[a-DIET_OPTIONS.length])
+      // console.log(checkboxStates[a-DIET_OPTIONS.length])
       a = a + 1;
-      console.log(a)
+      // console.log(a)
       return checkboxStates[a-DIET_OPTIONS.length];
     }
   }

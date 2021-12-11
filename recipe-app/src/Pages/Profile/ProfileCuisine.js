@@ -34,9 +34,9 @@ class ProfileCuisine extends Component {
         return false;
       }
       else {
-        console.log(checkboxStates[a-CUISINE_OPTIONS.length])
+        // console.log(checkboxStates[a-CUISINE_OPTIONS.length])
         a = a + 1;
-        console.log(a)
+        // console.log(a)
         return checkboxStates[a-CUISINE_OPTIONS.length];
       }
     }

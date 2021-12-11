@@ -13,6 +13,7 @@ var recipeID;
 var recipeLink;
 var savedRecipesText = "";
 var message;
+var buttonList=[];
 
 class Recipes extends Component{
 
@@ -25,12 +26,9 @@ class Recipes extends Component{
       
       generateRecipesHasBeenClicked = true;
       recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
-      console.log(recipePosition)
       if(filteredRecipeData[recipePosition]!=undefined){
         recipeID = filteredRecipeData[recipePosition].id
-        console.log(recipeID)
         this.getRecipeLink()
-        console.log(recipeLink)
       }
     }
     if (filteredRecipeData!=undefined){
@@ -49,15 +47,15 @@ class Recipes extends Component{
   showItemsAndSave = (bool) => {
     if (filteredRecipeData!=undefined && generateRecipesHasBeenClicked){
       savedRecipes.push(filteredRecipeData[recipePosition])
-      console.log(savedRecipes)
+
+      buttonList.push(this.makeButton(recipeLink,filteredRecipeData[recipePosition].title))
+      console.log("saved Buttons: ", buttonList)
+      
       recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
-      console.log(recipePosition)
 
       if(filteredRecipeData[recipePosition]!=undefined){
         recipeID = filteredRecipeData[recipePosition].id
-        console.log(recipeID)
         this.getRecipeLink()
-        console.log(recipeLink)
         this.generateSavedRecipeText()
       }
     }
@@ -95,6 +93,7 @@ class Recipes extends Component{
   }
 
   makeButton(link, recipe) {
+    console.log("button made")
     return (
         <button 
             style={{
@@ -136,7 +135,6 @@ class Recipes extends Component{
           {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && <img 
           src = {filteredRecipeData[recipePosition].image.toString()}
           onClick = {() => window.open(recipeLink, "_blank")}></img>}
-          {typeof filteredRecipeData!='undefined' && this.makeButton(recipeLink,filteredRecipeData[recipePosition].title)}
         </div> 
 
         <div
@@ -199,6 +197,11 @@ class Recipes extends Component{
          {typeof filteredRecipeData=='undefined' && 'Instructions: fill out the profile page first to get your customized recipes,then select your favorites using the buttons above. '} 
          {/* {typeof filteredRecipeData=='undefined' && "\n If no recipe appears when you press the new recipe button, and you've already filled out the profile, we could not find any recipes that match your filters. Try filling out the profile page again with different filters."} */}
           {console.log("is recipe list defined? ", typeof filteredRecipeData)}
+          {/* {typeof filteredRecipeData!='undefined' && this.makeButton(recipeLink,filteredRecipeData[recipePosition].title)} */}
+
+          {buttonList.map((i,key)=>{
+            return <div key={key}>{i}</div>;
+          })}
         </div>
 
       </div>

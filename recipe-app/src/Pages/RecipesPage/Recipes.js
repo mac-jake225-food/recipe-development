@@ -94,6 +94,21 @@ class Recipes extends Component{
     api.getRecipeInformation(recipeID, opts, callback);
   }
 
+  makeButton(link, recipe) {
+    return (
+        <button 
+            style={{
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems:'center', 
+              height:'5vh'
+            }}
+            onClick={() => window.open(link, "_blank")}> 
+            {recipe}
+        </button>
+    );
+}
+
   generateSavedRecipeText = () => {
     if (generateRecipesHasBeenClicked){
       savedRecipesText = ""
@@ -103,6 +118,7 @@ class Recipes extends Component{
       }
     }
   }
+  
 
   render() {
     // Emilano will revist this code and update saved recipes 
@@ -120,6 +136,7 @@ class Recipes extends Component{
           {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && <img 
           src = {filteredRecipeData[recipePosition].image.toString()}
           onClick = {() => window.open(recipeLink, "_blank")}></img>}
+          {typeof filteredRecipeData!='undefined' && this.makeButton(recipeLink,filteredRecipeData[recipePosition].title)}
         </div> 
 
         <div

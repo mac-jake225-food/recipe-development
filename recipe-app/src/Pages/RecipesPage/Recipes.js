@@ -198,8 +198,16 @@ class Recipes extends Component{
          {/* {typeof filteredRecipeData=='undefined' && "\n If no recipe appears when you press the new recipe button, and you've already filled out the profile, we could not find any recipes that match your filters. Try filling out the profile page again with different filters."} */}
           {console.log("is recipe list defined? ", typeof filteredRecipeData)}
           {/* {typeof filteredRecipeData!='undefined' && this.makeButton(recipeLink,filteredRecipeData[recipePosition].title)} */}
+        </div>
 
-          {buttonList.map((i,key)=>{
+        <div
+        style = {{
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems:'center', 
+          height:'5vh'
+        }}>
+            {buttonList.map((i,key)=>{
             return <div key={key}>{i}</div>;
           })}
         </div>

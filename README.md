@@ -30,7 +30,7 @@ Type the following into the console to open the meal planner:
 
 - When you have completed the profile to the best of your ability, click "Finish Profile" and you will be immediately navigated to the recipe generator. From there, you will be given the choice to generate a single recipe using the "New Recipe" button and can "Save Recipe" to add it to your meal plan.
 
-- Your weekly Calendar and Grocery List will reflect your personal choices an
+- Your weekly Calendar and Grocery List will reflect your personal choices
 
 ## Final Notes
 

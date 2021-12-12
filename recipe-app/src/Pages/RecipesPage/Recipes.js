@@ -182,7 +182,7 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
-          {typeof filteredRecipeData!='undefined' && generateRecipesHasBeenClicked && "Saved Recipes: " + savedRecipesText}
+          {/* {typeof filteredRecipeData!='undefined' && generateRecipesHasBeenClicked && "Saved Recipes: " + savedRecipesText} */}
           {typeof filteredRecipeData!= 'undefined' && typeof filteredRecipeData[0]==undefined && console.log("command works")}
         </div>
 
@@ -199,9 +199,10 @@ class Recipes extends Component{
           {console.log("is recipe list defined? ", typeof filteredRecipeData)}
           {/* {typeof filteredRecipeData!='undefined' && this.makeButton(recipeLink,filteredRecipeData[recipePosition].title)} */}
         </div>
-
+        
         <div
         style = {{
+          flexWrap: 'wrap',
           display: 'flex', 
           justifyContent: 'center', 
           alignItems:'center', 

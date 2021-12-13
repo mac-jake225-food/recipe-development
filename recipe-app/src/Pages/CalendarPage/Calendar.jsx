@@ -15,7 +15,6 @@ export default class Calendar extends React.Component {
   }
 
 
-
   /**
    * This function gathers the intialEvents from our './event-utils' file and if data is present sets the state to that current data (continously updated)
    */

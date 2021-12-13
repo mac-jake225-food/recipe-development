@@ -32,7 +32,7 @@ function createInitalArray(initalArray){
     let finalSetTitle = [...new Set(arrayCopy)];
     let finalArrayTitle = Array.from(finalSetTitle)
     return finalArrayTitle
-    }
+  }
 
 
   /**

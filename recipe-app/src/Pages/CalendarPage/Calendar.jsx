@@ -10,7 +10,7 @@ export default class Calendar extends React.Component {
 
   state = {
     weekendsVisible: true,
-    currentEvents: []
+    currentEvents: INITIAL_EVENTS
   }
 
 
@@ -20,7 +20,7 @@ export default class Calendar extends React.Component {
    */
   componentDidMount(){
     if(getCalendarData()){
-      this.setState({currentEvents: getCalendarData()})
+      this.setState({currentEvents: INITIAL_EVENTS})
     }
   }
 
@@ -47,8 +47,8 @@ export default class Calendar extends React.Component {
             // select={this.handleDateSelect}
             // eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
-            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            // eventAdd={this.updateEvents}
+            // eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
+            // eventAdd={this.renderEvents}
             eventRemove={this.handleRemove}
             /* you can update a remote database when these fire:
             eventAdd={function(){}}
@@ -91,6 +91,9 @@ export default class Calendar extends React.Component {
         </div>
         <div className='calendar-app-sidebar-section'>
           <h2>All Events ({this.state.currentEvents.length})</h2>
+          <ul>
+            <li>Select your recipe title below to view the full recipe</li>
+          </ul>
           <ul>
           {this.state.currentEvents.map(renderSidebarEvent)}
           </ul>
@@ -167,12 +170,13 @@ export default class Calendar extends React.Component {
   }
 
   // we want handle events if there is a new event to add the new event to current events instead of creating a new value 
-  // handleEvents = (event) => {
-  //   this.setState({
-  //     currentEvents : this.currentEvents.concat(event)
-  //   })
-  //   }
-
+  handleEvents = (event) => {
+    if(event.start != INITIAL_EVENTS){
+      this.setState({
+        currentEvents : INITIAL_EVENTS
+      })
+    }
+    }
   }
 
 // function renderEventContent(eventInfo) {
@@ -195,7 +199,8 @@ function renderSidebarEvent(event) {
   return (
     <li key={event.id}>
       <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <i>{event.title}</i>
+      <i
+      onClick = {() => window.open('//moodle.macalester.edu', "_blank")}>{event.title}</i>
     </li>
   )
 }

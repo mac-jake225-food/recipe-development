@@ -3,7 +3,7 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import {createEventId, getCalendarData, INITIAL_EVENTS, search, removeEvent, savedRecipes} from './event-utils'
+import {createEventId, createCalendarData, INITIAL_EVENTS, search, removeEvent, savedRecipes} from './event-utils'
 import Alert from "sweetalert2";
 import './Calendar.css'
 
@@ -18,7 +18,7 @@ export default class Calendar extends React.Component {
    * This function gathers the intialEvents from our './event-utils' file and if data is present sets the state to that current data (continously updated)
    */
   componentDidMount(){
-    this.setState({currentEvents: getCalendarData()})
+    this.setState({currentEvents: createCalendarData(this.state.currentEvents, savedRecipes)})
   }
 
   render() { 
@@ -107,7 +107,7 @@ export default class Calendar extends React.Component {
   // renderEvents() {
   //   return (
   //     <div>
-  //       {getCalendarData()}
+  //       {createCalendarData()}
   //     </div>
   //   )
   // }

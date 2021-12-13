@@ -4,7 +4,6 @@ import {savedRecipes} from '../RecipesPage/Recipes'
 
 
 let eventGuid = 0
-let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
 
 
 let INITIAL_EVENTS = []
@@ -70,24 +69,39 @@ function createInitalArray(initalArray){
    * with keys as id, title, start 
    * @returns INITIAL_EVENTS
    */
-  //take existing calendar as input, use to get event id and start time
-  // make new calendar array with saved recipes
-  function getCalendarData(){
-    let singleArray = createInitalArray(savedRecipes)
-    // console.log(singleArray)
-    let result = [];
-    let length = singleArray.length-1
-    for(var i = 0; i <= length; i++){
-      result[i]= 
-          {
-          id: createEventId(),
-          title: " " + singleArray[i],
-          start: todayStr + ' 12:00:00'
-        };
-      }
+  //take existing calendar and saved recipes as input, use to get event id and start time
+  // make new calendar array with saved recipes and events, keep same start time
+  // function getCalendarData(){
+  //   let singleArray = createInitalArray(savedRecipes)
+  //   // console.log(singleArray)
+  //   let result = [];
+  //   let length = singleArray.length-1
+  //   for(var i = 0; i <= length; i++){
+  //     result[i]= 
+  //         {
+  //         id: createEventId(),
+  //         title: " " + singleArray[i],
+  //         start: todayStr + ' 12:00:00'
+  //       };
+  //     }
 
-    console.log(result)
-    return result
+  //   console.log(result)
+  //   return result
+  // }
+
+  function createCalendarData(currentCalendarData, savedRecipes){
+    //for each saved recipe, find existing calendar data
+    //use start date, or make new one if it doesnt exist
+    let defaultDate = new Date().toISOString().replace(/T.*$/, '') + ' 12:00:00' // YYYY-MM-DD of today
+    
+    return savedRecipes.map(recipe => {
+      let existingEvent = currentCalendarData.find(event => event.recipeID == recipe.id)
+      return existingEvent || { 
+        recipeID: recipe.id,
+        title: recipe.title,
+        start: defaultDate 
+      };
+    })
   }
 
   /**
@@ -135,4 +149,4 @@ function createInitalArray(initalArray){
 //   })
 // }
 
-export {INITIAL_EVENTS, getCalendarData,  createEventId, search, removeEvent, savedRecipes}
+export {INITIAL_EVENTS, createCalendarData,  createEventId, search, removeEvent, savedRecipes}

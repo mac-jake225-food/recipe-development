@@ -117,12 +117,30 @@ class Recipes extends Component{
       }
     }
   }
+  /**
+   * This function iterates through our INITIAL_EVENTS array and SavedRecipes and checks to see if there is a removed element --
+   * if so an empty array pushes the element onto it and then returns a new array with the removed
+   * @returns savedRecipes 
+   */
+  removeRecipeFromArray(){
+    if(INITIAL_EVENTS.length > 0){
+      var emptyArray = [] 
+      for( let i = 0; i< INITIAL_EVENTS.length; i++){
+        for( let j = 0; j< savedRecipes.length; j++){
+          if(INITIAL_EVENTS[i].title == savedRecipes[j].title){
+            emptyArray.push(savedRecipes[j])
+            console.log(emptyArray, " empty array ")
+          }
+        }
+      }
+      return savedRecipes = emptyArray
+    }
+  }
   
 
   render() {
-    // Emilano will revist this code and update saved recipes 
-    // savedRecipes = INITIAL_EVENTS
-    // console.log(savedRecipes)
+    this.removeRecipeFromArray() 
+
     return (
       <div className='recipe-items'>
         <div

@@ -4,7 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import {createEventId, getCalendarData, INITIAL_EVENTS, search, removeEvent, savedRecipes} from './event-utils'
-import './main.css'
+import Alert from "sweetalert2";
+import './Calendar.css'
 
 export default class Calendar extends React.Component {
 
@@ -20,11 +21,13 @@ export default class Calendar extends React.Component {
    */
   componentDidMount(){
     if(getCalendarData()){
-      this.setState({currentEvents: INITIAL_EVENTS})
+      return(
+        this.setState({currentEvents: INITIAL_EVENTS})
+      )
     }
   }
 
-  render() {
+  render() { 
     return (
       <div className='calendar-app'>
         {this.renderSidebar()}
@@ -45,7 +48,7 @@ export default class Calendar extends React.Component {
             weekends={this.state.weekendsVisible}
             events={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
             // select={this.handleDateSelect}
-            // eventContent={renderEventContent} // custom render function
+            eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
             // eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
             // eventAdd={this.renderEvents}
@@ -149,44 +152,89 @@ export default class Calendar extends React.Component {
   // }
 
   handleEventClick = (clickInfo) => {
-    if (window.confirm(`Are you sure you want to delete this event '${clickInfo.event.title}'`)) {
+    if (`{clickInfo.event.title}`) {
       // have to splice up to that index, and then after that index then concat them together 
-      clickInfo.event.remove()
-      console.log(search(clickInfo.event.title, INITIAL_EVENTS))
+      // clickInfo.event.remove()
+      // console.log(search(clickInfo.event.title, INITIAL_EVENTS))
       this.handleRemove(clickInfo)
     }
   }
 
   handleRemove = (clickInfo) => {
     if(typeof(clickInfo) != "undefined"){
+    Alert.fire({
+      title: clickInfo.event.title,
+      html:
+        `<div class="table-responsive">
+      <table class="table">
+      <tbody>
+      <tr >
+      <td>Title</td>
+      <td><strong>` +
+      clickInfo.event.title +
+        `</strong></td>
+      </tr>
+      <tr >
+      <td>Start Time</td>
+      <td><strong>
+      ` +
+      clickInfo.event.start +
+        `
+      </strong></td>
+      </tr>
+      </tbody>
+      </table>
+      </div>`,
 
-      this.INITIAL_EVENTS = removeEvent(search(clickInfo.event.title, INITIAL_EVENTS))
-       console.log(this.INITIAL_EVENTS)
-
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Remove Event",
+      cancelButtonText: "Close"
+    }).then(result => {
+      if (result.value) {
+        this.INITIAL_EVENTS = removeEvent(search(clickInfo.event.title, INITIAL_EVENTS))
+        // console.log(this.INITIAL_EVENTS)
       this.setState({
         currentEvents: this.INITIAL_EVENTS
-      })
-    }
+      }) // It will remove event from the calendar
+        Alert.fire("Deleted!", "Your Event has been deleted.", "success");
+      }
+    });
   }
+  };
+
+
+  // handleRemove = (clickInfo) => {
+  //   if(typeof(clickInfo) != "undefined"){
+
+  //     this.INITIAL_EVENTS = removeEvent(search(clickInfo.event.title, INITIAL_EVENTS))
+  //      console.log(this.INITIAL_EVENTS)
+
+  //     this.setState({
+  //       currentEvents: this.INITIAL_EVENTS
+  //     })
+  //   }
+  // }
 
   // we want handle events if there is a new event to add the new event to current events instead of creating a new value 
-  handleEvents = (event) => {
-    if(event.start != INITIAL_EVENTS){
-      this.setState({
-        currentEvents : INITIAL_EVENTS
-      })
-    }
-    }
+  // handleEvents = (event) => {
+  //   if(event != INITIAL_EVENTS){
+  //     this.setState({
+  //       currentEvents : INITIAL_EVENTS
+  //     })
+  //   }
+  //   }
   }
 
-// function renderEventContent(eventInfo) {
-//   return (
-//     <>
-//       <b>{eventInfo.timeText}</b>
-//       <i>{eventInfo.event.title}</i>
-//     </>
-//   )
-// }
+function renderEventContent(eventInfo) {
+  return (
+    <>
+      <b>{eventInfo.timeText}</b>
+      <i>{eventInfo.event.title}</i>
+    </>
+  )
+}
 
 
 

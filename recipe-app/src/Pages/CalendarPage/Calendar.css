@@ -1,0 +1,17 @@
+.calendar-app {
+    margin: 5% 10%;
+}
+
+.swal2-popup {
+    font-size: 1.6rem !important;
+    font-family: monospace;
+  }
+.swal2-styled.swal2-confirm {
+    background-color: black;
+}
+.swal2-container.swal2-center.swal2-backdrop-show {
+    size: 50%;
+    opacity: .98;
+    background-color: lightgrey;
+    
+}

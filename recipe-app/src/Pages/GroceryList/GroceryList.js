@@ -19,7 +19,7 @@ class GroceryList extends Component{
 
   componentDidMount() {  
     this.getRecipeIngredients()
-    this.convertListToString(["one", "two"])
+    // this.convertListToString(["one", "two"])
   }
   componentWillUnmount() {  
 

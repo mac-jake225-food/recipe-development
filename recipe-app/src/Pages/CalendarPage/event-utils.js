@@ -11,7 +11,7 @@ let INITIAL_EVENTS = []
 let eventTitle = [] 
 
 /**
- * This function takes in the intial SavedRecipes array which is checked to ensure there are no duplicate 
+ * This function takes in the initial SavedRecipes array which is checked to ensure there are no duplicate 
  * recipes which is then returned to our intial array varible 
  * @param {*} initalArray 
  * @returns initalArray
@@ -36,13 +36,13 @@ function createInitalArray(initalArray){
     }
 
 
-    /**
-     * This function takes in two arrays (savedRecipes and an empty array), then a copy is made from the original array to the copy array which is finally returned
-     * @param {*} array 
-     * @param {*} arrayCopy 
-     * @returns finalArrayTitle
-     */
-    function createSecondaryArray(array, arrayCopy){
+  /**
+   * This function takes in two arrays (savedRecipes and an empty array), then a copy is made from the original array to the copy array which is finally returned
+   * @param {*} array 
+   * @param {*} arrayCopy 
+   * @returns finalArrayTitle
+   */
+  function createSecondaryArray(array, arrayCopy){
     let finalArrayTitle = []
     let concatArray = arrayCopy.concat(array)
     for (let title in concatArray){
@@ -70,21 +70,24 @@ function createInitalArray(initalArray){
    * with keys as id, title, start 
    * @returns INITIAL_EVENTS
    */
+  //take existing calendar as input, use to get event id and start time
+  // make new calendar array with saved recipes
   function getCalendarData(){
     let singleArray = createInitalArray(savedRecipes)
     // console.log(singleArray)
+    let result = [];
     let length = singleArray.length-1
-      for(var i = 0; i <= length; i++){
-          INITIAL_EVENTS[i]= 
-            {
-            id: createEventId(),
-            title: " " + singleArray[i],
-            start: todayStr + ' 12:00:00'
-          };
-        }
+    for(var i = 0; i <= length; i++){
+      result[i]= 
+          {
+          id: createEventId(),
+          title: " " + singleArray[i],
+          start: todayStr + ' 12:00:00'
+        };
+      }
 
-    console.log(INITIAL_EVENTS)
-    return INITIAL_EVENTS
+    console.log(result)
+    return result
   }
 
   /**

@@ -14,16 +14,11 @@ export default class Calendar extends React.Component {
     currentEvents: INITIAL_EVENTS
   }
 
-
   /**
    * This function gathers the intialEvents from our './event-utils' file and if data is present sets the state to that current data (continously updated)
    */
   componentDidMount(){
-    if(getCalendarData()){
-      return(
-        this.setState({currentEvents: INITIAL_EVENTS})
-      )
-    }
+    this.setState({currentEvents: getCalendarData()})
   }
 
   render() { 
@@ -45,7 +40,9 @@ export default class Calendar extends React.Component {
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
-            events={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+
+            //is this where the recipes are added?
+            events={this.state.currentEvents} // alternatively, use the `events` setting to fetch from a feed
             // select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
@@ -82,6 +79,7 @@ export default class Calendar extends React.Component {
           </ul>
         </div>
         <div className='calendar-app-sidebar-section'>
+
           <label>
             <input
               type='checkbox'
@@ -91,6 +89,7 @@ export default class Calendar extends React.Component {
             toggle weekends
           </label>
         </div>
+
         <div className='calendar-app-sidebar-section'>
           <h2>All Events ({this.state.currentEvents.length})</h2>
           <ul>
@@ -100,6 +99,7 @@ export default class Calendar extends React.Component {
           {this.state.currentEvents.map(renderSidebarEvent)}
           </ul>
         </div>
+
       </div>
     )
   }

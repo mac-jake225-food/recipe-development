@@ -160,6 +160,11 @@ export default class Calendar extends React.Component {
     }
   }
 
+  /**
+   * The button popup function for this method was taken from "SweetAlert2" github: https://sweetalert2.github.io/
+   * This method handles the remove aspect of the calendar prompting a popup before confirmation of removal 
+   * @param {clickInfo} clickInfo 
+   */
   handleRemove = (clickInfo) => {
     if(typeof(clickInfo) != "undefined"){
     Alert.fire({

@@ -78,7 +78,7 @@ function createInitalArray(initalArray){
           INITIAL_EVENTS[i]= 
             {
             id: createEventId(),
-            title: singleArray[i],
+            title: " " + singleArray[i],
             start: todayStr + ' 12:00:00'
           };
         }

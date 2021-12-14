@@ -14,6 +14,11 @@ import DateTime from './HelperMethods/DateTime'
 import SpoonacularApi from './spoonacular';
 import Checkbox from './Pages/Profile/Checkbox';
 
+
+/**
+ * This method renders the App as a whole, taking in each component and making them function in tandem 
+ * @returns funcitonality of the entire app / redirects and co-existing event responses 
+ */
 function App() {
 
   return (

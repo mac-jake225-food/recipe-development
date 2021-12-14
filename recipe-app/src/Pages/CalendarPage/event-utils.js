@@ -1,4 +1,3 @@
-import { render } from 'react-dom'
 import {savedRecipes, intializeData } from '../RecipesPage/Recipes'
 
 /**

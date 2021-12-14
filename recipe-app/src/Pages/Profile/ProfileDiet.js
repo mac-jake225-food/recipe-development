@@ -127,7 +127,7 @@ class ProfileDiet extends Component {
     else {
       console.log('API called successfully. Returned data: ', data.results);
       filteredRecipeDataDiet = data.results;
-      if (filteredRecipeDataCuisine.length==0){
+      if (filteredRecipeDataDiet.length==0){
         noRecipesDiet = true;
       }
     }

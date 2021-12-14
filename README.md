@@ -18,13 +18,12 @@ Type the following into the console to open the meal planner:
 
 ```
     cd/recpie-app
-    cd/src
     npm start
 ```
 
 ### STEP 3 – GENERATE RECIPES
 
-- Step 2 will have opened up the recipe generator.
+- Step 2 will have opened up the Smart Meal Planner.
 
 - First, navigate to the 'Profile' page (use the side bar on the left) and fill out your dietary restrictions and preferences. Make sure to click 'Save' before continuing through the survey!
 

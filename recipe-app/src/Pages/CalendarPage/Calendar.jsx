@@ -5,6 +5,9 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import {savedRecipes, savedEvents, getCalendarData} from './event-utils'
 import {removeRecipe} from '../RecipesPage/Recipes'
+/**
+ * this alert is from: https://sweetalert2.github.io/
+ */
 import Alert from "sweetalert2";
 import './Calendar.css'
 

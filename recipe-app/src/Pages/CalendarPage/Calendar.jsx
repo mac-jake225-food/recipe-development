@@ -48,7 +48,7 @@ export default class Calendar extends React.Component {
             // select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleRemove}
-            // eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
+            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
             // eventAdd={this.renderEvents}
             eventRemove={this.handleRemove}
             
@@ -200,6 +200,21 @@ export default class Calendar extends React.Component {
       }
     });
   };
+
+
+  // handleEvents = (clickInfo) => {
+  //   if(clickInfo){
+  //     console.log('------> start', clickInfo.event.id); 
+  //     if(clickInfo.event.start != savedEvents.start){
+  //       this.setState({
+  //         currentEvents: clickInfo.event.start
+  //       })
+  //       console.log(clickInfo.event.start)
+  //     }
+
+  //   }
+   
+  // }
 
 
   // handleRemove = (clickInfo) => {

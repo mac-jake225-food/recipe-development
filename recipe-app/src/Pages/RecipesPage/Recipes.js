@@ -10,15 +10,16 @@ import { INITIAL_EVENTS } from "../CalendarPage/event-utils";
 
 var generateRecipesHasBeenClicked = false;
 var savedRecipes = [];
-var recipePosition;
+var recipePosition = 0;
 var recipeID;
 var recipeLink;
 var savedRecipesText = "";
-var message;
 var buttonList=[];
 var putInstructions = false;
 var filteredRecipeData;
 var noRecipes;
+var outOfRecipes;
+var maxTime=0;
 
 class Recipes extends Component{
 
@@ -27,13 +28,17 @@ class Recipes extends Component{
   };
 
   showItems = (bool) => {
-    if (filteredRecipeData!=undefined && filteredRecipeData.length!=0){
+    if (filteredRecipeData!=undefined && filteredRecipeData.length!=0 && !outOfRecipes){
       putInstructions = true;
       generateRecipesHasBeenClicked = true;
-      recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
       if(filteredRecipeData[recipePosition]!=undefined){
         recipeID = filteredRecipeData[recipePosition].id
         this.getRecipeLink()
+      }
+      recipePosition = recipePosition + 1;
+      if (recipePosition==filteredRecipeData.length){
+        outOfRecipes = true;
+        recipePosition = recipePosition - 1;
       }
     }
     if (filteredRecipeData!=undefined){
@@ -43,26 +48,24 @@ class Recipes extends Component{
         });
         console.log("showItems")
       }
-      else{
-        message = "We could not find any recipes that match your filters. Try filling out the profile page again with different filters."
-      }
     }
   }
 
   showItemsAndSave = (bool) => {
-    if (filteredRecipeData!=undefined && generateRecipesHasBeenClicked && filteredRecipeData.length!=0){
+    if (filteredRecipeData!=undefined && generateRecipesHasBeenClicked && filteredRecipeData.length!=0 && !outOfRecipes){
       putInstructions = true;
       savedRecipes.push(filteredRecipeData[recipePosition])
-
       buttonList.push(this.makeButton(recipeLink,filteredRecipeData[recipePosition].title))
       console.log("saved Buttons: ", buttonList)
-      
-      recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
-
       if(filteredRecipeData[recipePosition]!=undefined){
         recipeID = filteredRecipeData[recipePosition].id
         this.getRecipeLink()
         this.generateSavedRecipeText()
+      }
+      recipePosition = recipePosition + 1;
+      if (recipePosition==filteredRecipeData.length){
+        outOfRecipes = true;
+        recipePosition = recipePosition - 1;
       }
     }
     if (filteredRecipeData!=undefined){
@@ -150,10 +153,19 @@ class Recipes extends Component{
     console.log(chooseDietData + "diet")
     console.log(chooseIntoleranceData + "intoler")
     console.log(chooseCuisineData + "cuisine")
+    console.log(finishedDiet)
+    console.log(finishedIntolerances)
+    console.log(finishedCuisine)
+    console.log(noRecipes)
     if (chooseDietData>chooseIntoleranceData&&chooseDietData>chooseCuisineData){
       filteredRecipeData = filteredRecipeDataDiet;
       if (noRecipesDiet){
         noRecipes = true;
+      }
+      if (chooseDietData>maxTime){
+        recipePosition=0;
+        outOfRecipes = false;
+        maxTime = chooseDietData;
       }
       console.log("diet")
     }
@@ -162,12 +174,22 @@ class Recipes extends Component{
       if (noRecipesIntolerances){
         noRecipes = true;
       }
+      if (chooseIntoleranceData>maxTime){
+        recipePosition=0;
+        outOfRecipes = false;
+        maxTime = chooseIntoleranceData;
+      }
       console.log("intoler")
     }
     else {
       filteredRecipeData = filteredRecipeDataCuisine;
       if (noRecipesCuisine){
         noRecipes = true;
+      }
+      if (chooseCuisineData>maxTime){
+        recipePosition=0;
+        outOfRecipes = false;
+        maxTime = chooseCuisineData;
       }
       console.log("cuisine")
     }
@@ -180,7 +202,7 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'40vh'
         }}>
-          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && <img 
+          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && !outOfRecipes && <img 
           src = {filteredRecipeData[recipePosition].image.toString()}
           onClick = {() => window.open(recipeLink, "_blank")}></img>}
         </div> 
@@ -192,7 +214,7 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
-          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && filteredRecipeData[recipePosition].title}
+          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && !outOfRecipes && filteredRecipeData[recipePosition].title}
         </div>
         <div className="recipe-buttons"
         style = {{
@@ -201,14 +223,14 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
-          {(finishedCuisine||finishedDiet||finishedIntolerances) && noRecipes && <button
+          {(finishedCuisine||finishedDiet||finishedIntolerances) && !noRecipes && !outOfRecipes && <button
             type="button"
             className="recipe-buttons"
             onClick={this.showItems.bind(null, true)}>
             New Recipe
           </button>}
 
-          {putInstructions && <button
+          {putInstructions && !outOfRecipes && <button
             type="button"
             className="recipe-buttons"
             onClick={this.showItemsAndSave.bind(null, true)}>
@@ -241,8 +263,9 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
+          {outOfRecipes && 'Sorry, we have no more recipes that match your profile specifications.'}
           {noRecipes && 'Sorry, we have no recipes that match your profile specifications.'}
-          {this.state.itemsShown && (finishedCuisine||finishedIntolerances||finishedDiet) && putInstructions && 'Click on the image to navigate to the recipe!'}
+          {this.state.itemsShown && (finishedCuisine||finishedIntolerances||finishedDiet) && putInstructions && !outOfRecipes && 'Click on the image to navigate to the recipe!'}
           {!(finishedCuisine||finishedDiet||finishedIntolerances) && 'Instructions: fill out the profile page first to get your customized recipes.'} 
           {/* {typeof filteredRecipeData=='undefined' && "\n If no recipe appears when you press the new recipe button, and you've already filled out the profile, we could not find any recipes that match your filters. Try filling out the profile page again with different filters."} */}
           {console.log("is recipe list defined? ", typeof filteredRecipeData)}
@@ -267,4 +290,4 @@ class Recipes extends Component{
   }
 }
 
-export {Recipes, savedRecipes};
+export {Recipes, savedRecipes, recipePosition, outOfRecipes};

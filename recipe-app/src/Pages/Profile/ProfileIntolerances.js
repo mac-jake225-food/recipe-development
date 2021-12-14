@@ -67,15 +67,15 @@ class ProfileIntolerances extends Component {
 
   handleFormSubmit = (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
-      if (chooseDietData>chooseCuisineData&&chooseDietData>chooseIntoleranceData){
-        chooseIntoleranceData = chooseDietData + 1;
-      }
-      else if (chooseCuisineData>chooseIntoleranceData&&chooseCuisineData>chooseDietData){
-        chooseIntoleranceData = chooseCuisineData + 1;
-      }
-      else {
-        chooseIntoleranceData = chooseIntoleranceData + 1;
-      }
+    if (chooseDietData>chooseCuisineData&&chooseDietData>chooseIntoleranceData){
+      chooseIntoleranceData = chooseDietData + 1;
+    }
+    else if (chooseCuisineData>chooseIntoleranceData&&chooseCuisineData>chooseDietData){
+      chooseIntoleranceData = chooseCuisineData + 1;
+    }
+    else {
+      chooseIntoleranceData = chooseIntoleranceData + 1;
+    }
     intolerances = [];
     checkboxStates = [];
     hasBeenSubmitted = true;

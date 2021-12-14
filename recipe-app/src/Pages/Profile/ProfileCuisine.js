@@ -5,7 +5,6 @@ import SpoonacularApi from '../../spoonacular';
 import {diets, filteredRecipeDataDiet, chooseDietData} from './ProfileDiet';
 import {intolerances, filteredRecipeDataIntolerances, chooseIntoleranceData} from './ProfileIntolerances';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Recipes } from "../RecipesPage/Recipes";
 
 const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", 
 "European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
@@ -71,15 +70,15 @@ class ProfileCuisine extends Component {
   
     handleFormSubmit = (formSubmitEvent) => {
       formSubmitEvent.preventDefault();
-        if (chooseIntoleranceData>chooseCuisineData&&chooseIntoleranceData>chooseDietData){
-          chooseCuisineData = chooseIntoleranceData + 1;
-        }
-        else if (chooseDietData>chooseIntoleranceData&&chooseDietData>chooseCuisineData){
-          chooseCuisineData = chooseDietData + 1;
-        }
-        else {
-          chooseCuisineData = chooseCuisineData + 1;
-        }
+      if (chooseIntoleranceData>chooseCuisineData&&chooseIntoleranceData>chooseDietData){
+        chooseCuisineData = chooseIntoleranceData + 1;
+      }
+      else if (chooseDietData>chooseIntoleranceData&&chooseDietData>chooseCuisineData){
+        chooseCuisineData = chooseDietData + 1;
+      }
+      else {
+        chooseCuisineData = chooseCuisineData + 1;
+      }
       cuisines = [];
       checkboxStates = [];
       hasBeenSubmitted = true;

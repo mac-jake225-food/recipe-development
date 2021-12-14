@@ -10,13 +10,14 @@ import { Recipes } from "../RecipesPage/Recipes";
 const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", 
 "European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
 "Latin American", "Mediterranean", "Mexican", "Middle Eastern", "Nordic", "Southern", "Spanish", "Thai", 
-"Vietnamese"]; 
+"Vietnamese"];
 
 var cuisines = []
 var filteredRecipeData;
 var hasBeenSubmitted = false;
 var checkboxStates = [];
 var a = -1;
+var finished = false;
 
 class ProfileCuisine extends Component {
     state = {
@@ -95,6 +96,7 @@ class ProfileCuisine extends Component {
     createCheckboxes = () => CUISINE_OPTIONS.map(this.createCheckbox);
 
     searchRecipes = () => {
+      finished=true;
       var api = new SpoonacularApi.RecipesApi()
       var opts = {
       'diet' : diets.toString(),
@@ -166,4 +168,4 @@ class ProfileCuisine extends Component {
     }
   }
   
-export {ProfileCuisine, cuisines, filteredRecipeData};
+export {ProfileCuisine, cuisines, filteredRecipeData, finished};

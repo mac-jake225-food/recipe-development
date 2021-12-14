@@ -3,9 +3,9 @@
 > Welcome to the Smart Meal Planner, a comprehensive meal planner that gives a customized recipe list based on the user's goals. It also gives the user a grocery list for all of the ingredients for all the meals.
 
 
-How to use:
+## How to use:
 
-## STEP 1 – SET UP
+### STEP 1 – SET UP
 
 There are some packages that need to be installed before you can get cooking. Type the following into the console, then procede to the next step:
 
@@ -13,7 +13,7 @@ There are some packages that need to be installed before you can get cooking. Ty
     npm install
 ```
 
-## STEP 2- OPEN SITE
+### STEP 2- OPEN SITE
 Type the following into the console to open the meal planner:
 
 ```
@@ -22,7 +22,7 @@ Type the following into the console to open the meal planner:
     npm start
 ```
 
-## STEP 3 – GENERATE RECIPES
+### STEP 3 – GENERATE RECIPES
 
 - Step 2 will have opened up the recipe generator.
 
@@ -32,7 +32,7 @@ Type the following into the console to open the meal planner:
 
 - The 'Calendar' and 'Grocery List' pages will reflect your personal choices and you will be able to explore and format your recipes from here on.
 
-## Final Notes
+### Final Notes
 
 This project was completed from September-December 2021 for COMP 225 by:
 Abigail Stolp,

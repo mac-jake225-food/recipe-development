@@ -5,6 +5,9 @@ import './Profile.css'
 import { cuisines, filteredRecipeDataCuisine, chooseCuisineData } from "./ProfileCuisine";
 import { intolerances, filteredRecipeDataIntolerances, chooseIntoleranceData } from "./ProfileIntolerances";
 import SpoonacularApi from "../../spoonacular";
+/**
+ * this import is from https://reactjsexample.com/a-customize-and-easliy-use-alert-component-for-react-js/ 
+ */
 import { AlertContainer, alert } from 'react-custom-alert';
 import './index.css'; // import css file from root.
 

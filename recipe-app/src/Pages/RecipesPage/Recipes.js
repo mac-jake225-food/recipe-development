@@ -1,6 +1,8 @@
 
 import React, { Component } from "react";
-import { filteredRecipeData, finished } from "../Profile/ProfileCuisine";
+import { filteredRecipeDataCuisine, finishedCuisine, chooseCuisineData, noRecipesCuisine } from "../Profile/ProfileCuisine";
+import { filteredRecipeDataDiet, finishedDiet, chooseDietData, noRecipesDiet } from "../Profile/ProfileDiet";
+import { filteredRecipeDataIntolerances, finishedIntolerances, chooseIntoleranceData, noRecipesIntolerances } from "../Profile/ProfileIntolerances";
 import SpoonacularApi from "../../spoonacular";
 import { Link } from "react-router-dom";
 import Checkbox from "../Profile/Checkbox";
@@ -15,6 +17,8 @@ var savedRecipesText = "";
 var message;
 var buttonList=[];
 var putInstructions = false;
+var filteredRecipeData;
+var noRecipes;
 
 class Recipes extends Component{
 
@@ -23,7 +27,7 @@ class Recipes extends Component{
   };
 
   showItems = (bool) => {
-    if (filteredRecipeData!=undefined){
+    if (filteredRecipeData!=undefined && filteredRecipeData.length!=0){
       putInstructions = true;
       generateRecipesHasBeenClicked = true;
       recipePosition=Math.floor(Math.random()*(filteredRecipeData.length-1));
@@ -46,7 +50,7 @@ class Recipes extends Component{
   }
 
   showItemsAndSave = (bool) => {
-    if (filteredRecipeData!=undefined && generateRecipesHasBeenClicked){
+    if (filteredRecipeData!=undefined && generateRecipesHasBeenClicked && filteredRecipeData.length!=0){
       putInstructions = true;
       savedRecipes.push(filteredRecipeData[recipePosition])
 
@@ -142,7 +146,31 @@ class Recipes extends Component{
 
   render() {
     this.removeRecipeFromArray() 
-
+    noRecipes = false;
+    console.log(chooseDietData + "diet")
+    console.log(chooseIntoleranceData + "intoler")
+    console.log(chooseCuisineData + "cuisine")
+    if (chooseDietData>chooseIntoleranceData&&chooseDietData>chooseCuisineData){
+      filteredRecipeData = filteredRecipeDataDiet;
+      if (noRecipesDiet){
+        noRecipes = true;
+      }
+      console.log("diet")
+    }
+    else if (chooseIntoleranceData>chooseDietData&&chooseIntoleranceData>chooseCuisineData){
+      filteredRecipeData = filteredRecipeDataIntolerances;
+      if (noRecipesIntolerances){
+        noRecipes = true;
+      }
+      console.log("intoler")
+    }
+    else {
+      filteredRecipeData = filteredRecipeDataCuisine;
+      if (noRecipesCuisine){
+        noRecipes = true;
+      }
+      console.log("cuisine")
+    }
     return (
       <div className='recipe-items'>
         <div
@@ -173,7 +201,7 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
-          {finished && <button
+          {(finishedCuisine||finishedDiet||finishedIntolerances) && noRecipes && <button
             type="button"
             className="recipe-buttons"
             onClick={this.showItems.bind(null, true)}>
@@ -213,9 +241,10 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
-          {this.state.itemsShown && finished && putInstructions && 'Click on the image to navigate to the recipe!'}
-         {!finished && 'Instructions: fill out the profile page first to get your customized recipes.'} 
-         {/* {typeof filteredRecipeData=='undefined' && "\n If no recipe appears when you press the new recipe button, and you've already filled out the profile, we could not find any recipes that match your filters. Try filling out the profile page again with different filters."} */}
+          {noRecipes && 'Sorry, we have no recipes that match your profile specifications.'}
+          {this.state.itemsShown && (finishedCuisine||finishedIntolerances||finishedDiet) && putInstructions && 'Click on the image to navigate to the recipe!'}
+          {!(finishedCuisine||finishedDiet||finishedIntolerances) && 'Instructions: fill out the profile page first to get your customized recipes.'} 
+          {/* {typeof filteredRecipeData=='undefined' && "\n If no recipe appears when you press the new recipe button, and you've already filled out the profile, we could not find any recipes that match your filters. Try filling out the profile page again with different filters."} */}
           {console.log("is recipe list defined? ", typeof filteredRecipeData)}
           {/* {typeof filteredRecipeData!='undefined' && this.makeButton(recipeLink,filteredRecipeData[recipePosition].title)} */}
         </div>

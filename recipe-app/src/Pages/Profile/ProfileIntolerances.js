@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Checkbox from "./Checkbox";
 import { Link } from "react-router-dom";
+import { diets, filteredRecipeDataDiet, chooseDietData } from "./ProfileDiet";
+import { cuisines, filteredRecipeDataCuisine, chooseCuisineData } from "./ProfileCuisine";
+import SpoonacularApi from "../../spoonacular";
 
 const INTOLERANCE_OPTIONS = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", 
 "Soy", "Sulfite", "Tree Nut", "Wheat"]
@@ -9,6 +12,10 @@ var intolerances = []
 var hasBeenSubmitted = false;
 var checkboxStates = [];
 var a = -1;
+var finishedIntolerances = false;
+var filteredRecipeDataIntolerances=[];
+var chooseIntoleranceData=0;
+var noRecipesIntolerances = false;
 
 class ProfileIntolerances extends Component {
   state = {
@@ -60,6 +67,15 @@ class ProfileIntolerances extends Component {
 
   handleFormSubmit = (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
+      if (chooseDietData>chooseCuisineData&&chooseDietData>chooseIntoleranceData){
+        chooseIntoleranceData = chooseDietData + 1;
+      }
+      else if (chooseCuisineData>chooseIntoleranceData&&chooseCuisineData>chooseDietData){
+        chooseIntoleranceData = chooseCuisineData + 1;
+      }
+      else {
+        chooseIntoleranceData = chooseIntoleranceData + 1;
+      }
     intolerances = [];
     checkboxStates = [];
     hasBeenSubmitted = true;
@@ -70,7 +86,7 @@ class ProfileIntolerances extends Component {
         }
         checkboxStates.push(this.state.checkboxes[checkbox])
       });
-      console.log(intolerances)
+      this.searchRecipes()
   };
 
   createCheckbox = (option) => (
@@ -83,6 +99,31 @@ class ProfileIntolerances extends Component {
   );
 
   createCheckboxes = () => INTOLERANCE_OPTIONS.map(this.createCheckbox);
+
+  searchRecipes = () => {
+    finishedIntolerances=true;
+    var api = new SpoonacularApi.RecipesApi()
+    var opts = {
+    'diet' : diets.toString(),
+    'intolerances' : intolerances.toString(),
+    'cuisine' : cuisines.toString(),
+    '_number' : "100"
+    };
+    console.log("showing user choices: ",opts)
+    var callback = function(error, data, response) {
+    if (error) {
+      console.error(error);
+    } 
+    else {
+      console.log('API called successfully. Returned data: ', data.results);
+      filteredRecipeDataIntolerances = data.results;
+      if (filteredRecipeDataIntolerances.length==0){
+        noRecipesIntolerances = true;
+      }
+    }
+  };
+  api.searchRecipes(opts, callback);
+  }
 
   render() {
     a = -1;
@@ -139,4 +180,4 @@ class ProfileIntolerances extends Component {
   }
 }
 
-export {ProfileIntolerances, intolerances};
+export {ProfileIntolerances, intolerances, finishedIntolerances, filteredRecipeDataIntolerances, chooseIntoleranceData, noRecipesIntolerances};

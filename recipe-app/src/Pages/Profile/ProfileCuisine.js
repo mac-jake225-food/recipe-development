@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Checkbox from "./Checkbox";
 import { Link } from "react-router-dom";
 import SpoonacularApi from '../../spoonacular';
-import {diets} from './ProfileDiet';
-import {intolerances} from './ProfileIntolerances';
+import {diets, filteredRecipeDataDiet, chooseDietData} from './ProfileDiet';
+import {intolerances, filteredRecipeDataIntolerances, chooseIntoleranceData} from './ProfileIntolerances';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Recipes } from "../RecipesPage/Recipes";
 
@@ -13,11 +13,13 @@ const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean",
 "Vietnamese"];
 
 var cuisines = []
-var filteredRecipeData;
+var filteredRecipeDataCuisine=[];
 var hasBeenSubmitted = false;
 var checkboxStates = [];
 var a = -1;
-var finished = false;
+var finishedCuisine = false;
+var chooseCuisineData=0;
+var noRecipesCuisine = false;
 
 class ProfileCuisine extends Component {
     state = {
@@ -69,6 +71,15 @@ class ProfileCuisine extends Component {
   
     handleFormSubmit = (formSubmitEvent) => {
       formSubmitEvent.preventDefault();
+        if (chooseIntoleranceData>chooseCuisineData&&chooseIntoleranceData>chooseDietData){
+          chooseCuisineData = chooseIntoleranceData + 1;
+        }
+        else if (chooseDietData>chooseIntoleranceData&&chooseDietData>chooseCuisineData){
+          chooseCuisineData = chooseDietData + 1;
+        }
+        else {
+          chooseCuisineData = chooseCuisineData + 1;
+        }
       cuisines = [];
       checkboxStates = [];
       hasBeenSubmitted = true;
@@ -79,9 +90,7 @@ class ProfileCuisine extends Component {
           }
           checkboxStates.push(this.state.checkboxes[checkbox])
         });
-        console.log(checkboxStates)
-      console.log(cuisines)
-      console.log(a)
+        this.searchRecipes()
     };
   
     createCheckbox = option => (
@@ -96,7 +105,7 @@ class ProfileCuisine extends Component {
     createCheckboxes = () => CUISINE_OPTIONS.map(this.createCheckbox);
 
     searchRecipes = () => {
-      finished=true;
+      finishedCuisine=true;
       var api = new SpoonacularApi.RecipesApi()
       var opts = {
       'diet' : diets.toString(),
@@ -111,12 +120,15 @@ class ProfileCuisine extends Component {
       } 
       else {
         console.log('API called successfully. Returned data: ', data.results);
-        filteredRecipeData = data.results
+        filteredRecipeDataCuisine = data.results;
+        if (filteredRecipeDataCuisine.length==0){
+          noRecipesCuisine = true;
+        }
       }
     };
     api.searchRecipes(opts, callback);
     }
-  
+
     render() {
       a = -1;
       return (
@@ -153,13 +165,6 @@ class ProfileCuisine extends Component {
                     className="profile-buttons">
                     Save
                     </button>
-                    < Link to='/Recipes'>
-                      <button type="button" 
-                        className="profile-buttons" 
-                        onClick={this.searchRecipes}>
-                          Finish Profile
-                      </button>
-                    </Link>
                   </div>
                 </form>
               </div>
@@ -168,4 +173,4 @@ class ProfileCuisine extends Component {
     }
   }
   
-export {ProfileCuisine, cuisines, filteredRecipeData, finished};
+export {ProfileCuisine, cuisines, filteredRecipeDataCuisine, finishedCuisine, chooseCuisineData, noRecipesCuisine};

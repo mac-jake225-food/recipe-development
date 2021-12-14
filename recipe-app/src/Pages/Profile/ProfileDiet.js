@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Checkbox from "./Checkbox";
 import { Link } from "react-router-dom";
 import './Profile.css'
+import { cuisines, filteredRecipeDataCuisine, chooseCuisineData } from "./ProfileCuisine";
+import { intolerances, filteredRecipeDataIntolerances, chooseIntoleranceData } from "./ProfileIntolerances";
+import SpoonacularApi from "../../spoonacular";
 
 const DIET_OPTIONS = ["Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan",
 "Pescetarian", "Paleo", "Primal", "Low FODMAP", "Whole30"]
@@ -10,6 +13,10 @@ var diets = []
 var hasBeenSubmitted = false;
 var checkboxStates = [];
 var a = -1;
+var finishedDiet = false;
+var filteredRecipeDataDiet=[];
+var chooseDietData=0;
+var noRecipesDiet = false;
 
 class ProfileDiet extends Component {
 
@@ -62,6 +69,16 @@ class ProfileDiet extends Component {
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
+      if (chooseIntoleranceData>chooseCuisineData&&chooseIntoleranceData>chooseDietData){
+        chooseDietData = chooseIntoleranceData + 1;
+      }
+      else if (chooseCuisineData>chooseIntoleranceData&&chooseCuisineData>chooseDietData){
+        chooseDietData = chooseCuisineData + 1;
+      }
+      else {
+        chooseDietData = chooseDietData + 1;
+      }
+    console.log(chooseDietData)
     diets = [];
     checkboxStates = [];
     hasBeenSubmitted = true;
@@ -72,9 +89,7 @@ class ProfileDiet extends Component {
         }
         checkboxStates.push(this.state.checkboxes[checkbox])
       });
-      console.log(checkboxStates)
-      console.log(diets)
-      console.log(a)
+      this.searchRecipes()
   };
 
   createCheckbox = (option) => (
@@ -87,6 +102,31 @@ class ProfileDiet extends Component {
   );
 
   createCheckboxes = () => DIET_OPTIONS.map(this.createCheckbox);
+
+  searchRecipes = () => {
+    finishedDiet=true;
+    var api = new SpoonacularApi.RecipesApi()
+    var opts = {
+    'diet' : diets.toString(),
+    'intolerances' : intolerances.toString(),
+    'cuisine' : cuisines.toString(),
+    '_number' : "100"
+    };
+    console.log("showing user choices: ",opts)
+    var callback = function(error, data, response) {
+    if (error) {
+      console.error(error);
+    } 
+    else {
+      console.log('API called successfully. Returned data: ', data.results);
+      filteredRecipeDataDiet = data.results;
+      if (filteredRecipeDataCuisine.length==0){
+        noRecipesDiet = true;
+      }
+    }
+  };
+  api.searchRecipes(opts, callback);
+  }
 
   render() {
     a = -1;
@@ -131,5 +171,5 @@ class ProfileDiet extends Component {
     );
   }
 }
-export {ProfileDiet, diets};
+export {ProfileDiet, diets, finishedDiet, filteredRecipeDataDiet, chooseDietData, noRecipesDiet};
  

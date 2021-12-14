@@ -213,7 +213,7 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
-          {finished && putInstructions && 'Click on the image to navigate to the recipe!'}
+          {this.state.itemsShown && finished && putInstructions && 'Click on the image to navigate to the recipe!'}
          {!finished && 'Instructions: fill out the profile page first to get your customized recipes.'} 
          {/* {typeof filteredRecipeData=='undefined' && "\n If no recipe appears when you press the new recipe button, and you've already filled out the profile, we could not find any recipes that match your filters. Try filling out the profile page again with different filters."} */}
           {console.log("is recipe list defined? ", typeof filteredRecipeData)}

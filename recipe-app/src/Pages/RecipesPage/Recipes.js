@@ -29,16 +29,16 @@ class Recipes extends Component{
 
   showItems = (bool) => {
     if (filteredRecipeData!=undefined && filteredRecipeData.length!=0 && !outOfRecipes){
+      recipePosition = recipePosition + 1;
+      if (recipePosition==filteredRecipeData.length){
+        outOfRecipes = true;
+        recipePosition = recipePosition - 1;
+      }
       putInstructions = true;
       generateRecipesHasBeenClicked = true;
       if(filteredRecipeData[recipePosition]!=undefined){
         recipeID = filteredRecipeData[recipePosition].id
         this.getRecipeLink()
-      }
-      recipePosition = recipePosition + 1;
-      if (recipePosition==filteredRecipeData.length){
-        outOfRecipes = true;
-        recipePosition = recipePosition - 1;
       }
     }
     if (filteredRecipeData!=undefined){
@@ -57,15 +57,15 @@ class Recipes extends Component{
       savedRecipes.push(filteredRecipeData[recipePosition])
       buttonList.push(this.makeButton(recipeLink,filteredRecipeData[recipePosition].title))
       console.log("saved Buttons: ", buttonList)
-      if(filteredRecipeData[recipePosition]!=undefined){
-        recipeID = filteredRecipeData[recipePosition].id
-        this.getRecipeLink()
-        this.generateSavedRecipeText()
-      }
       recipePosition = recipePosition + 1;
       if (recipePosition==filteredRecipeData.length){
         outOfRecipes = true;
         recipePosition = recipePosition - 1;
+      }
+      if(filteredRecipeData[recipePosition]!=undefined){
+        recipeID = filteredRecipeData[recipePosition].id
+        this.getRecipeLink()
+        this.generateSavedRecipeText()
       }
     }
     if (filteredRecipeData!=undefined){

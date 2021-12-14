@@ -3,22 +3,24 @@ import FullCalendar, { formatDate } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import {createEventId, createCalendarData, INITIAL_EVENTS, search, removeEvent, savedRecipes} from './event-utils'
+import {savedRecipes, savedEvents, getCalendarData} from './event-utils'
+import {removeRecipe} from '../RecipesPage/Recipes'
 import Alert from "sweetalert2";
 import './Calendar.css'
+
 
 export default class Calendar extends React.Component {
 
   state = {
     weekendsVisible: true,
-    currentEvents: INITIAL_EVENTS
+    currentEvents: savedEvents
   }
 
   /**
    * This function gathers the intialEvents from our './event-utils' file and if data is present sets the state to that current data (continously updated)
    */
   componentDidMount(){
-    this.setState({currentEvents: createCalendarData(this.state.currentEvents, savedRecipes)})
+    this.setState({currentEvents: getCalendarData(savedEvents, savedRecipes)})
   }
 
   render() { 
@@ -45,10 +47,11 @@ export default class Calendar extends React.Component {
             events={this.state.currentEvents} // alternatively, use the `events` setting to fetch from a feed
             // select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
-            eventClick={this.handleEventClick}
+            eventClick={this.handleRemove}
             // eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
             // eventAdd={this.renderEvents}
             eventRemove={this.handleRemove}
+            
             /* you can update a remote database when these fire:
             eventAdd={function(){}}
             eventChange={function(){}} 
@@ -67,7 +70,6 @@ export default class Calendar extends React.Component {
    * @returns 
    */
   renderSidebar() {
-    this.handleRemove()
     return (
       <div className='calendar-app-sidebar'>
         <div className='calendar-app-sidebar-section'>
@@ -150,22 +152,13 @@ export default class Calendar extends React.Component {
   //   }
   // }
 
-  handleEventClick = (clickInfo) => {
-    if (`{clickInfo.event.title}`) {
-      // have to splice up to that index, and then after that index then concat them together 
-      // clickInfo.event.remove()
-      // console.log(search(clickInfo.event.title, INITIAL_EVENTS))
-      this.handleRemove(clickInfo)
-    }
-  }
-
   /**
    * The button popup function for this method was taken from "SweetAlert2" github: https://sweetalert2.github.io/
    * This method handles the remove aspect of the calendar prompting a popup before confirmation of removal 
    * @param {clickInfo} clickInfo 
    */
   handleRemove = (clickInfo) => {
-    if(typeof(clickInfo) != "undefined"){
+    console.log("---------> clickInfo", clickInfo)
     Alert.fire({
       title: clickInfo.event.title,
       html:
@@ -196,16 +189,16 @@ export default class Calendar extends React.Component {
       confirmButtonText: "Remove Event",
       cancelButtonText: "Close"
     }).then(result => {
+      console.log("------------->", clickInfo.event, result.value)
       if (result.value) {
-        this.INITIAL_EVENTS = removeEvent(search(clickInfo.event.title, INITIAL_EVENTS))
-        // console.log(this.INITIAL_EVENTS)
-      this.setState({
-        currentEvents: this.INITIAL_EVENTS
-      }) // It will remove event from the calendar
+
+        removeRecipe(clickInfo.event.id)
+        this.setState({
+          currentEvents: getCalendarData()
+        }) // It will remove event from the calendar
         Alert.fire("Deleted!", "Your Event has been deleted.", "success");
       }
     });
-  }
   };
 
 
@@ -249,7 +242,7 @@ function renderEventContent(eventInfo) {
  */
 function renderSidebarEvent(event) {
   return (
-    <li key={event.id}>
+    <li key={event.title}>
       <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
       <i
       onClick = {() => window.open('//moodle.macalester.edu', "_blank")}>{event.title}</i>

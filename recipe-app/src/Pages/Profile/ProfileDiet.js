@@ -5,9 +5,13 @@ import './Profile.css'
 import { cuisines, filteredRecipeDataCuisine, chooseCuisineData } from "./ProfileCuisine";
 import { intolerances, filteredRecipeDataIntolerances, chooseIntoleranceData } from "./ProfileIntolerances";
 import SpoonacularApi from "../../spoonacular";
+import { AlertContainer, alert } from 'react-custom-alert';
+import './index.css'; // import css file from root.
 
 const DIET_OPTIONS = ["Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan",
 "Pescetarian", "Paleo", "Primal", "Low FODMAP", "Whole30"]
+
+export const alertSuccess = () => alert({ message: 'Saved', type: 'success' });
 
 var diets = []
 var hasBeenSubmitted = false;
@@ -153,10 +157,12 @@ class ProfileDiet extends Component {
                     onClick={this.deselectAll}>
                     Deselect All
                   </button>
+                  
                   <button type="submit" 
-                  className="profile-buttons">
+                  className="profile-buttons" onClick={alertSuccess}>
                   Save
                   </button>
+
                   <button type="button" 
                   className="profile-buttons">
                   <Link to="/ProfileIntolerances"

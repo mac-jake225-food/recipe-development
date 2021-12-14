@@ -6,6 +6,7 @@ import {Recipes} from './Pages/RecipesPage/Recipes';
 import {ProfileDiet} from './Pages/Profile/ProfileDiet';
 import {ProfileIntolerances} from './Pages/Profile/ProfileIntolerances';
 import {ProfileCuisine} from "./Pages/Profile/ProfileCuisine";
+import { AlertContainer, alert } from 'react-custom-alert';
 
 import GroceryList from "./Pages/GroceryList/GroceryList";
 import DateTime from './HelperMethods/DateTime'
@@ -19,6 +20,7 @@ function App() {
     <>
       <Router>
       <DateTime/>
+      <AlertContainer floatingTime={800} />
         <Sidebar/>
         <Route exact path="/">
             <Redirect to="/Home" />

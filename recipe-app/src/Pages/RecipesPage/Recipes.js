@@ -117,6 +117,10 @@ class Recipes extends Component{
     );
 }
 
+  removeButton(){
+    
+  }
+
   generateSavedRecipeText = () => {
     if (generateRecipesHasBeenClicked){
       savedRecipesText = ""

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { diets, filteredRecipeDataDiet, chooseDietData } from "./ProfileDiet";
 import { cuisines, filteredRecipeDataCuisine, chooseCuisineData } from "./ProfileCuisine";
 import SpoonacularApi from "../../spoonacular";
+import {alertSuccess} from './ProfileDiet'
 
 const INTOLERANCE_OPTIONS = ["Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", 
 "Soy", "Sulfite", "Tree Nut", "Wheat"]
@@ -161,7 +162,7 @@ class ProfileIntolerances extends Component {
                   </button>
 
                   <button type="submit" 
-                  className="profile-buttons">
+                  className="profile-buttons" onClick={alertSuccess}>
                   Save
                   </button>
                   

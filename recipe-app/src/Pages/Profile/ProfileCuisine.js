@@ -5,6 +5,7 @@ import SpoonacularApi from '../../spoonacular';
 import {diets, filteredRecipeDataDiet, chooseDietData} from './ProfileDiet';
 import {intolerances, filteredRecipeDataIntolerances, chooseIntoleranceData} from './ProfileIntolerances';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {alertSuccess} from './ProfileDiet'
 
 const CUISINE_OPTIONS = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European", 
 "European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese", "Jewish", "Korean", 
@@ -161,8 +162,8 @@ class ProfileCuisine extends Component {
                       Deselect All
                     </button>
                     <button type="submit" 
-                    className="profile-buttons">
-                    Save
+                      className="profile-buttons" onClick={alertSuccess}>
+                      Save
                     </button>
                   </div>
                 </form>

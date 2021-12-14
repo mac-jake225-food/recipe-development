@@ -26,6 +26,12 @@ export default class Calendar extends React.Component {
     this.setState({currentEvents: getCalendarData(savedEvents, savedRecipes)})
   }
 
+
+  /**
+   * This method renders each and every event that is present on the calendar page while also initializing intial view of the calendar limiting the 
+   * user accesibilty to add/remove events and change time view from month to week to day  
+   * @returns All functionality of the calender (i.e all events side bar, calendar itself, and events that appear on the calendar grid)
+   */
   render() { 
     return (
       <div className='calendar-app'>
@@ -70,7 +76,7 @@ export default class Calendar extends React.Component {
   /**
    * This is our main render method for components present on the calendar and UI, 
    * It renders in the data under ALL EVENTS as well as the dragable components on our calendar page
-   * @returns 
+   * @returns All events sidebar div ( displays the date and title of each event that a user has saved)
    */
   renderSidebar() {
     return (
@@ -109,22 +115,6 @@ export default class Calendar extends React.Component {
     )
   }
 
-  // renderEvents() {
-  //   return (
-  //     <div>
-  //       {createCalendarData()}
-  //     </div>
-  //   )
-  // }
-
-  // componentDidUpdate(prevState) {
-  //   // Typical usage (don't forget to compare props):
-  //   if(this.state.currentEvents != finalArray) {
-  //     this.setState(finalArray);
-  //   }
-  // }
-
-
   /**
    * This function handles the weekend visibility toggle on or off
    */
@@ -133,27 +123,6 @@ export default class Calendar extends React.Component {
       weekendsVisible: !this.state.weekendsVisible
     })
   }
-
-  /**
-   * This function will be removed, but handles users adding in new events 
-   * @param {selectInfo} 
-   */
-  // handleDateSelect = (selectInfo) => {
-  //   let title = prompt('Please enter a new title for your event')
-  //   let calendarApi = selectInfo.view.calendar
-
-  //   calendarApi.unselect() // clear date selection
-
-  //   if (title) {
-  //     calendarApi.addEvent({
-  //       id: createEventId(),
-  //       title,
-  //       start: selectInfo.startStr,
-  //       end: selectInfo.endStr,
-  //       allDay: selectInfo.allDay
-  //     })
-  //   }
-  // }
 
   /**
    * The button popup function for this method was taken from "SweetAlert2" github: https://sweetalert2.github.io/
@@ -194,7 +163,6 @@ export default class Calendar extends React.Component {
     }).then(result => {
       console.log("------------->", clickInfo.event, result.value)
       if (result.value) {
-
         removeRecipe(clickInfo.event.id)
         this.setState({
           currentEvents: getCalendarData()

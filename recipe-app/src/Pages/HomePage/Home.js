@@ -1,12 +1,21 @@
 import React, { Children } from 'react';
-import womanCooking from '../StockImages/womanCooking.jpeg'
+
+/**
+ * the following three imports are catergorized as: CC0 LICENSE (FREE PERSONAL AND COMMERCIAL USE)
+ * sourcing these are not necessary in our program 
+ */
 import chickPeasImg from '../StockImages/chickpeas.jpg'
-import Ingredients from '../StockImages/Ingredients.jpg'
 import Planner from '../StockImages/planner.jpg'
 import foodSkillet from '../StockImages/foodSkillet.jpg'
 import "./Home.css";
 
 
+
+
+/**
+ * This method constructs the card stack present on the home page 
+ * @returns card stack containing images/words 
+ */
 const Home = () => {
 
   return (
@@ -22,6 +31,11 @@ const Home = () => {
   );
 };
 
+/**
+ * This method constructs the actual card prop containing and image / words with title 
+ * @param {props} props 
+ * @returns 
+ */
 function Card(props) {
   return (
     <div className='card'>

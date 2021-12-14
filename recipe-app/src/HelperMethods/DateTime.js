@@ -3,6 +3,10 @@ import { render } from 'react-dom'
 import './DateTime.css'
 import FinalDate from './FinalDate'
 
+
+/**
+ * This class is rendering the current time from FinalDate and then displays it on the application in each page
+ */
 export class DateTime extends React.Component {
     
     constructor() {

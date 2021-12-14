@@ -9,6 +9,7 @@
 .swal2-styled.swal2-confirm {
     background-color: black;
 }
+
 .swal2-container.swal2-center.swal2-backdrop-show {
     opacity: .98;
     background-color: lightgray;

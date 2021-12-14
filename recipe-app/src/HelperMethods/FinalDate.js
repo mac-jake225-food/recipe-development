@@ -1,6 +1,12 @@
 import React from 'react'
 import DateTime from './DateTime'
 
+
+/**
+ * This method constructs the final date that will be displayed in the application
+ * It established the current time and date in military time which then must be converted to a standard 12:00 hour format 
+ * @returns finalDate() << which corresponds with the format xx/xx/xx XX:XX:XX
+ */
 const FinalDate = () => {
     var currentTime = new Date(); 
 

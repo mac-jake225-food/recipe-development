@@ -129,7 +129,6 @@ class Recipes extends Component{
 
 
   render() {
-    this.removeRecipeFromArray() 
     noRecipes = false;
     console.log(chooseDietData + "diet")
     console.log(chooseIntoleranceData + "intoler")

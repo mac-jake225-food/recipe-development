@@ -173,7 +173,7 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'40vh'
         }}>
-          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && !outOfRecipes && <img 
+          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && !noRecipes && !outOfRecipes && <img 
           src = {filteredRecipeData[recipePosition].image.toString()}
           onClick = {() => window.open(recipeLink, "_blank")}></img>}
         </div> 
@@ -184,7 +184,7 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
-          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && !outOfRecipes && filteredRecipeData[recipePosition].title}
+          {this.state.itemsShown && generateRecipesHasBeenClicked && typeof filteredRecipeData!='undefined' && !noRecipes && !outOfRecipes && filteredRecipeData[recipePosition].title}
         </div>
         <div className="recipe-buttons"
         style = {{
@@ -199,7 +199,7 @@ class Recipes extends Component{
             onClick={this.showItems.bind(null, true)}>
             New Recipe
           </button>}
-          {putInstructions && !outOfRecipes && <button
+          {putInstructions && !outOfRecipes && !noRecipes && <button
             type="button"
             className="recipe-buttons"
             onClick={this.showItemsAndSave.bind(null, true)}>
@@ -224,7 +224,7 @@ class Recipes extends Component{
         }}>
           {outOfRecipes && 'Sorry, we have no more recipes that match your profile specifications.'}
           {noRecipes && 'Sorry, we have no recipes that match your profile specifications.'}
-          {this.state.itemsShown && (finishedCuisine||finishedIntolerances||finishedDiet) && putInstructions && !outOfRecipes && 'Click on the image to navigate to the recipe!'}
+          {this.state.itemsShown && (finishedCuisine||finishedIntolerances||finishedDiet) && putInstructions && !outOfRecipes && !noRecipes && 'Click on the image to navigate to the recipe!'}
           {!(finishedCuisine||finishedDiet||finishedIntolerances) && 'Fill out the profile page first to get your customized recipes.'} 
         </div>
         <div

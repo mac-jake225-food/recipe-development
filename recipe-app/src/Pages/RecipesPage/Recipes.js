@@ -1,19 +1,14 @@
-
 import React, { Component } from "react";
 import { filteredRecipeDataCuisine, finishedCuisine, chooseCuisineData, noRecipesCuisine } from "../Profile/ProfileCuisine";
 import { filteredRecipeDataDiet, finishedDiet, chooseDietData, noRecipesDiet } from "../Profile/ProfileDiet";
 import { filteredRecipeDataIntolerances, finishedIntolerances, chooseIntoleranceData, noRecipesIntolerances } from "../Profile/ProfileIntolerances";
 import SpoonacularApi from "../../spoonacular";
-import { Link } from "react-router-dom";
-import Checkbox from "../Profile/Checkbox";
-import { createCalendarData } from "../CalendarPage/event-utils";
 
 var generateRecipesHasBeenClicked = false;
 var savedRecipes = [];
 var recipePosition = 0;
 var recipeID;
 var recipeLink;
-var savedRecipesText = "";
 var buttonList=[];
 var putInstructions = false;
 var filteredRecipeData;
@@ -27,6 +22,11 @@ class Recipes extends Component{
     itemsShown : generateRecipesHasBeenClicked
   };
 
+  /**
+   * This method handles all events after the user clicks the "New Recipe" button including updating position,
+   * getting the recipe link, and updating various booleans to display and hide messages.
+   * @param {true} bool 
+   */
   showItems = (bool) => {
     if (filteredRecipeData!=undefined && filteredRecipeData.length!=0 && !outOfRecipes){
       recipePosition = recipePosition + 1;
@@ -46,17 +46,21 @@ class Recipes extends Component{
         this.setState({
           itemsShown : bool
         });
-        console.log("showItems")
       }
     }
   }
 
+  /**
+   * This method handles all events after the user clicks the "Save Recipe" button including updating position,
+   * getting the recipe link, adding the recipe to saved recipes, adding the button for the saved recipe,
+   * and updating various booleans to display and hide messages.
+   * @param {true} bool 
+   */
   showItemsAndSave = (bool) => {
     if (filteredRecipeData!=undefined && generateRecipesHasBeenClicked && filteredRecipeData.length!=0 && !outOfRecipes){
       putInstructions = true;
       savedRecipes.push(filteredRecipeData[recipePosition])
       buttonList.push(this.makeButton(recipeLink,filteredRecipeData[recipePosition].title))
-      console.log("saved Buttons: ", buttonList)
       recipePosition = recipePosition + 1;
       if (recipePosition==filteredRecipeData.length){
         outOfRecipes = true;
@@ -65,7 +69,6 @@ class Recipes extends Component{
       if(filteredRecipeData[recipePosition]!=undefined){
         recipeID = filteredRecipeData[recipePosition].id
         this.getRecipeLink()
-        this.generateSavedRecipeText()
       }
     }
     if (filteredRecipeData!=undefined){
@@ -73,7 +76,6 @@ class Recipes extends Component{
         this.setState({
           itemsShown : bool
         });
-        console.log("showItems")
       }
     }
   }
@@ -85,6 +87,9 @@ class Recipes extends Component{
     });
   }
 
+  /**
+   * This method makes an api call to get the link to the original recipe.
+   */
   getRecipeLink = () => {
     var api = new SpoonacularApi.RecipesApi()
       var opts = {
@@ -102,7 +107,6 @@ class Recipes extends Component{
   }
 
   makeButton(link, recipe) {
-    console.log("button made")
     return (
         <button 
             style={{
@@ -115,32 +119,14 @@ class Recipes extends Component{
             {recipe}
         </button>
     );
-}
-
-  removeButton(){
-    
   }
 
-  generateSavedRecipeText = () => {
-    if (generateRecipesHasBeenClicked){
-      savedRecipesText = ""
-      savedRecipesText = savedRecipes[0].title.toString()
-      for (let i=1; i<savedRecipes.length; i++) {
-        savedRecipesText = savedRecipesText + ", " + savedRecipes[i].title.toString()
-      }
-    }
-  }
-
-
-  render() {
+  /**
+   * This method handles all events and checks that need to happen when the recipe page rerenders including making sure
+   * the recipe data is correct and making sure there exist recipes to give the user.
+   */
+  handleRecipeRerender = () => {
     noRecipes = false;
-    console.log(chooseDietData + "diet")
-    console.log(chooseIntoleranceData + "intoler")
-    console.log(chooseCuisineData + "cuisine")
-    console.log(finishedDiet)
-    console.log(finishedIntolerances)
-    console.log(finishedCuisine)
-    console.log(noRecipes)
     if (chooseDietData>chooseIntoleranceData&&chooseDietData>chooseCuisineData){
       filteredRecipeData = filteredRecipeDataDiet;
       if (noRecipesDiet){
@@ -151,7 +137,6 @@ class Recipes extends Component{
         outOfRecipes = false;
         maxTime = chooseDietData;
       }
-      console.log("diet")
     }
     else if (chooseIntoleranceData>chooseDietData&&chooseIntoleranceData>chooseCuisineData){
       filteredRecipeData = filteredRecipeDataIntolerances;
@@ -163,7 +148,6 @@ class Recipes extends Component{
         outOfRecipes = false;
         maxTime = chooseIntoleranceData;
       }
-      console.log("intoler")
     }
     else {
       filteredRecipeData = filteredRecipeDataCuisine;
@@ -175,8 +159,11 @@ class Recipes extends Component{
         outOfRecipes = false;
         maxTime = chooseCuisineData;
       }
-      console.log("cuisine")
     }
+  }
+
+  render() {
+    this.handleRecipeRerender();
     return (
       <div className='recipe-items'>
         <div
@@ -190,7 +177,6 @@ class Recipes extends Component{
           src = {filteredRecipeData[recipePosition].image.toString()}
           onClick = {() => window.open(recipeLink, "_blank")}></img>}
         </div> 
-
         <div
         style = {{
           display: 'flex', 
@@ -213,21 +199,12 @@ class Recipes extends Component{
             onClick={this.showItems.bind(null, true)}>
             New Recipe
           </button>}
-
           {putInstructions && !outOfRecipes && <button
             type="button"
             className="recipe-buttons"
             onClick={this.showItemsAndSave.bind(null, true)}>
             Save Recipe
           </button>}
-
-          {/* <button
-            type="button"
-            className="recipe-buttons"
-            onClick={this.resetSavedRecipes.bind(null, true)}>
-            Clear Saved Recipes */}
-            {/**does not take the previously saved recipes off the screen, just clears the array */}
-          {/* </button> */}
         </div>
         <div
         style = {{
@@ -236,10 +213,8 @@ class Recipes extends Component{
           alignItems:'center', 
           height:'5vh'
         }}>
-          {/* {typeof filteredRecipeData!='undefined' && generateRecipesHasBeenClicked && "Saved Recipes: " + savedRecipesText} */}
-          {typeof filteredRecipeData!= 'undefined' && typeof filteredRecipeData[0]==undefined && console.log("command works")}
+          {typeof filteredRecipeData!= 'undefined' && typeof filteredRecipeData[0]==undefined}
         </div>
-
         <div
         style = {{
           display: 'flex', 
@@ -251,11 +226,7 @@ class Recipes extends Component{
           {noRecipes && 'Sorry, we have no recipes that match your profile specifications.'}
           {this.state.itemsShown && (finishedCuisine||finishedIntolerances||finishedDiet) && putInstructions && !outOfRecipes && 'Click on the image to navigate to the recipe!'}
           {!(finishedCuisine||finishedDiet||finishedIntolerances) && 'Instructions: fill out the profile page first to get your customized recipes.'} 
-          {/* {typeof filteredRecipeData=='undefined' && "\n If no recipe appears when you press the new recipe button, and you've already filled out the profile, we could not find any recipes that match your filters. Try filling out the profile page again with different filters."} */}
-          {console.log("is recipe list defined? ", typeof filteredRecipeData)}
-          {/* {typeof filteredRecipeData!='undefined' && this.makeButton(recipeLink,filteredRecipeData[recipePosition].title)} */}
         </div>
-        
         <div
         style = {{
           flexWrap: 'wrap',
@@ -268,11 +239,9 @@ class Recipes extends Component{
             return <div key={key}>{i}</div>;
           })}
         </div>
-
       </div>
     );
   }
-  
 }
 
   /**
@@ -281,10 +250,8 @@ class Recipes extends Component{
    */
   export function removeRecipe(id) { 
     savedRecipes = savedRecipes.filter((ele) => { 
-      console.log('filter', ele, ele.id)
       return ele.id != id; 
     });
   }
-
 
   export {Recipes, savedRecipes, recipePosition, outOfRecipes};

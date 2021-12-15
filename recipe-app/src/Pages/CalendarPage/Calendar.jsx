@@ -230,8 +230,7 @@ function renderSidebarEvent(event) {
   return (
     <li key={event.title}>
       <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <i
-      onClick = {() => window.open('//moodle.macalester.edu', "_blank")}>{event.title}</i>
+      <i>{event.title}</i>
     </li>
   )
 }

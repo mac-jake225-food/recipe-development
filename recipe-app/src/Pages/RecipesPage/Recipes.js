@@ -225,7 +225,7 @@ class Recipes extends Component{
           {outOfRecipes && 'Sorry, we have no more recipes that match your profile specifications.'}
           {noRecipes && 'Sorry, we have no recipes that match your profile specifications.'}
           {this.state.itemsShown && (finishedCuisine||finishedIntolerances||finishedDiet) && putInstructions && !outOfRecipes && 'Click on the image to navigate to the recipe!'}
-          {!(finishedCuisine||finishedDiet||finishedIntolerances) && 'Instructions: fill out the profile page first to get your customized recipes.'} 
+          {!(finishedCuisine||finishedDiet||finishedIntolerances) && 'Fill out the profile page first to get your customized recipes.'} 
         </div>
         <div
         style = {{

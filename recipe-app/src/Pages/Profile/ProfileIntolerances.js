@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+/**
+ * Most checkbox implementation comes from http://react.tips/checkboxes-in-react-16/
+ */
 import Checkbox from "./Checkbox";
 import { Link } from "react-router-dom";
 import { diets, filteredRecipeDataDiet, chooseDietData } from "./ProfileDiet";
@@ -20,6 +23,10 @@ var chooseIntoleranceData=0;
 var noRecipesIntolerances = false;
 
 class ProfileIntolerances extends Component {
+
+  /**
+   * This sets the state of the checkboxes on render to the state they were in when previously saved.
+   */
   state = {
     checkboxes: INTOLERANCE_OPTIONS.reduce(
       (options, option) => ({
@@ -30,18 +37,24 @@ class ProfileIntolerances extends Component {
     )
   };
 
+  /**
+   * This method checks to see if checkboxes have been saved to set initial state of checkboxes
+   * @returns state of checkboxes
+   */
   setInitialState () {
     if (!hasBeenSubmitted){
       return false;
     }
     else {
-      // console.log(checkboxStates[a-INTOLERANCE_OPTIONS.length])
       a = a + 1;
-      // console.log(a)
       return checkboxStates[a-INTOLERANCE_OPTIONS.length];
     }
   }
 
+  /**
+   * This method sets the state of each checkbox to isSelected.
+   * @param {boolean} isSelected 
+   */
   selectAllCheckboxes = (isSelected) => {
     Object.keys(this.state.checkboxes).forEach(checkbox => {
       this.setState(prevState => ({
@@ -53,10 +66,20 @@ class ProfileIntolerances extends Component {
     });
   };
 
+  /**
+   * This method calls selectAllCheckboxes with the parameter true to select all checkboxes.
+   */
   selectAll = () => this.selectAllCheckboxes(true);
 
+  /**
+   * This method calls selectAllCheckboxes with the parameter false to select deselct all checkboxes.
+   */
   deselectAll = () => this.selectAllCheckboxes(false);
 
+  /**
+   * This method handles state changes when checkboxes are selected and deselected.
+   * @param {changeEvent} changeEvent 
+   */
   handleCheckboxChange = changeEvent => {
     const { name } = changeEvent.target;
     this.setState(prevState => ({
@@ -67,6 +90,11 @@ class ProfileIntolerances extends Component {
     }));
   };
 
+  /**
+   * This method handles all events after the save button is clicked including sending information to the recipes page,
+   * saving checkbox states, saving checkbox preferences, and calling the method to make the api call.
+   * @param {formSubmitEvent} formSubmitEvent 
+   */
   handleFormSubmit = (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
     if (chooseDietData>chooseCuisineData&&chooseDietData>chooseIntoleranceData){
@@ -91,6 +119,11 @@ class ProfileIntolerances extends Component {
       this.searchRecipes()
   };
 
+  /**
+   * This method creates the checkbox item
+   * @param {option} option 
+   * @returns Checkbox
+   */
   createCheckbox = (option) => (
     <Checkbox
       label={option}
@@ -100,8 +133,14 @@ class ProfileIntolerances extends Component {
     />
   );
 
+  /**
+   * This method creates a checkbox for each item in the INTOLERANCE_OPTIONS array.
+   */
   createCheckboxes = () => INTOLERANCE_OPTIONS.map(this.createCheckbox);
 
+  /**
+   * This method makes the api call after the save button has been clicked based on the selected parameters.
+   */
   searchRecipes = () => {
     finishedIntolerances=true;
     var api = new SpoonacularApi.RecipesApi()
@@ -111,13 +150,11 @@ class ProfileIntolerances extends Component {
     'cuisine' : cuisines.toString(),
     '_number' : "100"
     };
-    console.log("showing user choices: ",opts)
     var callback = function(error, data, response) {
     if (error) {
       console.error(error);
     } 
     else {
-      console.log('API called successfully. Returned data: ', data.results);
       filteredRecipeDataIntolerances = data.results;
       if (filteredRecipeDataIntolerances.length==0){
         noRecipesIntolerances = true;

@@ -210,20 +210,25 @@ export default class Calendar extends React.Component {
   //   }
   }
 
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  )
-}
+  /**
+   * this function renders the event content by title and time on the calendar 
+   * @param {eventInfo} eventInfo 
+   * @returns 
+   */
+  function renderEventContent(eventInfo) {
+    return (
+      <>
+        <b>{eventInfo.timeText}</b>
+        <i>{eventInfo.event.title}</i>
+      </>
+    )
+  }
 
 
 
 /**
  * This function gathers each event's ID, Start Time, and Title which is then rendered on to the calander page
- * @param {*} event 
+ * @param {event} event 
  * @returns (event.id, event.title, event.start)
  */
 function renderSidebarEvent(event) {
